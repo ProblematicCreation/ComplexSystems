@@ -1,0 +1,30 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\problematicplugin\\module.problematicplugin.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\intermediate\\build\\win64\\x64\\dungeongeneratordemoeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\problematicplugin\\definitions.problematicplugin.h",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\dungeon.gen.cpp",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\source\\problematicplugin\\public\\dungeon.h",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\dungeon.generated.h",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\edgepathway.gen.cpp",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\source\\problematicplugin\\public\\edgepathway.h",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\edgepathway.generated.h",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\nodearea.gen.cpp",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\source\\problematicplugin\\public\\nodearea.h",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\nodearea.generated.h",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\problematicfunctions.gen.cpp",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\source\\problematicplugin\\public\\problematicfunctions.h",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\problematicfunctions.generated.h",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\problematicplugin.init.gen.cpp",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\source\\problematicplugin\\private\\dungeon.cpp",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\source\\problematicplugin\\private\\edgepathway.cpp",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\source\\problematicplugin\\private\\problematicplugin.cpp",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\source\\problematicplugin\\public\\problematicplugin.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

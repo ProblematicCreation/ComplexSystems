@@ -1,5 +1,17 @@
 {
 	"RemapUnityFiles": 
 	{
+		"Module.ProblematicPlugin.cpp.obj": [
+			"Dungeon.gen.cpp.obj",
+			"EdgePathway.gen.cpp.obj",
+			"NodeArea.gen.cpp.obj",
+			"ProblematicFunctions.gen.cpp.obj",
+			"ProblematicPlugin.init.gen.cpp.obj",
+			"Dungeon.cpp.obj",
+			"EdgePathway.cpp.obj",
+			"ProblematicPlugin.cpp.obj",
+			"NodeArea.cpp.obj",
+			"ProblematicFunctions.cpp.obj"
+		]
 	}
 }

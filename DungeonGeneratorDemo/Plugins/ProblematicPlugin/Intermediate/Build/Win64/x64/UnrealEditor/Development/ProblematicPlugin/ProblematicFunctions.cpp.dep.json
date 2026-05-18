@@ -1,0 +1,24 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\source\\problematicplugin\\private\\problematicfunctions.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\intermediate\\build\\win64\\x64\\dungeongeneratordemoeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\problematicplugin\\definitions.problematicplugin.h",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\source\\problematicplugin\\public\\problematicfunctions.h",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\problematicfunctions.generated.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\kismet\\gameplaystatics.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\kismet\\kismetsystemlibrary.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\source\\runtime\\coreuobject\\public\\uobject\\propertyaccessutil.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\kismetsystemlibrary.generated.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\sound\\dialoguetypes.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\dialoguetypes.generated.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\kismet\\gameplaystaticstypes.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gameplaystaticstypes.generated.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\gameplaystatics.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
