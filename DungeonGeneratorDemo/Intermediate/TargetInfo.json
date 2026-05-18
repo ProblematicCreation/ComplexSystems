@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "DungeonGeneratorDemo",
+			"Path": "..\\Source\\DungeonGeneratorDemo.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "DungeonGeneratorDemoEditor",
+			"Path": "..\\Source\\DungeonGeneratorDemoEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

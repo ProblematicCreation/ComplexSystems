@@ -1,0 +1,23 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\source\\dungeongeneratordemo\\dungeongeneratordemoprojectile.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\intermediate\\build\\win64\\x64\\dungeongeneratordemoeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\dungeongeneratordemo\\definitions.dungeongeneratordemo.h",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\source\\dungeongeneratordemo\\dungeongeneratordemoprojectile.h",
+            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\intermediate\\build\\win64\\unrealeditor\\inc\\dungeongeneratordemo\\uht\\dungeongeneratordemoprojectile.generated.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\gameframework\\projectilemovementcomponent.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\gameframework\\movementcomponent.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\movementcomponent.generated.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\projectilemovementcomponent.generated.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\components\\spherecomponent.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\components\\shapecomponent.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\shapecomponent.generated.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\spherecomponent.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

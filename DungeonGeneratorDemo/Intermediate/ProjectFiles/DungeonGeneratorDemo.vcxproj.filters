@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\DungeonGeneratorDemo.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\DungeonGeneratorDemo.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\DungeonGeneratorDemoEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\DungeonGeneratorDemo">
+      <UniqueIdentifier>{1B0F55BF-4C6C-34A1-9399-5534EC60CB0F}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\DungeonGeneratorDemo\DungeonGeneratorDemo.Build.cs">
+      <Filter>Source\DungeonGeneratorDemo</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\DungeonGeneratorDemo\DungeonGeneratorDemo.cpp">
+      <Filter>Source\DungeonGeneratorDemo</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\DungeonGeneratorDemo\DungeonGeneratorDemo.h">
+      <Filter>Source\DungeonGeneratorDemo</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\DungeonGeneratorDemo\DungeonGeneratorDemoCharacter.cpp">
+      <Filter>Source\DungeonGeneratorDemo</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\DungeonGeneratorDemo\DungeonGeneratorDemoCharacter.h">
+      <Filter>Source\DungeonGeneratorDemo</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\DungeonGeneratorDemo\DungeonGeneratorDemoGameMode.cpp">
+      <Filter>Source\DungeonGeneratorDemo</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\DungeonGeneratorDemo\DungeonGeneratorDemoGameMode.h">
+      <Filter>Source\DungeonGeneratorDemo</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\DungeonGeneratorDemo\DungeonGeneratorDemoPlayerController.cpp">
+      <Filter>Source\DungeonGeneratorDemo</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\DungeonGeneratorDemo\DungeonGeneratorDemoPlayerController.h">
+      <Filter>Source\DungeonGeneratorDemo</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\DungeonGeneratorDemo\DungeonGeneratorDemoProjectile.cpp">
+      <Filter>Source\DungeonGeneratorDemo</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\DungeonGeneratorDemo\DungeonGeneratorDemoProjectile.h">
+      <Filter>Source\DungeonGeneratorDemo</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\DungeonGeneratorDemo\TP_PickUpComponent.cpp">
+      <Filter>Source\DungeonGeneratorDemo</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\DungeonGeneratorDemo\TP_PickUpComponent.h">
+      <Filter>Source\DungeonGeneratorDemo</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\DungeonGeneratorDemo\TP_WeaponComponent.cpp">
+      <Filter>Source\DungeonGeneratorDemo</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\DungeonGeneratorDemo\TP_WeaponComponent.h">
+      <Filter>Source\DungeonGeneratorDemo</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
