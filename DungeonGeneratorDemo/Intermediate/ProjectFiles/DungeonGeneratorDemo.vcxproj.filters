@@ -11,6 +11,7 @@
     <None Include="..\..\Source\DungeonGeneratorDemoEditor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\.vsconfig" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
     </Filter>
@@ -28,6 +29,48 @@
     </None>
     <None Include="..\..\Config\DefaultInput.ini">
       <Filter>Config</Filter>
+    </None>
+    <Filter Include="Plugins">
+      <UniqueIdentifier>{BB38096A-B391-30DC-A0D4-4F3EA6B44507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\ProblematicPlugin">
+      <UniqueIdentifier>{F7E77C37-C9CA-31BA-A60C-E395C9A23526}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\ProblematicPlugin\Source">
+      <UniqueIdentifier>{8BA2572B-D985-3E2E-BDCB-CBBFC09BC443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Plugins\ProblematicPlugin\Source\ProblematicPlugin">
+      <UniqueIdentifier>{DAF721A5-DC16-3659-812B-0F92B0B33DB7}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\ProblematicPlugin\Source\ProblematicPlugin\ProblematicPlugin.Build.cs">
+      <Filter>Plugins\ProblematicPlugin\Source\ProblematicPlugin</Filter>
+    </None>
+    <Filter Include="Plugins\ProblematicPlugin\Source\ProblematicPlugin\Private">
+      <UniqueIdentifier>{E1C1FBF0-21FD-3239-8D79-F3B47136E7BB}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Plugins\ProblematicPlugin\Source\ProblematicPlugin\Private\NodeArea.cpp">
+      <Filter>Plugins\ProblematicPlugin\Source\ProblematicPlugin\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Plugins\ProblematicPlugin\Source\ProblematicPlugin\Private\ProblematicPlugin.cpp">
+      <Filter>Plugins\ProblematicPlugin\Source\ProblematicPlugin\Private</Filter>
+    </ClCompile>
+    <Filter Include="Plugins\ProblematicPlugin\Source\ProblematicPlugin\Public">
+      <UniqueIdentifier>{2BD0BAF9-6974-3471-9667-9304BDC3A32C}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Plugins\ProblematicPlugin\Source\ProblematicPlugin\Public\NodeArea.h">
+      <Filter>Plugins\ProblematicPlugin\Source\ProblematicPlugin\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Plugins\ProblematicPlugin\Source\ProblematicPlugin\Public\ProblematicPlugin.h">
+      <Filter>Plugins\ProblematicPlugin\Source\ProblematicPlugin\Public</Filter>
+    </ClInclude>
+    <None Include="..\..\Plugins\ProblematicPlugin\ProblematicPlugin.uplugin">
+      <Filter>Plugins\ProblematicPlugin</Filter>
+    </None>
+    <Filter Include="Plugins\ProblematicPlugin\Resources">
+      <UniqueIdentifier>{F0752B76-5DA7-338D-8BA3-7DF454DE47A9}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Plugins\ProblematicPlugin\Resources\Icon128.png">
+      <Filter>Plugins\ProblematicPlugin\Resources</Filter>
     </None>
     <Filter Include="Source\DungeonGeneratorDemo">
       <UniqueIdentifier>{1B0F55BF-4C6C-34A1-9399-5534EC60CB0F}</UniqueIdentifier>

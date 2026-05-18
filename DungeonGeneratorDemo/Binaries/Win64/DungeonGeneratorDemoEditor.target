@@ -3652,6 +3652,18 @@
 		{
 			"Path": "$(ProjectDir)/Binaries/Win64/UnrealEditor.modules",
 			"Type": "RequiredResource"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/ProblematicPlugin/Binaries/Win64/UnrealEditor-ProblematicPlugin.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/ProblematicPlugin/Binaries/Win64/UnrealEditor-ProblematicPlugin.pdb",
+			"Type": "SymbolFile"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/ProblematicPlugin/Binaries/Win64/UnrealEditor.modules",
+			"Type": "RequiredResource"
 		}
 	],
 	"RuntimeDependencies": [
@@ -26694,6 +26706,10 @@
 		{
 			"Path": "$(ProjectDir)/DungeonGeneratorDemo.uproject",
 			"Type": "UFS"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/ProblematicPlugin/ProblematicPlugin.uplugin",
+			"Type": "UFS"
 		}
 	],
 	"BuildPlugins": [
@@ -26828,6 +26844,7 @@
 		"PluginBrowser",
 		"PluginUtils",
 		"PortableObjectFileDataSource",
+		"ProblematicPlugin",
 		"ProceduralMeshComponent",
 		"PropertyAccessEditor",
 		"PropertyAccessNode",
