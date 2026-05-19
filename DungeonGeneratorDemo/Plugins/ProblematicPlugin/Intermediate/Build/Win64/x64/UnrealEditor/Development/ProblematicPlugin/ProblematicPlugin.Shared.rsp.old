@@ -282,6 +282,7 @@
 /I "Editor\SceneDepthPickerMode\Public"
 /I "..\Intermediate\Build\Win64\UnrealEditor\Inc\AnimationEditMode\UHT"
 /I "Editor\AnimationEditMode\Public"
+/I "C:\Users\s241270\Documents\GitHub\ComplexSystems\DungeonGeneratorDemo\Plugins\ProblematicPlugin\Intermediate\Build\Win64\UnrealEditor\Inc\ProblematicPlugin\UHT"
 /I "C:\Users\s241270\Documents\GitHub\ComplexSystems\DungeonGeneratorDemo\Plugins\ProblematicPlugin\Source"
 /I "C:\Users\s241270\Documents\GitHub\ComplexSystems\DungeonGeneratorDemo\Plugins\ProblematicPlugin\Source\ProblematicPlugin\Public"
 /external:W0

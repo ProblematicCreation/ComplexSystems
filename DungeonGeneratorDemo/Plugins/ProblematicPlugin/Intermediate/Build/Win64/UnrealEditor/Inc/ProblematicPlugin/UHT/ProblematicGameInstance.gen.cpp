@@ -151,9 +151,13 @@ struct Z_Construct_UClass_UProblematicGameInstance_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CachedNodes_MetaData[] = {
 		{ "ModuleRelativePath", "Public/ProblematicGameInstance.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CachedEdgeAsset_MetaData[] = {
+		{ "ModuleRelativePath", "Public/ProblematicGameInstance.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_CachedNodes_Inner;
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_CachedNodes;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_CachedEdgeAsset;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
@@ -168,9 +172,11 @@ struct Z_Construct_UClass_UProblematicGameInstance_Statics
 };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UProblematicGameInstance_Statics::NewProp_CachedNodes_Inner = { "CachedNodes", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_ANodeArea_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UProblematicGameInstance_Statics::NewProp_CachedNodes = { "CachedNodes", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UProblematicGameInstance, CachedNodes), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CachedNodes_MetaData), NewProp_CachedNodes_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UProblematicGameInstance_Statics::NewProp_CachedEdgeAsset = { "CachedEdgeAsset", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UProblematicGameInstance, CachedEdgeAsset), Z_Construct_UClass_AEdgePathway_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CachedEdgeAsset_MetaData), NewProp_CachedEdgeAsset_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UProblematicGameInstance_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UProblematicGameInstance_Statics::NewProp_CachedNodes_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UProblematicGameInstance_Statics::NewProp_CachedNodes,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UProblematicGameInstance_Statics::NewProp_CachedEdgeAsset,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UProblematicGameInstance_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_UProblematicGameInstance_Statics::DependentSingletons[])() = {
@@ -211,14 +217,14 @@ UProblematicGameInstance::~UProblematicGameInstance() {}
 // End Class UProblematicGameInstance
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_s241270_Documents_GitHub_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicGameInstance_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicGameInstance_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UProblematicGameInstance, UProblematicGameInstance::StaticClass, TEXT("UProblematicGameInstance"), &Z_Registration_Info_UClass_UProblematicGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UProblematicGameInstance), 3179072764U) },
+		{ Z_Construct_UClass_UProblematicGameInstance, UProblematicGameInstance::StaticClass, TEXT("UProblematicGameInstance"), &Z_Registration_Info_UClass_UProblematicGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UProblematicGameInstance), 31506909U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_s241270_Documents_GitHub_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicGameInstance_h_2989694102(TEXT("/Script/ProblematicPlugin"),
-	Z_CompiledInDeferFile_FID_Users_s241270_Documents_GitHub_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicGameInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_s241270_Documents_GitHub_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicGameInstance_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicGameInstance_h_3924070351(TEXT("/Script/ProblematicPlugin"),
+	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicGameInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicGameInstance_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

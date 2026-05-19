@@ -20,7 +20,7 @@ class PROBLEMATICPLUGIN_API UProblematicFunctions : public UBlueprintFunctionLib
 public:
 	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") void GenerateDungeonMap(TArray<ANodeArea*> Nodes, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle,int32 RoomAmountToSpawn, TArray<int32> FrequencyPerRoom, UWorld* WorldContextObject);
 	
-	UFUNCTION(BlueprintCallable, Category = "Problematic Functions")void GenerateDungeonAndLoadLevel(FName levelToLoad, TArray<ANodeArea*> Nodes, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, int32 RoomAmountToSpawn, TArray<int32> FrequencyPerRoom,UWorld* WorldContextObject);
+	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") void GenerateDungeonAndLoadLevel(FName levelToLoad, TArray<ANodeArea*> Nodes, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, int32 RoomAmountToSpawn, TArray<int32> FrequencyPerRoom,UWorld* WorldContextObject);
 	
 private:
 	void MinimumSpanningTreeAlgorithm(TArray<ANodeArea*> Nodes, TArray<FVector2D> Edges);

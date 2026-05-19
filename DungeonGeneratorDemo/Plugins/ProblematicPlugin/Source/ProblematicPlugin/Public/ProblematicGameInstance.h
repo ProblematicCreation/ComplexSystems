@@ -27,9 +27,8 @@ public:
 	void GenerateDungeonOnOpen();
 	
 private:
-	UPROPERTY()
-	TArray<ANodeArea*> CachedNodes;
-	AEdgePathway* CachedEdgeAsset;
+	UPROPERTY() TArray<ANodeArea*> CachedNodes;
+	UPROPERTY() AEdgePathway* CachedEdgeAsset;
 	FVector2D CachedMapLocation;
 	float CachedNodeAreaSpawnRadius;
 	int32 CachedNodeAreaAmountToSpawn;
