@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "NodeArea.generated.h"
 
+class UBoxComponent;
+
 UCLASS()
 class PROBLEMATICPLUGIN_API ANodeArea : public AActor
 {
@@ -15,14 +17,16 @@ public:
 	// Sets default values for this actor's properties
 	ANodeArea();
 	
-	FVector2D GetSize();
+	void BoundingBox(FBox2D& Inner, FBox2D& Outer, float OuterBoxScale);
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	
+	UPROPERTY(EditAnywhere)
+	UBoxComponent* CollisionBox;
+	
 private:
-	FVector2D AreaSize;
 	TArray<FVector2D> DoorwayLocations;
 
 public:	

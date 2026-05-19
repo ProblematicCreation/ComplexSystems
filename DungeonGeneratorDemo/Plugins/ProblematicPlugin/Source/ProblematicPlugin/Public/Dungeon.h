@@ -23,6 +23,9 @@ public:
 	TArray<ANodeArea*> AllNodeAreas;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dungeon Map")
 	TArray<AEdgePathway*> AllEdgePathways;
+	
+	UFUNCTION(BlueprintCallable, Category = "Dungeon Map")
+	void AddArea(ANodeArea* Node);
 
 protected:
 	// Called when the game starts or when spawned

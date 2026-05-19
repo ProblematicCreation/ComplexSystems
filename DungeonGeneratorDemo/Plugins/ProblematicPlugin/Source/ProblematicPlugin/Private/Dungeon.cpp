@@ -11,6 +11,11 @@ ADungeon::ADungeon()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
+void ADungeon::AddArea(ANodeArea* Node)
+{
+	AllNodeAreas.Add(Node);
+}
+
 // Called when the game starts or when spawned
 void ADungeon::BeginPlay()
 {
