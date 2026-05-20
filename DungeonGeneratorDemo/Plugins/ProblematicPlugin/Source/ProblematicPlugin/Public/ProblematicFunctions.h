@@ -12,15 +12,27 @@ class AEdgePathway;
 /**
  * 
  */
+USTRUCT(BlueprintType)
+struct FAreaAndFrequency
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 FrequencyMinimum;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<ANodeArea> NodeAreaClass;
+};
+
 UCLASS()
 class PROBLEMATICPLUGIN_API UProblematicFunctions : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 	
 public:
-	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") void GenerateDungeonMap(TArray<ANodeArea*> Nodes, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle,int32 RoomAmountToSpawn, TArray<int32> FrequencyPerRoom, UWorld* WorldContextObject);
+	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") static void GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAndFrequency, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle,int32 RoomAmountToSpawn, UObject* WorldContextObject);
 	
-	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") void GenerateDungeonAndLoadLevel(FName levelToLoad, TArray<ANodeArea*> Nodes, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, int32 RoomAmountToSpawn, TArray<int32> FrequencyPerRoom,UWorld* WorldContextObject);
+	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") static void GenerateDungeonAndLoadLevel(FName levelToLoad, TArray<ANodeArea*> Nodes, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, int32 RoomAmountToSpawn, TArray<int32> FrequencyPerRoom,UWorld* WorldContextObject);
 	
 private:
 	void MinimumSpanningTreeAlgorithm(TArray<ANodeArea*> Nodes, TArray<FVector2D> Edges);

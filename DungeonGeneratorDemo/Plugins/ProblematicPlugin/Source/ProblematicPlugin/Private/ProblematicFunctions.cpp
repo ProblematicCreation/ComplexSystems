@@ -7,40 +7,75 @@
 #include "ProblematicGameInstance.h"
 #include "Kismet/GameplayStatics.h"
 
-void UProblematicFunctions::GenerateDungeonMap(TArray<ANodeArea*> Nodes, AEdgePathway* EdgeAsset, FVector2D MapLocation,
-	float MapSpawnCircle, int32 RoomAmountToSpawn, TArray<int32> FrequencyPerRoom, UWorld* WorldContextObject)
+void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAndFrequency, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle,int32 RoomAmountToSpawn, UObject* WorldContextObject)
 {
-	//--==== spawn rooms in world and create a dungeon actor instance to save them to ====--
+	if (IsValid(WorldContextObject))
+	{
+		//--==== create a dungeon actor instance to save rooms to ====--
 	FVector Location = FVector(MapLocation.X, MapLocation.Y, 0.f);
 	FActorSpawnParameters SpawnParams;
-	ADungeon* NewMap = WorldContextObject->SpawnActor<ADungeon>(Location, FRotator(0.f), SpawnParams);
-	
-	for (auto Room : Nodes)
+	ADungeon* NewMap = WorldContextObject->GetWorld()->SpawnActor<ADungeon>(Location, FRotator(0.f), SpawnParams);
+		
+	//--== calculate the minimum amount of rooms based on the frequency array ==--
+	int32 TotalRoomsMinimum = 0;
+	for (auto Amount : NodesAndFrequency)
 	{
-		//--== spawn actors in circle area ==--
-		float Angle = FMath::FRandRange(0, 365.f); // circle angle point
-		float CosAngle = FMath::Cos(Angle);
-		float SinAngle = FMath::Sin(Angle);
+		TotalRoomsMinimum += Amount.FrequencyMinimum;
+	}
+	//--== check if the room amount to spawn is large enough to be valid ==--
+	if (RoomAmountToSpawn < TotalRoomsMinimum)
+	{
+		RoomAmountToSpawn = TotalRoomsMinimum;
+	}
+
+	//--==== have at least the minimum amount of rooms to generate per room first ====--
+	for (auto AreaAndMinimum : NodesAndFrequency)
+	{
+		//--== spawn room * minimum amount ==--
+		for (int32 i = 0; i < AreaAndMinimum.FrequencyMinimum; i++)
+		{
+			//--== set random location in a circular area ==--
+			float Angle = FMath::FRandRange(0, 365.f); // circle angle point
+			float CosAngle = FMath::Cos(Angle);
+			float SinAngle = FMath::Sin(Angle);
 		
-		FVector NodeLocation;
-		NodeLocation.X = CosAngle * MapSpawnCircle + MapLocation.X;
-		NodeLocation.Y = SinAngle * MapSpawnCircle + MapLocation.Y;
-		NodeLocation.Z = 0.f;
-		
-		Room = WorldContextObject->SpawnActor<ANodeArea>(NodeLocation, FRotator(0.f), SpawnParams);
-		
-		//--== add actor to list of rooms in this instance of dungeon ==--
-		NewMap->AddArea(Room);
+			FVector NodeLocation;
+			NodeLocation.X = CosAngle * MapSpawnCircle + MapLocation.X;
+			NodeLocation.Y = SinAngle * MapSpawnCircle + MapLocation.Y;
+			NodeLocation.Z = 0.f;
+
+			//--== spawn room ==--
+			ANodeArea* NewRoom = WorldContextObject->GetWorld()->SpawnActor<ANodeArea>(AreaAndMinimum.NodeAreaClass, NodeLocation, FRotator(0.f), SpawnParams);
+			//--== add to dungeon actor ==--
+			NewMap->AddArea(NewRoom);
+		}
 	}
 	
-	//--==== space the rooms apart ====--
-	//SeparationSteeringAlgorithm(Nodes, MapLocation, MapSpawnCircle, WorldContextObject);
-	
-	//--==== if there is no edge asset, it is assumed that no pathways are to be implemented ====--
-	/*if (EdgeAsset != nullptr)
+	//--==== calculate how many more rooms need to be generated after the minimum amount per room has be spawned ====--
+	RoomAmountToSpawn -= TotalRoomsMinimum;
+
+	//--==== randomise the remaining rooms to spawn ====--
+	for (int32 i = 0; i < RoomAmountToSpawn; i++)
 	{
-		MinimumSpanningTreeAlgorithm(Nodes, DelaunayTriangulationAlgorithm(Nodes));
-	}*/
+		for (auto Area : NodesAndFrequency)
+		{
+			//--== set random location in a circular area ==--
+			float Angle = FMath::FRandRange(0, 365.f); // circle angle point
+			float CosAngle = FMath::Cos(Angle);
+			float SinAngle = FMath::Sin(Angle);
+		
+			FVector NodeLocation;
+			NodeLocation.X = CosAngle * MapSpawnCircle + MapLocation.X;
+			NodeLocation.Y = SinAngle * MapSpawnCircle + MapLocation.Y;
+			NodeLocation.Z = 0.f;
+
+			//--== spawn room ==--
+			ANodeArea* NewRoom = WorldContextObject->GetWorld()->SpawnActor<ANodeArea>(Area.NodeAreaClass, NodeLocation, FRotator(0.f), SpawnParams);
+			//--== add to dungeon actor ==--
+			NewMap->AddArea(NewRoom);
+		}
+	}
+	}
 }
 
 void UProblematicFunctions::GenerateDungeonAndLoadLevel(FName levelToLoad, TArray<ANodeArea*> Nodes,
@@ -50,6 +85,7 @@ void UProblematicFunctions::GenerateDungeonAndLoadLevel(FName levelToLoad, TArra
 	//--==== check if the current game instance is the problematic game instance ====--
 	if (UProblematicGameInstance* instance = Cast<UProblematicGameInstance>(WorldContextObject->GetGameInstance()))
 	{
+		//--==== load level after the game instance gets updated ====--
 		UGameplayStatics::OpenLevel(WorldContextObject, levelToLoad);
 	}
 }
