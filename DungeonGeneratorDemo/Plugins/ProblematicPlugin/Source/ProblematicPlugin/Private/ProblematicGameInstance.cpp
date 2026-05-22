@@ -3,9 +3,24 @@
 
 #include "ProblematicGameInstance.h"
 
-void UProblematicGameInstance::CachedDungeonToGenerate(TArray<ANodeArea*> Nodes, AEdgePathway* EdgeAsset,
-	FVector2D MapLocation, float NodeAreaSpawnRadius, int32 NodeAreaAmountToSpawn, TArray<int32> SpawnFrequencyPerRoom)
+UProblematicGameInstance::UProblematicGameInstance()
 {
+	CachedEdgeAsset = nullptr;
+	CachedMapLocation = FVector2D::ZeroVector;
+	CachedNodeAreaAmountToSpawn = 0.f;
+	CachedNodeAreaSpawnRadius = 0.f;
+	CachedNodesAndFrequency.Empty();
+}
+
+void UProblematicGameInstance::CachedDungeonToGenerate(TArray<FAreaAndFrequency> NodesAndFrequency,
+                                                       AEdgePathway* EdgeAsset, FVector2D MapLocation, float NodeAreaSpawnRadius, int32 NodeAreaAmountToSpawn,
+                                                       UObject* WorldContextObject)
+{
+	CachedEdgeAsset = EdgeAsset;
+	CachedMapLocation = MapLocation;
+	CachedNodeAreaAmountToSpawn = NodeAreaAmountToSpawn;
+	CachedNodeAreaSpawnRadius = NodeAreaSpawnRadius;
+	CachedNodesAndFrequency = NodesAndFrequency;
 }
 
 void UProblematicGameInstance::GenerateDungeonOnOpen()

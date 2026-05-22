@@ -30,12 +30,17 @@ class PROBLEMATICPLUGIN_API UProblematicFunctions : public UBlueprintFunctionLib
 	GENERATED_BODY()
 	
 public:
-	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") static void GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAndFrequency, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle,int32 RoomAmountToSpawn, UObject* WorldContextObject);
+	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") 
+	static void GenerateDungeonMap(
+	TArray<FAreaAndFrequency> AreasAndFrequency, AEdgePathway* EdgeAsset, 
+	FVector2D MapLocation, float MapSpawnCircle, float SpaceBetweenAreas, int32 RoomAmountToSpawn, 
+	UObject* WorldContextObject);
 	
-	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") static void GenerateDungeonAndLoadLevel(FName levelToLoad, TArray<ANodeArea*> Nodes, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, int32 RoomAmountToSpawn, TArray<int32> FrequencyPerRoom,UWorld* WorldContextObject);
+	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") 
+	static void GenerateDungeonAndLoadLevel(FName levelToLoad, TArray<FAreaAndFrequency> NodesAndFrequency, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, int32 RoomAmountToSpawn, UObject* WorldContextObject);
 	
 private:
-	void MinimumSpanningTreeAlgorithm(TArray<ANodeArea*> Nodes, TArray<FVector2D> Edges);
-	TArray<FVector2D> DelaunayTriangulationAlgorithm(TArray<ANodeArea*> Nodes);
-	void SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes, FVector2D MapLocation, float MapSpawnCircle, float HalfSpaceBetweenAreas, UWorld* WorldContextObject);
+	static TArray<FVector2D> MinimumSpanningTreeAlgorithm(TArray<ANodeArea*> Nodes, TArray<FVector2D> Edges);
+	static TArray<FVector2D> DelaunayTriangulationAlgorithm(TArray<ANodeArea*> Nodes);
+	static void SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes, FVector2D MapLocation, float MapSpawnCircle, float HalfSpaceBetweenAreas, UWorld* WorldContextObject);
 };

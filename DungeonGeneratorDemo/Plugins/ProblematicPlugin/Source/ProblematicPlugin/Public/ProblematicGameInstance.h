@@ -6,6 +6,7 @@
 #include "Engine/GameInstance.h"
 #include "ProblematicGameInstance.generated.h"
 
+struct FAreaAndFrequency;
 class AEdgePathway;
 class ANodeArea;
 /**
@@ -17,20 +18,22 @@ class PROBLEMATICPLUGIN_API UProblematicGameInstance : public UGameInstance
 	GENERATED_BODY()
 	
 public:
+	UProblematicGameInstance();
+
+	
 	UFUNCTION(BlueprintCallable, Category = "Problematic Instance Functions")
 	void CachedDungeonToGenerate(
-		TArray<ANodeArea*> Nodes, AEdgePathway* EdgeAsset, 
+		TArray<FAreaAndFrequency> NodesAndFrequency, AEdgePathway* EdgeAsset, 
 		FVector2D MapLocation, float NodeAreaSpawnRadius, 
-		int32 NodeAreaAmountToSpawn, TArray<int32> SpawnFrequencyPerRoom);
+		int32 NodeAreaAmountToSpawn, UObject* WorldContextObject);
 	
 	UFUNCTION(BlueprintCallable, Category = "Problematic Instance Functions")
 	void GenerateDungeonOnOpen();
 	
 private:
-	UPROPERTY() TArray<ANodeArea*> CachedNodes;
+	TArray<FAreaAndFrequency> CachedNodesAndFrequency;
 	UPROPERTY() AEdgePathway* CachedEdgeAsset;
 	FVector2D CachedMapLocation;
 	float CachedNodeAreaSpawnRadius;
 	int32 CachedNodeAreaAmountToSpawn;
-	TArray<int32> CachedSpawnFrequencyPerRoom;
 };
