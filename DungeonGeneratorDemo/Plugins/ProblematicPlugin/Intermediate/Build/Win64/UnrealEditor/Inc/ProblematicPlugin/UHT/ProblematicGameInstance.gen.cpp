@@ -6,16 +6,18 @@
 
 #include "UObject/GeneratedCppIncludes.h"
 #include "ProblematicPlugin/Public/ProblematicGameInstance.h"
+#include "ProblematicPlugin/Public/ProblematicFunctions.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeProblematicGameInstance() {}
 
 // Begin Cross Module References
+COREUOBJECT_API UClass* Z_Construct_UClass_UObject_NoRegister();
 COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector2D();
 ENGINE_API UClass* Z_Construct_UClass_UGameInstance();
 PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_AEdgePathway_NoRegister();
-PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_ANodeArea_NoRegister();
 PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_UProblematicGameInstance();
 PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_UProblematicGameInstance_NoRegister();
+PROBLEMATICPLUGIN_API UScriptStruct* Z_Construct_UScriptStruct_FAreaAndFrequency();
 UPackage* Z_Construct_UPackage__Script_ProblematicPlugin();
 // End Cross Module References
 
@@ -24,12 +26,12 @@ struct Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_St
 {
 	struct ProblematicGameInstance_eventCachedDungeonToGenerate_Parms
 	{
-		TArray<ANodeArea*> Nodes;
+		TArray<FAreaAndFrequency> NodesAndFrequency;
 		AEdgePathway* EdgeAsset;
 		FVector2D MapLocation;
 		float NodeAreaSpawnRadius;
 		int32 NodeAreaAmountToSpawn;
-		TArray<int32> SpawnFrequencyPerRoom;
+		UObject* WorldContextObject;
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
@@ -37,34 +39,31 @@ struct Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_St
 		{ "ModuleRelativePath", "Public/ProblematicGameInstance.h" },
 	};
 #endif // WITH_METADATA
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_Nodes_Inner;
-	static const UECodeGen_Private::FArrayPropertyParams NewProp_Nodes;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_NodesAndFrequency_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_NodesAndFrequency;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_EdgeAsset;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_MapLocation;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_NodeAreaSpawnRadius;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_NodeAreaAmountToSpawn;
-	static const UECodeGen_Private::FIntPropertyParams NewProp_SpawnFrequencyPerRoom_Inner;
-	static const UECodeGen_Private::FArrayPropertyParams NewProp_SpawnFrequencyPerRoom;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_WorldContextObject;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_Nodes_Inner = { "Nodes", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_ANodeArea_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_Nodes = { "Nodes", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicGameInstance_eventCachedDungeonToGenerate_Parms, Nodes), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_NodesAndFrequency_Inner = { "NodesAndFrequency", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FAreaAndFrequency, METADATA_PARAMS(0, nullptr) }; // 1512496352
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_NodesAndFrequency = { "NodesAndFrequency", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicGameInstance_eventCachedDungeonToGenerate_Parms, NodesAndFrequency), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 1512496352
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_EdgeAsset = { "EdgeAsset", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicGameInstance_eventCachedDungeonToGenerate_Parms, EdgeAsset), Z_Construct_UClass_AEdgePathway_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_MapLocation = { "MapLocation", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicGameInstance_eventCachedDungeonToGenerate_Parms, MapLocation), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_NodeAreaSpawnRadius = { "NodeAreaSpawnRadius", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicGameInstance_eventCachedDungeonToGenerate_Parms, NodeAreaSpawnRadius), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_NodeAreaAmountToSpawn = { "NodeAreaAmountToSpawn", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicGameInstance_eventCachedDungeonToGenerate_Parms, NodeAreaAmountToSpawn), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_SpawnFrequencyPerRoom_Inner = { "SpawnFrequencyPerRoom", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_SpawnFrequencyPerRoom = { "SpawnFrequencyPerRoom", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicGameInstance_eventCachedDungeonToGenerate_Parms, SpawnFrequencyPerRoom), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_WorldContextObject = { "WorldContextObject", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicGameInstance_eventCachedDungeonToGenerate_Parms, WorldContextObject), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_Nodes_Inner,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_Nodes,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_NodesAndFrequency_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_NodesAndFrequency,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_EdgeAsset,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_MapLocation,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_NodeAreaSpawnRadius,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_NodeAreaAmountToSpawn,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_SpawnFrequencyPerRoom_Inner,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_SpawnFrequencyPerRoom,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_WorldContextObject,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::PropPointers) < 2048);
 const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UProblematicGameInstance, nullptr, "CachedDungeonToGenerate", nullptr, nullptr, Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::PropPointers), sizeof(Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::ProblematicGameInstance_eventCachedDungeonToGenerate_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04820401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::Function_MetaDataParams), Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::Function_MetaDataParams) };
@@ -80,15 +79,15 @@ UFunction* Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerat
 }
 DEFINE_FUNCTION(UProblematicGameInstance::execCachedDungeonToGenerate)
 {
-	P_GET_TARRAY(ANodeArea*,Z_Param_Nodes);
+	P_GET_TARRAY(FAreaAndFrequency,Z_Param_NodesAndFrequency);
 	P_GET_OBJECT(AEdgePathway,Z_Param_EdgeAsset);
 	P_GET_STRUCT(FVector2D,Z_Param_MapLocation);
 	P_GET_PROPERTY(FFloatProperty,Z_Param_NodeAreaSpawnRadius);
 	P_GET_PROPERTY(FIntProperty,Z_Param_NodeAreaAmountToSpawn);
-	P_GET_TARRAY(int32,Z_Param_SpawnFrequencyPerRoom);
+	P_GET_OBJECT(UObject,Z_Param_WorldContextObject);
 	P_FINISH;
 	P_NATIVE_BEGIN;
-	P_THIS->CachedDungeonToGenerate(Z_Param_Nodes,Z_Param_EdgeAsset,Z_Param_MapLocation,Z_Param_NodeAreaSpawnRadius,Z_Param_NodeAreaAmountToSpawn,Z_Param_SpawnFrequencyPerRoom);
+	P_THIS->CachedDungeonToGenerate(Z_Param_NodesAndFrequency,Z_Param_EdgeAsset,Z_Param_MapLocation,Z_Param_NodeAreaSpawnRadius,Z_Param_NodeAreaAmountToSpawn,Z_Param_WorldContextObject);
 	P_NATIVE_END;
 }
 // End Class UProblematicGameInstance Function CachedDungeonToGenerate
@@ -148,20 +147,15 @@ struct Z_Construct_UClass_UProblematicGameInstance_Statics
 		{ "IncludePath", "ProblematicGameInstance.h" },
 		{ "ModuleRelativePath", "Public/ProblematicGameInstance.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CachedNodes_MetaData[] = {
-		{ "ModuleRelativePath", "Public/ProblematicGameInstance.h" },
-	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CachedEdgeAsset_MetaData[] = {
 		{ "ModuleRelativePath", "Public/ProblematicGameInstance.h" },
 	};
 #endif // WITH_METADATA
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_CachedNodes_Inner;
-	static const UECodeGen_Private::FArrayPropertyParams NewProp_CachedNodes;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_CachedEdgeAsset;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate, "CachedDungeonToGenerate" }, // 1086523900
+		{ &Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate, "CachedDungeonToGenerate" }, // 3943212022
 		{ &Z_Construct_UFunction_UProblematicGameInstance_GenerateDungeonOnOpen, "GenerateDungeonOnOpen" }, // 3317038436
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
@@ -170,12 +164,8 @@ struct Z_Construct_UClass_UProblematicGameInstance_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UProblematicGameInstance_Statics::NewProp_CachedNodes_Inner = { "CachedNodes", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_ANodeArea_NoRegister, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UProblematicGameInstance_Statics::NewProp_CachedNodes = { "CachedNodes", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UProblematicGameInstance, CachedNodes), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CachedNodes_MetaData), NewProp_CachedNodes_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UProblematicGameInstance_Statics::NewProp_CachedEdgeAsset = { "CachedEdgeAsset", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UProblematicGameInstance, CachedEdgeAsset), Z_Construct_UClass_AEdgePathway_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CachedEdgeAsset_MetaData), NewProp_CachedEdgeAsset_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UProblematicGameInstance_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UProblematicGameInstance_Statics::NewProp_CachedNodes_Inner,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UProblematicGameInstance_Statics::NewProp_CachedNodes,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UProblematicGameInstance_Statics::NewProp_CachedEdgeAsset,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UProblematicGameInstance_Statics::PropPointers) < 2048);
@@ -211,7 +201,6 @@ template<> PROBLEMATICPLUGIN_API UClass* StaticClass<UProblematicGameInstance>()
 {
 	return UProblematicGameInstance::StaticClass();
 }
-UProblematicGameInstance::UProblematicGameInstance(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
 DEFINE_VTABLE_PTR_HELPER_CTOR(UProblematicGameInstance);
 UProblematicGameInstance::~UProblematicGameInstance() {}
 // End Class UProblematicGameInstance
@@ -220,10 +209,10 @@ UProblematicGameInstance::~UProblematicGameInstance() {}
 struct Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicGameInstance_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UProblematicGameInstance, UProblematicGameInstance::StaticClass, TEXT("UProblematicGameInstance"), &Z_Registration_Info_UClass_UProblematicGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UProblematicGameInstance), 31506909U) },
+		{ Z_Construct_UClass_UProblematicGameInstance, UProblematicGameInstance::StaticClass, TEXT("UProblematicGameInstance"), &Z_Registration_Info_UClass_UProblematicGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UProblematicGameInstance), 1776613544U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicGameInstance_h_3924070351(TEXT("/Script/ProblematicPlugin"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicGameInstance_h_1870810911(TEXT("/Script/ProblematicPlugin"),
 	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicGameInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicGameInstance_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

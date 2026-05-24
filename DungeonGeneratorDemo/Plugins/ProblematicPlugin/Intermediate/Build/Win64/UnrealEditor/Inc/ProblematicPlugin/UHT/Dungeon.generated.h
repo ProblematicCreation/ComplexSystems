@@ -16,7 +16,10 @@ class ANodeArea;
 #define PROBLEMATICPLUGIN_Dungeon_generated_h
 
 #define FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_Dungeon_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
-	DECLARE_FUNCTION(execAddArea);
+	DECLARE_FUNCTION(execGetAllNodeAreas); \
+	DECLARE_FUNCTION(execAddArea); \
+	DECLARE_FUNCTION(execSetFocusedNodeArea); \
+	DECLARE_FUNCTION(execSetIsUpdatingAreaPosition);
 
 
 #define FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_Dungeon_h_15_INCLASS_NO_PURE_DECLS \

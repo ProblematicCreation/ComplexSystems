@@ -1,13 +1,15 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\problematicgameinstance.gen.cpp",
+        "Source": "c:\\users\\user\\documents\\aie git\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\problematicgameinstance.gen.cpp",
         "ProvidedModule": "",
-        "PCH": "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\intermediate\\build\\win64\\x64\\dungeongeneratordemoeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "PCH": "c:\\users\\user\\documents\\aie git\\complexsystems\\dungeongeneratordemo\\intermediate\\build\\win64\\x64\\dungeongeneratordemoeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
         "Includes": [
-            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\problematicplugin\\definitions.problematicplugin.h",
-            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\source\\problematicplugin\\public\\problematicgameinstance.h",
-            "c:\\users\\s241270\\documents\\github\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\problematicgameinstance.generated.h"
+            "c:\\users\\user\\documents\\aie git\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\problematicplugin\\definitions.problematicplugin.h",
+            "c:\\users\\user\\documents\\aie git\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\source\\problematicplugin\\public\\problematicgameinstance.h",
+            "c:\\users\\user\\documents\\aie git\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\problematicgameinstance.generated.h",
+            "c:\\users\\user\\documents\\aie git\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\source\\problematicplugin\\public\\problematicfunctions.h",
+            "c:\\users\\user\\documents\\aie git\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\problematicfunctions.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

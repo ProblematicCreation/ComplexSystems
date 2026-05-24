@@ -2,6 +2,7 @@
 
 
 #include "ProblematicGameInstance.h"
+#include "ProblematicFunctions.h"
 
 UProblematicGameInstance::UProblematicGameInstance()
 {

@@ -57,27 +57,26 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 		//--==== randomise the remaining rooms to spawn ====--
 		for (int32 i = 0; i < RoomAmountToSpawn; i++)
 		{
-			for (auto Area : NodesAndFrequency)
-			{
-				//--== set random location in a circular area ==--
-				float Angle = FMath::FRandRange(0, 365.f); // circle angle point
-				float CosAngle = FMath::Cos(Angle);
-				float SinAngle = FMath::Sin(Angle);
-		
-				FVector NodeLocation;
-				NodeLocation.X = CosAngle * MapSpawnCircle + MapLocation.X;
-				NodeLocation.Y = SinAngle * MapSpawnCircle + MapLocation.Y;
-				NodeLocation.Z = 0.f;
+			//--== randomise which area to spawn ==--
+			float Iterator = FMath::FRandRange(0.f, NodesAndFrequency.Num());
 
-				//--== spawn room ==--
-				ANodeArea* NewRoom = WorldContextObject->GetWorld()->SpawnActor<ANodeArea>(Area.NodeAreaClass, NodeLocation, FRotator(0.f), SpawnParams);
-				//--== add to dungeon actor ==--
-				NewMap->AddArea(NewRoom);
-			}
+			//--== set random location in a circular area ==--
+			float Angle = FMath::FRandRange(0, 365.f); // circle angle point
+			float CosAngle = FMath::Cos(Angle);
+			float SinAngle = FMath::Sin(Angle);
+			FVector NodeLocation;
+			NodeLocation.X = CosAngle * MapSpawnCircle + MapLocation.X;
+			NodeLocation.Y = SinAngle * MapSpawnCircle + MapLocation.Y;
+			NodeLocation.Z = 0.f;
+
+			//--== spawn room ==--
+			ANodeArea* NewRoom = WorldContextObject->GetWorld()->SpawnActor<ANodeArea>(NodesAndFrequency[Iterator].NodeAreaClass, NodeLocation, FRotator(0.f), SpawnParams);
+			//--== add to dungeon actor ==--
+			NewMap->AddArea(NewRoom);
 		}
 
 		//--==== Move each room apart from one another ====--
-		SeparationSteeringAlgorithm(NewMap->GetAllNodeAreas(), MapLocation, MapSpawnCircle, SpaceBetweenAreas / 2.f, WorldContextObject->GetWorld());
+		//SeparationSteeringAlgorithm(NewMap->GetAllNodeAreas(), MapLocation, MapSpawnCircle, SpaceBetweenAreas / 2.f, WorldContextObject->GetWorld());
 
 		//--==== Connect rooms together via triangulation ====--
 		//TArray<FVector2D> InitialEdges = DelaunayTriangulationAlgorithm(NewMap->GetAllNodeAreas());
@@ -96,6 +95,18 @@ void UProblematicFunctions::GenerateDungeonAndLoadLevel(FName levelToLoad, TArra
 		//--==== load level after the game instance gets updated ====--
 		UGameplayStatics::OpenLevel(WorldContextObject, levelToLoad);
 	}
+}
+
+TArray<FVector2D> UProblematicFunctions::MinimumSpanningTreeAlgorithm(TArray<ANodeArea*> Nodes, TArray<FVector2D> Edges)
+{
+	TArray<FVector2D> RemainingEdges;
+	return RemainingEdges;
+}
+
+TArray<FVector2D> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArray<ANodeArea*> Nodes)
+{
+	TArray<FVector2D> Edges;
+	return Edges;
 }
 
 void UProblematicFunctions::SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes, FVector2D MapLocation, float MapSpawnCircle, float HalfSpaceBetweenAreas, UWorld* WorldContextObject)

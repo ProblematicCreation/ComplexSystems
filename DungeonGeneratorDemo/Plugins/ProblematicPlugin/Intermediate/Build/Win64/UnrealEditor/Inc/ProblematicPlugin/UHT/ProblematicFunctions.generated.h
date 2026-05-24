@@ -10,9 +10,7 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class AEdgePathway;
-class ANodeArea;
 class UObject;
-class UWorld;
 struct FAreaAndFrequency;
 #ifdef PROBLEMATICPLUGIN_ProblematicFunctions_generated_h
 #error "ProblematicFunctions.generated.h already included, missing '#pragma once' in ProblematicFunctions.h"
