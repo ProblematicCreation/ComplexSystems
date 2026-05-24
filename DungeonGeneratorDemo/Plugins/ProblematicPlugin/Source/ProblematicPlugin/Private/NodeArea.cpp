@@ -4,6 +4,7 @@
 #include "NodeArea.h"
 
 #include "Components/BoxComponent.h"
+#include "Components/SphereComponent.h"
 
 // Sets default values
 ANodeArea::ANodeArea()
@@ -13,6 +14,8 @@ ANodeArea::ANodeArea()
 	//--==== components ====--
 	USceneComponent* Root = CreateDefaultSubobject<USceneComponent>("Root");
 	SetRootComponent(Root);
+	CollisionBox = CreateDefaultSubobject<UBoxComponent>("Collision Box");
+	CollisionBox->SetupAttachment(Root);
 }
 
 void ANodeArea::BoundingBox(FBox2D& Inner, FBox2D& Outer, float OuterBoxScale)

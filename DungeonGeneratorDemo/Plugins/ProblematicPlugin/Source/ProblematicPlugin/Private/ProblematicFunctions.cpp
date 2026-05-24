@@ -76,7 +76,7 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 		}
 
 		//--==== Move each room apart from one another ====--
-		//SeparationSteeringAlgorithm(NewMap->GetAllNodeAreas(), MapLocation, MapSpawnCircle, SpaceBetweenAreas / 2.f, WorldContextObject->GetWorld());
+		SeparationSteeringAlgorithm(NewMap->GetAllNodeAreas(), SpaceBetweenAreas);
 
 		//--==== Connect rooms together via triangulation ====--
 		//TArray<FVector2D> InitialEdges = DelaunayTriangulationAlgorithm(NewMap->GetAllNodeAreas());
@@ -85,9 +85,7 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 	}
 }
 
-void UProblematicFunctions::GenerateDungeonAndLoadLevel(FName levelToLoad, TArray<FAreaAndFrequency> NodesAndFrequency,
-	AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, int32 RoomAmountToSpawn,
-	UObject* WorldContextObject)
+void UProblematicFunctions::GenerateDungeonAndLoadLevel(FName levelToLoad, TArray<FAreaAndFrequency> NodesAndFrequency, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, int32 RoomAmountToSpawn, UObject* WorldContextObject)
 {
 	//--==== check if the current game instance is the problematic game instance ====--
 	if (UProblematicGameInstance* instance = Cast<UProblematicGameInstance>(WorldContextObject->GetWorld()->GetGameInstance()))
@@ -109,7 +107,7 @@ TArray<FVector2D> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArray<A
 	return Edges;
 }
 
-void UProblematicFunctions::SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes, FVector2D MapLocation, float MapSpawnCircle, float HalfSpaceBetweenAreas, UWorld* WorldContextObject)
+void UProblematicFunctions::SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes, float HalfSpaceBetweenAreas)
 {
 	//--==== very expensive operation ====--
 	for (auto Node : Nodes)
@@ -136,8 +134,10 @@ void UProblematicFunctions::SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes
 				{
 					//--==== max force push away ====--
 					FVector2D Direction = FVector2D(Node->GetActorLocation().X, Node->GetActorLocation().Y) - FVector2D(OtherNode->GetActorLocation().X, OtherNode->GetActorLocation().Y);
-					float Distance = Direction.Size();
-					CachedForcesCombined += (FVector2D(Direction / FMath::Square(FVector2D::Distance(FVector2D(Node->GetActorLocation().X, Node->GetActorLocation().Y), FVector2D(OtherNode->GetActorLocation().X, OtherNode->GetActorLocation().Y)))));
+					float Distance = FVector2D::Distance(FVector2D(Node->GetActorLocation().X, Node->GetActorLocation().Y), FVector2D(OtherNode->GetActorLocation().X, OtherNode->GetActorLocation().Y) );
+					Direction.Normalize();
+					CachedForcesCombined += Direction / Distance;
+					//CachedForcesCombined += (FVector2D(Direction / FMath::Square(FVector2D::Distance(FVector2D(Node->GetActorLocation().X, Node->GetActorLocation().Y), FVector2D(OtherNode->GetActorLocation().X, OtherNode->GetActorLocation().Y)))));
 					OverlapCount++;
 				}
 				else if (OtherOuterPerimeter.Intersect(OuterPerimeter))
@@ -145,15 +145,19 @@ void UProblematicFunctions::SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes
 					//--== min force push away ====--
 					FVector2D Direction = FVector2D(Node->GetActorLocation().X, Node->GetActorLocation().Y) - FVector2D(OtherNode->GetActorLocation().X, OtherNode->GetActorLocation().Y);
 					float Distance = Direction.Size();
-					CachedForcesCombined += (FVector2D((Direction / 2.f) / FMath::Square(FVector2D::Distance(FVector2D(Node->GetActorLocation().X, Node->GetActorLocation().Y), FVector2D(OtherNode->GetActorLocation().X, OtherNode->GetActorLocation().Y)))));
+					Direction.Normalize();
+					CachedForcesCombined += Direction / Distance;
+					//CachedForcesCombined += (FVector2D((Direction / 2.f) / FMath::Square(FVector2D::Distance(FVector2D(Node->GetActorLocation().X, Node->GetActorLocation().Y), FVector2D(OtherNode->GetActorLocation().X, OtherNode->GetActorLocation().Y)))));
 					OverlapCount++;
 				}
 			}
 		}
 		//--== apply the force ==--
 		FVector2D AveragedForce = CachedForcesCombined / OverlapCount;
-		FVector2D NewLocation = FVector2D(Node->GetActorLocation().X, Node->GetActorLocation().Y) + (AveragedForce.GetSafeNormal() * 1.f);
-		//--==== has reached desired distance away ====--
-		
+		float Time = AveragedForce.Size();
+		float EndX = Node->GetActorLocation().X +(AveragedForce.X * Time);
+		float EndY = Node->GetActorLocation().Y +(AveragedForce.Y * Time);
+		//FVector2D NewLocation = FVector2D(Node->GetActorLocation().X, Node->GetActorLocation().Y) + (AveragedForce.GetSafeNormal() * 1.f);
+		Node->SetActorLocation(FVector(EndX,EndY,0.f));
 	}
 }

@@ -7,13 +7,13 @@
 			"Dungeon.cpp.obj",
 			"EdgePathway.cpp.obj",
 			"NodeArea.cpp.obj",
-			"ProblematicGameInstance.cpp.obj",
 			"ProblematicPlugin.cpp.obj",
 			"Dungeon.gen.cpp.obj",
 			"ProblematicFunctions.gen.cpp.obj",
 			"ProblematicGameInstance.gen.cpp.obj",
 			"ProblematicPlugin.init.gen.cpp.obj",
-			"ProblematicFunctions.cpp.obj"
+			"ProblematicFunctions.cpp.obj",
+			"ProblematicGameInstance.cpp.obj"
 		]
 	}
 }

@@ -2,6 +2,7 @@
 
 
 #include "Dungeon.h"
+#include "NodeArea.h"
 
 
 // Sets default values
@@ -38,10 +39,6 @@ void ADungeon::BeginPlay()
 void ADungeon::Tick(float dt)
 {
 	Super::Tick(dt);
-	if (bIsUpdatingAreaPosition)
-	{
-		
-	}
 }
 
 

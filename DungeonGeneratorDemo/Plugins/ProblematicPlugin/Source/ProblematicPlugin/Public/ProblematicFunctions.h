@@ -33,7 +33,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") 
 	static void GenerateDungeonMap(
 	TArray<FAreaAndFrequency> AreasAndFrequency, AEdgePathway* EdgeAsset, 
-	FVector2D MapLocation, float MapSpawnCircle, float SpaceBetweenAreas, int32 RoomAmountToSpawn, 
+	FVector2D MapLocation, float MapSpawnCircle, float OuterPerimeterSizeMultiplier, int32 RoomAmountToSpawn, 
 	UObject* WorldContextObject);
 	
 	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") 
@@ -42,5 +42,5 @@ public:
 private:
 	static TArray<FVector2D> MinimumSpanningTreeAlgorithm(TArray<ANodeArea*> Nodes, TArray<FVector2D> Edges);
 	static TArray<FVector2D> DelaunayTriangulationAlgorithm(TArray<ANodeArea*> Nodes);
-	static void SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes, FVector2D MapLocation, float MapSpawnCircle, float HalfSpaceBetweenAreas, UWorld* WorldContextObject);
+	static void SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes, float HalfSpaceBetweenAreas);
 };

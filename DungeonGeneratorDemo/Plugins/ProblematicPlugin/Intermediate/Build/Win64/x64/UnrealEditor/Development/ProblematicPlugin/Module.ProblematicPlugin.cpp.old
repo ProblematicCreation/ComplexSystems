@@ -4,5 +4,4 @@
 #include "C:/Users/User/Documents/AIE git/ComplexSystems/DungeonGeneratorDemo/Plugins/ProblematicPlugin/Source/ProblematicPlugin/Private/Dungeon.cpp"
 #include "C:/Users/User/Documents/AIE git/ComplexSystems/DungeonGeneratorDemo/Plugins/ProblematicPlugin/Source/ProblematicPlugin/Private/EdgePathway.cpp"
 #include "C:/Users/User/Documents/AIE git/ComplexSystems/DungeonGeneratorDemo/Plugins/ProblematicPlugin/Source/ProblematicPlugin/Private/NodeArea.cpp"
-#include "C:/Users/User/Documents/AIE git/ComplexSystems/DungeonGeneratorDemo/Plugins/ProblematicPlugin/Source/ProblematicPlugin/Private/ProblematicGameInstance.cpp"
 #include "C:/Users/User/Documents/AIE git/ComplexSystems/DungeonGeneratorDemo/Plugins/ProblematicPlugin/Source/ProblematicPlugin/Private/ProblematicPlugin.cpp"

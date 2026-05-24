@@ -179,7 +179,7 @@ struct Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics
 		AEdgePathway* EdgeAsset;
 		FVector2D MapLocation;
 		float MapSpawnCircle;
-		float SpaceBetweenAreas;
+		float OuterPerimeterSizeMultiplier;
 		int32 RoomAmountToSpawn;
 		UObject* WorldContextObject;
 	};
@@ -194,7 +194,7 @@ struct Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_EdgeAsset;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_MapLocation;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_MapSpawnCircle;
-	static const UECodeGen_Private::FFloatPropertyParams NewProp_SpaceBetweenAreas;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_OuterPerimeterSizeMultiplier;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_RoomAmountToSpawn;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_WorldContextObject;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -205,7 +205,7 @@ const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UProblematic
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_EdgeAsset = { "EdgeAsset", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonMap_Parms, EdgeAsset), Z_Construct_UClass_AEdgePathway_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_MapLocation = { "MapLocation", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonMap_Parms, MapLocation), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_MapSpawnCircle = { "MapSpawnCircle", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonMap_Parms, MapSpawnCircle), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_SpaceBetweenAreas = { "SpaceBetweenAreas", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonMap_Parms, SpaceBetweenAreas), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_OuterPerimeterSizeMultiplier = { "OuterPerimeterSizeMultiplier", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonMap_Parms, OuterPerimeterSizeMultiplier), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_RoomAmountToSpawn = { "RoomAmountToSpawn", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonMap_Parms, RoomAmountToSpawn), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_WorldContextObject = { "WorldContextObject", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonMap_Parms, WorldContextObject), Z_Construct_UClass_UObject_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::PropPointers[] = {
@@ -214,7 +214,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UProbl
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_EdgeAsset,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_MapLocation,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_MapSpawnCircle,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_SpaceBetweenAreas,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_OuterPerimeterSizeMultiplier,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_RoomAmountToSpawn,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_WorldContextObject,
 };
@@ -236,12 +236,12 @@ DEFINE_FUNCTION(UProblematicFunctions::execGenerateDungeonMap)
 	P_GET_OBJECT(AEdgePathway,Z_Param_EdgeAsset);
 	P_GET_STRUCT(FVector2D,Z_Param_MapLocation);
 	P_GET_PROPERTY(FFloatProperty,Z_Param_MapSpawnCircle);
-	P_GET_PROPERTY(FFloatProperty,Z_Param_SpaceBetweenAreas);
+	P_GET_PROPERTY(FFloatProperty,Z_Param_OuterPerimeterSizeMultiplier);
 	P_GET_PROPERTY(FIntProperty,Z_Param_RoomAmountToSpawn);
 	P_GET_OBJECT(UObject,Z_Param_WorldContextObject);
 	P_FINISH;
 	P_NATIVE_BEGIN;
-	UProblematicFunctions::GenerateDungeonMap(Z_Param_AreasAndFrequency,Z_Param_EdgeAsset,Z_Param_MapLocation,Z_Param_MapSpawnCircle,Z_Param_SpaceBetweenAreas,Z_Param_RoomAmountToSpawn,Z_Param_WorldContextObject);
+	UProblematicFunctions::GenerateDungeonMap(Z_Param_AreasAndFrequency,Z_Param_EdgeAsset,Z_Param_MapLocation,Z_Param_MapSpawnCircle,Z_Param_OuterPerimeterSizeMultiplier,Z_Param_RoomAmountToSpawn,Z_Param_WorldContextObject);
 	P_NATIVE_END;
 }
 // End Class UProblematicFunctions Function GenerateDungeonMap
@@ -272,7 +272,7 @@ struct Z_Construct_UClass_UProblematicFunctions_Statics
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonAndLoadLevel, "GenerateDungeonAndLoadLevel" }, // 4265385628
-		{ &Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap, "GenerateDungeonMap" }, // 3084687151
+		{ &Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap, "GenerateDungeonMap" }, // 1882766786
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -324,10 +324,10 @@ struct Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_Dun
 		{ FAreaAndFrequency::StaticStruct, Z_Construct_UScriptStruct_FAreaAndFrequency_Statics::NewStructOps, TEXT("AreaAndFrequency"), &Z_Registration_Info_UScriptStruct_AreaAndFrequency, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FAreaAndFrequency), 1512496352U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UProblematicFunctions, UProblematicFunctions::StaticClass, TEXT("UProblematicFunctions"), &Z_Registration_Info_UClass_UProblematicFunctions, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UProblematicFunctions), 3663497584U) },
+		{ Z_Construct_UClass_UProblematicFunctions, UProblematicFunctions::StaticClass, TEXT("UProblematicFunctions"), &Z_Registration_Info_UClass_UProblematicFunctions, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UProblematicFunctions), 617396578U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_3129423188(TEXT("/Script/ProblematicPlugin"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_100139528(TEXT("/Script/ProblematicPlugin"),
 	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics::ScriptStructInfo),
 	nullptr, 0);
