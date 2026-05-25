@@ -28,9 +28,6 @@ protected:
 	
 private:
 	TArray<FVector2D> DoorwayLocations;
-
-public:	
-	// Called every frame
-	//virtual void Tick(float DeltaTime) override;
+	
 
 };

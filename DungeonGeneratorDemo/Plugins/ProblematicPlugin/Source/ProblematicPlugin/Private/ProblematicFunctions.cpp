@@ -3,8 +3,10 @@
 
 #include "ProblematicFunctions.h"
 #include "Dungeon.h"
+#include "EdgePathway.h"
 #include "NodeArea.h"
 #include "ProblematicGameInstance.h"
+#include "RewindData.h"
 #include "Kismet/GameplayStatics.h"
 
 void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAndFrequency, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, float SpaceBetweenAreas,int32 RoomAmountToSpawn, UObject* WorldContextObject)
@@ -75,6 +77,10 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 			NewMap->AddArea(NewRoom);
 		}
 
+		bool ShouldExecuteDelaunayTriangulationOnceCompleted = false;
+		if (IsValid(EdgeAsset))
+			ShouldExecuteDelaunayTriangulationOnceCompleted = true;
+		
 		//--==== Move each room apart from one another ====--
 		SeparationSteeringAlgorithm(NewMap->GetAllNodeAreas(), SpaceBetweenAreas);
 
@@ -103,18 +109,45 @@ TArray<FVector2D> UProblematicFunctions::MinimumSpanningTreeAlgorithm(TArray<ANo
 
 TArray<FVector2D> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArray<ANodeArea*> Nodes)
 {
+	FMatrix MatrixForDetermenant;
 	TArray<FVector2D> Edges;
+
+	for (auto Node : Nodes)
+	{
+		float Deter = MatrixForDetermenant.Determinant();
+		
+		switch (Deter)
+		{
+		case -1:
+			//--== not inside circle
+			break;
+		case 0:
+			//--== on circumference of circle ==--
+			break;
+		case 1:
+			//--== is inside of circle ==--
+			break;
+		default:
+			//--== Invalid data ==--
+			break;
+			
+		};
+	}
+	
+	
+	
 	return Edges;
 }
 
 void UProblematicFunctions::SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes, float HalfSpaceBetweenAreas)
 {
-	//--==== very expensive operation ====--
+	TArray<ANodeArea*> NodesThatOverlapped = Nodes;
+	
 	for (auto Node : Nodes)
 	{
 		FVector2D SeparationForce = FVector2D::ZeroVector;
 		int32 OverlapCount = 0;
-		FVector2D CachedForcesCombined;
+		FVector2D CachedForcesCombined = FVector2D::ZeroVector;
 		
 		//--==== calculate boxes ====--
 		FBox2D InnerPerimeter;
@@ -134,30 +167,38 @@ void UProblematicFunctions::SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes
 				{
 					//--==== max force push away ====--
 					FVector2D Direction = FVector2D(Node->GetActorLocation().X, Node->GetActorLocation().Y) - FVector2D(OtherNode->GetActorLocation().X, OtherNode->GetActorLocation().Y);
-					float Distance = FVector2D::Distance(FVector2D(Node->GetActorLocation().X, Node->GetActorLocation().Y), FVector2D(OtherNode->GetActorLocation().X, OtherNode->GetActorLocation().Y) );
-					Direction.Normalize();
-					CachedForcesCombined += Direction / Distance;
-					//CachedForcesCombined += (FVector2D(Direction / FMath::Square(FVector2D::Distance(FVector2D(Node->GetActorLocation().X, Node->GetActorLocation().Y), FVector2D(OtherNode->GetActorLocation().X, OtherNode->GetActorLocation().Y)))));
+					CachedForcesCombined += Direction * 2.f;
 					OverlapCount++;
 				}
 				else if (OtherOuterPerimeter.Intersect(OuterPerimeter))
 				{
 					//--== min force push away ====--
 					FVector2D Direction = FVector2D(Node->GetActorLocation().X, Node->GetActorLocation().Y) - FVector2D(OtherNode->GetActorLocation().X, OtherNode->GetActorLocation().Y);
-					float Distance = Direction.Size();
-					Direction.Normalize();
-					CachedForcesCombined += Direction / Distance;
-					//CachedForcesCombined += (FVector2D((Direction / 2.f) / FMath::Square(FVector2D::Distance(FVector2D(Node->GetActorLocation().X, Node->GetActorLocation().Y), FVector2D(OtherNode->GetActorLocation().X, OtherNode->GetActorLocation().Y)))));
+					CachedForcesCombined += Direction;
 					OverlapCount++;
 				}
 			}
 		}
-		//--== apply the force ==--
-		FVector2D AveragedForce = CachedForcesCombined / OverlapCount;
-		float Time = AveragedForce.Size();
-		float EndX = Node->GetActorLocation().X +(AveragedForce.X * Time);
-		float EndY = Node->GetActorLocation().Y +(AveragedForce.Y * Time);
-		//FVector2D NewLocation = FVector2D(Node->GetActorLocation().X, Node->GetActorLocation().Y) + (AveragedForce.GetSafeNormal() * 1.f);
-		Node->SetActorLocation(FVector(EndX,EndY,0.f));
+		if (OverlapCount > 0)
+		{
+			//--== apply the force ==--
+			FVector2D AveragedForce = CachedForcesCombined / OverlapCount;
+			float EndX = Node->GetActorLocation().X + (AveragedForce.X);
+			float EndY = Node->GetActorLocation().Y + (AveragedForce.Y);
+			//--== set location of node ==--
+			Node->SetActorLocation(FVector(EndX,EndY,0.f));
+			
+			//--== add to array for nodes that need to check if they are now overlapping something else ==--
+			NodesThatOverlapped.Add(Node);
+		}
+		else
+		{
+			NodesThatOverlapped.Remove(Node);
+		}
+	}
+	
+	if (NodesThatOverlapped.Num() > 0)
+	{
+		SeparationSteeringAlgorithm(Nodes, HalfSpaceBetweenAreas);
 	}
 }

@@ -1,9 +1,9 @@
 {
 	"SourceFiles": [
-		"C:\\Users\\User\\Documents\\AIE git\\ComplexSystems\\DungeonGeneratorDemo\\Source\\DungeonGeneratorDemo\\DungeonGeneratorDemo.Build.cs",
-		"C:\\Users\\User\\Documents\\AIE git\\ComplexSystems\\DungeonGeneratorDemo\\Plugins\\ProblematicPlugin\\Source\\ProblematicPlugin\\ProblematicPlugin.Build.cs",
-		"C:\\Users\\User\\Documents\\AIE git\\ComplexSystems\\DungeonGeneratorDemo\\Source\\DungeonGeneratorDemo.Target.cs",
-		"C:\\Users\\User\\Documents\\AIE git\\ComplexSystems\\DungeonGeneratorDemo\\Source\\DungeonGeneratorDemoEditor.Target.cs"
+		"C:\\Users\\s241270\\Documents\\GitHub\\ComplexSystems\\DungeonGeneratorDemo\\Source\\DungeonGeneratorDemo\\DungeonGeneratorDemo.Build.cs",
+		"C:\\Users\\s241270\\Documents\\GitHub\\ComplexSystems\\DungeonGeneratorDemo\\Plugins\\ProblematicPlugin\\Source\\ProblematicPlugin\\ProblematicPlugin.Build.cs",
+		"C:\\Users\\s241270\\Documents\\GitHub\\ComplexSystems\\DungeonGeneratorDemo\\Source\\DungeonGeneratorDemo.Target.cs",
+		"C:\\Users\\s241270\\Documents\\GitHub\\ComplexSystems\\DungeonGeneratorDemo\\Source\\DungeonGeneratorDemoEditor.Target.cs"
 	],
 	"EngineVersion": "5.4.4"
 }
