@@ -30,6 +30,8 @@ public:
 	//--==== Getter Functions ====--
 	UFUNCTION(BlueprintCallable, Category = "Dungeon Map")
 	TArray<ANodeArea*> GetAllNodeAreas() { return AllNodeAreas;}
+	UFUNCTION(BlueprintCallable, Category = "Dungeon Map")
+	FVector2D GetCentrePoint() { return CentrePoint;}
 
 protected:
 	// Called when the game starts or when spawned

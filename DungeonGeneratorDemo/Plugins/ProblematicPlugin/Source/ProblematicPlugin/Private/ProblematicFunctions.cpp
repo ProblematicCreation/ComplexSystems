@@ -107,13 +107,47 @@ TArray<FVector2D> UProblematicFunctions::MinimumSpanningTreeAlgorithm(TArray<ANo
 	return RemainingEdges;
 }
 
-TArray<FVector2D> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArray<ANodeArea*> Nodes)
+TArray<FVector2D> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArray<ANodeArea*> Nodes, ADungeon* DungeonMap)
 {
 	FMatrix MatrixForDetermenant;
 	TArray<FVector2D> Edges;
-
+	int32 Iterator = 0;
+	
+	
+	//--== get Most positive node away ==--
+	float MaxPositivePointX = Nodes[0]->GetActorLocation().X - DungeonMap->GetCentrePoint().X;
+	float MaxPositivePointY = Nodes[0]->GetActorLocation().Y - DungeonMap->GetCentrePoint().Y;
+	//--== get Most Negative Node Away ==--
+	float MaxNegativePointX = Nodes[0]->GetActorLocation().X - DungeonMap->GetCentrePoint().X;
+	float MaxNegativePointY = Nodes[0]->GetActorLocation().X - DungeonMap->GetCentrePoint().X;
+	
 	for (auto Node : Nodes)
 	{
+		FVector2D NodePos2D(Node->GetActorLocation().X,Node->GetActorLocation().Y);
+		float TempXPositive = NodePos2D.X - DungeonMap->GetCentrePoint().X;
+		
+		if (TempXPositive > MaxPositivePointX)
+		{
+			
+		}
+		Iterator++;
+	}
+	
+	//FBox2D BoundingBox;
+	//FVector2D TopRight(MaxPositivePointX, MaxNegativePointY);
+	FVector2D CentrePos = FVector2D((MaxPositivePointX + MaxNegativePointX) / 2.f, (MaxNegativePointY + MaxPositivePointY) / 2.f);
+	//BoundingBox.Min = ;
+	//BoundingBox.Max = ;
+	
+	for (auto Node : Nodes)
+	{
+		
+		
+		
+		
+		
+		
+		
 		float Deter = MatrixForDetermenant.Determinant();
 		
 		switch (Deter)

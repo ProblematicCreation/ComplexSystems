@@ -28,7 +28,9 @@ void ANodeArea::BoundingBox(FBox2D& Inner, FBox2D& Outer, float OuterBoxScale)
 	FVector2D Extents2D = FVector2D(Extents.X, Extents.Y);
 	FVector2D Origin2D = FVector2D(Origin.X, Origin.Y);
 	
+	//bottom left
 	Inner.Min = Origin2D - Extents2D; 
+	//top right
 	Inner.Max = Origin2D + Extents2D;
 	
 	Outer.Min = Inner.Min * OuterBoxScale;
