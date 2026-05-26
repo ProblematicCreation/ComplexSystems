@@ -113,44 +113,69 @@ TArray<FVector2D> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArray<A
 	TArray<FVector2D> Edges;
 	int32 Iterator = 0;
 	
-	
 	//--== get Most positive node away ==--
-	float MaxPositivePointX = Nodes[0]->GetActorLocation().X - DungeonMap->GetCentrePoint().X;
-	float MaxPositivePointY = Nodes[0]->GetActorLocation().Y - DungeonMap->GetCentrePoint().Y;
+	float MaxPositiveX = Nodes[0]->GetActorLocation().X - DungeonMap->GetCentrePoint().X;
+	float MaxPositiveY = Nodes[0]->GetActorLocation().Y - DungeonMap->GetCentrePoint().Y;
 	//--== get Most Negative Node Away ==--
-	float MaxNegativePointX = Nodes[0]->GetActorLocation().X - DungeonMap->GetCentrePoint().X;
-	float MaxNegativePointY = Nodes[0]->GetActorLocation().X - DungeonMap->GetCentrePoint().X;
+	float MaxNegativeX = Nodes[0]->GetActorLocation().X - DungeonMap->GetCentrePoint().X;
+	float MaxNegativeY = Nodes[0]->GetActorLocation().X - DungeonMap->GetCentrePoint().X;
 	
 	for (auto Node : Nodes)
 	{
 		FVector2D NodePos2D(Node->GetActorLocation().X,Node->GetActorLocation().Y);
-		float TempXPositive = NodePos2D.X - DungeonMap->GetCentrePoint().X;
+		float XValue = NodePos2D.X - DungeonMap->GetCentrePoint().X;
+		float YValue = NodePos2D.Y - DungeonMap->GetCentrePoint().Y;
 		
-		if (TempXPositive > MaxPositivePointX)
+		//--==== X values ====--
+		if (XValue > MaxPositiveX)
 		{
-			
+			MaxPositiveX = XValue;
+		}
+		else if (XValue < MaxNegativeX)
+		{
+			MaxNegativeX = XValue;
+		}
+		//--==== Y values ====--
+		if (YValue > MaxPositiveY)
+		{
+			MaxPositiveY = YValue;
+		}
+		else if (YValue < MaxNegativeY)
+		{
+			MaxNegativeY = YValue;
 		}
 		Iterator++;
 	}
 	
-	//FBox2D BoundingBox;
-	//FVector2D TopRight(MaxPositivePointX, MaxNegativePointY);
-	FVector2D CentrePos = FVector2D((MaxPositivePointX + MaxNegativePointX) / 2.f, (MaxNegativePointY + MaxPositivePointY) / 2.f);
-	//BoundingBox.Min = ;
-	//BoundingBox.Max = ;
+	//--==== create a box around all Nodes ====--
+	FVector2D BottomLeft(MaxNegativeX,MaxNegativeY);
+	FVector2D TopRight(MaxPositiveX,MaxPositiveY);
+	/*|-----------------O
+	 *|                 |
+	 *|                 |
+	 *|                 |
+	 *O-----------------|
+	 */
+	FBox2D BoundingBox(BottomLeft,TopRight);
+	
+	//--==== Super Triangle ====--
+	FVector2D SuperV1 = FVector2D(MaxNegativeX - (BoundingBox.GetExtent().X * 0.1f), MaxPositiveY + (BoundingBox.GetExtent().Y * 2.f));
+	FVector2D SuperV2 = FVector2D(MaxNegativeX - (BoundingBox.GetExtent().X * 0.1f), MaxNegativeY - (BoundingBox.GetExtent().Y * 2.f));
+	FVector2D SuperV3 = FVector2D(MaxPositiveX + (BoundingBox.GetExtent().X * 1.1f), MaxNegativeY + (BoundingBox.GetExtent().Y));
 	
 	for (auto Node : Nodes)
 	{
+		FVector2D NodePos2D(Node->GetActorLocation().X,Node->GetActorLocation().Y);
 		
+		FMatrix SuperTriangleMatrix = 
+		{
+			FPlane(SuperV1.X,SuperV1.Y,(SuperV1.X * SuperV1.X) + (SuperV1.Y * SuperV1.Y),1),
+			FPlane(SuperV2.X,SuperV2.Y,(SuperV2.X * SuperV2.X) + (SuperV1.Y * SuperV1.Y),1),
+			FPlane(SuperV3.X,SuperV3.Y,(SuperV3.X * SuperV3.X) + (SuperV1.Y * SuperV1.Y),1),
+			FPlane(NodePos2D.X,NodePos2D.Y,(NodePos2D.X * NodePos2D.X) + (NodePos2D.Y * NodePos2D.Y),1)
+		};
 		
-		
-		
-		
-		
-		
-		float Deter = MatrixForDetermenant.Determinant();
-		
-		switch (Deter)
+		switch (SuperTriangleMatrix.Determinant())
 		{
 		case -1:
 			//--== not inside circle
@@ -164,11 +189,8 @@ TArray<FVector2D> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArray<A
 		default:
 			//--== Invalid data ==--
 			break;
-			
 		};
 	}
-	
-	
 	
 	return Edges;
 }
