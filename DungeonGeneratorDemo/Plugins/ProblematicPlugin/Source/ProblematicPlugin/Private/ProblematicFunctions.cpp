@@ -167,30 +167,46 @@ TArray<FVector2D> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArray<A
 	{
 		FVector2D NodePos2D(Node->GetActorLocation().X,Node->GetActorLocation().Y);
 		
-		FMatrix SuperTriangleMatrix = 
+		for (auto OtherNode : Nodes)
 		{
-			FPlane(SuperV1.X,SuperV1.Y,(SuperV1.X * SuperV1.X) + (SuperV1.Y * SuperV1.Y),1),
-			FPlane(SuperV2.X,SuperV2.Y,(SuperV2.X * SuperV2.X) + (SuperV1.Y * SuperV1.Y),1),
-			FPlane(SuperV3.X,SuperV3.Y,(SuperV3.X * SuperV3.X) + (SuperV1.Y * SuperV1.Y),1),
-			FPlane(NodePos2D.X,NodePos2D.Y,(NodePos2D.X * NodePos2D.X) + (NodePos2D.Y * NodePos2D.Y),1)
-		};
+			FMatrix ABCMatrix = 
+			{
+				FPlane(SuperV1.X,SuperV1.Y,(SuperV1.X * SuperV1.X) + (SuperV1.Y * SuperV1.Y),1),
+				FPlane(SuperV2.X,SuperV2.Y,(SuperV2.X * SuperV2.X) + (SuperV1.Y * SuperV1.Y),1),
+				FPlane(SuperV3.X,SuperV3.Y,(SuperV3.X * SuperV3.X) + (SuperV1.Y * SuperV1.Y),1),
+				FPlane(NodePos2D.X,NodePos2D.Y,(NodePos2D.X * NodePos2D.X) + (NodePos2D.Y * NodePos2D.Y),1)
+			};
+			
+			switch (ABCMatrix.Determinant())
+			{
+			case -1:
+				//--== not inside circle
+				break;
+			case 0:
+				//--== on circumference of circle ==--
+				break;
+			case 1:
+				//--== is inside of circle ==--
+				break;
+			default:
+				//--== Invalid data ==--
+				break;
+			};
+		}
 		
-		switch (SuperTriangleMatrix.Determinant())
-		{
-		case -1:
-			//--== not inside circle
-			break;
-		case 0:
-			//--== on circumference of circle ==--
-			break;
-		case 1:
-			//--== is inside of circle ==--
-			break;
-		default:
-			//--== Invalid data ==--
-			break;
-		};
 	}
+	
+	//--==== quad-edges ====--
+	//---== Edge data ==--
+	FVector2D StartPos(0.f);
+	FVector2D EndPos(0.f);
+	
+	//--== quad-edge-references ==--
+	const StartEnd; //top --> bottom
+	const EndStart; //bottom --> top
+	const LeftRight; //left face --> right face
+	const Rightleft; //right face --> left face
+	
 	
 	return Edges;
 }
