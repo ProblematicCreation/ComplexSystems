@@ -50,11 +50,36 @@ private:
 	//--==== delaunay triangulation data ====--
 	struct FQuadEdgeRef
 	{
-		void* Data;
+		FVector2D Data;
 		FQuadEdgeRef* Next; //points to an edge that has the same start pos (vertex or face node), the next counter-clockwise edge to this one   
 		FQuadEdgeRef* Rotate; 
 	};
 	FQuadEdgeRef *Rotate(FQuadEdgeRef* Edge) { return Edge->Rotate; } //rot
 	FQuadEdgeRef *SymmetricEdge(FQuadEdgeRef* Edge) { return Edge->Rotate->Rotate; } //sym
 	FQuadEdgeRef *RotateOtherWay(FQuadEdgeRef* Edge) { return Edge->Rotate->Rotate->Rotate; } //tor
+	FQuadEdgeRef* GetPreviousEdge(FQuadEdgeRef* Edge) { return Edge->Rotate->Next->Rotate; }
+	FQuadEdgeRef* LeftOfCurrentEdge(FQuadEdgeRef* Edge) {return RotateOtherWay(Edge)->Next->Rotate; }
+	
+	FVector2D Destination(FQuadEdgeRef* Edge) { return SymmetricEdge(Edge)->Data; }
+
+	FQuadEdgeRef* MakeQuadEdge(FVector2D Start, FVector2D End);
+	
+	void SwapNexts(FQuadEdgeRef* A, FQuadEdgeRef* B);
+	void Splice(FQuadEdgeRef* A, FQuadEdgeRef* B);
+
+	//--== generate a triangle using the 3 vector 2d points ==--
+	FQuadEdgeRef* MakeTriangle(FVector2D A, FVector2D B, FVector2D C);
+
+	//--== connect edges together ==--
+	FQuadEdgeRef* Connect(FQuadEdgeRef* A, FQuadEdgeRef* B);
+
+	//--== remove the connected edge ==--
+	void SeverEdge(FQuadEdgeRef* Edge);
+
+	//--== add 2d point vector of node position
+	FQuadEdgeRef* InsertPoint(FQuadEdgeRef* PolygonEdge, FVector2D NodeLocation);
+
+	//--== fundmental feature ==--
+	void FlipDiagonalEdge(FQuadEdgeRef* Edge);
+	
 };

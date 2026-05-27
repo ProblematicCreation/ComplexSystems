@@ -21,7 +21,7 @@ void EmptyLinkFunctionForGeneratedCodeDungeonGeneratorDemo_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0xA008F015,
+				0xF8B64B38,
 				0x0CBF26B8,
 				METADATA_PARAMS(0, nullptr)
 			};
@@ -29,5 +29,5 @@ void EmptyLinkFunctionForGeneratedCodeDungeonGeneratorDemo_init() {}
 		}
 		return Z_Registration_Info_UPackage__Script_DungeonGeneratorDemo.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_DungeonGeneratorDemo(Z_Construct_UPackage__Script_DungeonGeneratorDemo, TEXT("/Script/DungeonGeneratorDemo"), Z_Registration_Info_UPackage__Script_DungeonGeneratorDemo, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xA008F015, 0x0CBF26B8));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_DungeonGeneratorDemo(Z_Construct_UPackage__Script_DungeonGeneratorDemo, TEXT("/Script/DungeonGeneratorDemo"), Z_Registration_Info_UPackage__Script_DungeonGeneratorDemo, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0xF8B64B38, 0x0CBF26B8));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

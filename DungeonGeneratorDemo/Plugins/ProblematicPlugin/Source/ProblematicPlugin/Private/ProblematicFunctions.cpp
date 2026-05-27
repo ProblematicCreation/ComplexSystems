@@ -4,10 +4,12 @@
 #include "ProblematicFunctions.h"
 #include "Dungeon.h"
 #include "EdgePathway.h"
+#include "MeshAttributes.h"
 #include "NodeArea.h"
 #include "ProblematicGameInstance.h"
 #include "RewindData.h"
 #include "Kismet/GameplayStatics.h"
+#include "ProfilingDebugging/StallDetector.h"
 
 void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAndFrequency, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, float SpaceBetweenAreas,int32 RoomAmountToSpawn, UObject* WorldContextObject)
 {
@@ -176,8 +178,10 @@ TArray<FVector2D> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArray<A
 				FPlane(SuperV3.X,SuperV3.Y,(SuperV3.X * SuperV3.X) + (SuperV1.Y * SuperV1.Y),1),
 				FPlane(NodePos2D.X,NodePos2D.Y,(NodePos2D.X * NodePos2D.X) + (NodePos2D.Y * NodePos2D.Y),1)
 			};
+
+			/*float deter = (float)ABCMatrix.Determinant();
 			
-			switch (ABCMatrix.Determinant())
+			switch (deter)
 			{
 			case -1:
 				//--== not inside circle
@@ -191,22 +195,12 @@ TArray<FVector2D> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArray<A
 			default:
 				//--== Invalid data ==--
 				break;
-			};
+			};*/
 		}
 		
 	}
 	
 	//--==== quad-edges ====--
-	//---== Edge data ==--
-	FVector2D StartPos(0.f);
-	FVector2D EndPos(0.f);
-	
-	//--== quad-edge-references ==--
-	const StartEnd; //top --> bottom
-	const EndStart; //bottom --> top
-	const LeftRight; //left face --> right face
-	const Rightleft; //right face --> left face
-	
 	
 	return Edges;
 }
@@ -274,3 +268,108 @@ void UProblematicFunctions::SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes
 		SeparationSteeringAlgorithm(Nodes, HalfSpaceBetweenAreas);
 	}
 }
+
+UProblematicFunctions::FQuadEdgeRef* UProblematicFunctions::MakeQuadEdge(FVector2D Start, FVector2D End)
+{
+	//--== quad-edge-references ==--
+	FQuadEdgeRef* StartEnd = new FQuadEdgeRef(); //top --> bottom
+	FQuadEdgeRef* EndStart = new FQuadEdgeRef(); //bottom --> top
+	FQuadEdgeRef* LeftRight = new FQuadEdgeRef(); //left face --> right face
+	FQuadEdgeRef* RightLeft = new FQuadEdgeRef(); //right face --> left face
+
+	StartEnd->Data = Start;
+	EndStart->Data = End;
+
+	StartEnd->Rotate = LeftRight;
+	LeftRight->Rotate = EndStart;
+	EndStart->Rotate = RightLeft;
+	RightLeft->Rotate = StartEnd;
+
+	//--== normal edges on different5 verticies ==--
+	StartEnd->Next = StartEnd;
+	EndStart->Next = EndStart;
+	//--== dual edges ==--
+	LeftRight->Next = RightLeft;
+	RightLeft->Next = LeftRight;
+	
+	return StartEnd;
+}
+
+void UProblematicFunctions::SwapNexts(FQuadEdgeRef* A, FQuadEdgeRef* B)
+{
+	//
+	FQuadEdgeRef* NextA = A->Next;
+	A->Next = B->Next;
+	B->Next = NextA;
+}
+
+void UProblematicFunctions::Splice(FQuadEdgeRef* A, FQuadEdgeRef* B)
+{
+	//--== this function is never called directly in the algorithm, instead it will be used to generate higher level functions that will be called in the algorithm ==--
+	SwapNexts(A->Next->Rotate, B->Next->Rotate);
+	SwapNexts(A, B);
+}
+
+UProblematicFunctions::FQuadEdgeRef* UProblematicFunctions::MakeTriangle(FVector2D A, FVector2D B, FVector2D C)
+{
+	FQuadEdgeRef* AB = MakeQuadEdge(A, B);
+	FQuadEdgeRef* BC = MakeQuadEdge(B, C);
+	FQuadEdgeRef* CA = MakeQuadEdge(C, A);
+
+	Splice(SymmetricEdge(AB), BC);
+	Splice(SymmetricEdge(BC), CA);
+	Splice(SymmetricEdge(CA), AB);
+	
+	return AB;
+}
+
+UProblematicFunctions::FQuadEdgeRef* UProblematicFunctions::Connect(FQuadEdgeRef* A, FQuadEdgeRef* B)
+{
+	//--== for connecting edges together ==--
+	FQuadEdgeRef* NewEdge = MakeQuadEdge(Destination(A), B->Data);
+	Splice(NewEdge, LeftOfCurrentEdge(A));
+	Splice(SymmetricEdge(NewEdge), B);
+
+	return NewEdge;
+}
+
+void UProblematicFunctions::SeverEdge(FQuadEdgeRef* Edge)
+{
+	Splice(Edge, GetPreviousEdge(Edge));
+	Splice(SymmetricEdge(Edge), GetPreviousEdge(SymmetricEdge(Edge)));
+}
+
+UProblematicFunctions::FQuadEdgeRef* UProblematicFunctions::InsertPoint(FQuadEdgeRef* PolygonEdge,
+	FVector2D NodeLocation)
+{
+	FQuadEdgeRef* FirstSpoke = MakeQuadEdge(PolygonEdge->Data, NodeLocation);
+	Splice(FirstSpoke, PolygonEdge);
+	
+	FQuadEdgeRef* Spoke = FirstSpoke;
+	
+	do
+	{
+		Spoke = Connect(PolygonEdge, SymmetricEdge(Spoke));
+		Rotate(Spoke)->Data = FVector2D::ZeroVector;
+		RotateOtherWay(Spoke)->Data = FVector2D::ZeroVector;
+		PolygonEdge = GetPreviousEdge(Spoke);
+	} while (LeftOfCurrentEdge(PolygonEdge) != FirstSpoke);
+	
+	return FirstSpoke;
+}
+
+void UProblematicFunctions::FlipDiagonalEdge(FQuadEdgeRef* Edge)
+{
+	FQuadEdgeRef* A = GetPreviousEdge(Edge);
+	FQuadEdgeRef* B = GetPreviousEdge(SymmetricEdge(Edge));
+
+	Splice(Edge, A);
+	Splice(SymmetricEdge(Edge), B);
+	
+	Splice(Edge, LeftOfCurrentEdge(A));
+	Splice(SymmetricEdge(Edge), LeftOfCurrentEdge(B));
+	
+	Edge->Data = Destination(A);
+	Destination(Edge) = Destination(B);
+}
+ 
