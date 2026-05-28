@@ -4,12 +4,9 @@
 #include "ProblematicFunctions.h"
 #include "Dungeon.h"
 #include "EdgePathway.h"
-#include "MeshAttributes.h"
 #include "NodeArea.h"
 #include "ProblematicGameInstance.h"
-#include "RewindData.h"
 #include "Kismet/GameplayStatics.h"
-#include "ProfilingDebugging/StallDetector.h"
 
 void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAndFrequency, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, float SpaceBetweenAreas,int32 RoomAmountToSpawn, UObject* WorldContextObject)
 {
@@ -199,6 +196,20 @@ TArray<FVector2D> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArray<A
 		}
 		
 	}
+
+//--==== method of adding a new point to the graph ====--
+	//--== 1. locate the triangle that the point is within ==--
+	//make 3 new triangles ==--
+	
+	//MakeTriangle(); //BCP
+	//MakeTriangle(); //CAP
+	//Calculate the sign of the oriented area for each triangle via the determinant of a 3x3 matrix with z = 1
+	/*
+	 * This tells you whether the triangles verts are listed clockwise (negative), or counter-clockwise (positive),
+	 * if all of these triangles are counter-clockwise then the point is inside the triangle.
+	 * ANOTHER way this can be explained:
+	 * If every triangle's determenant is negative then the point is 'to the left' of every edge of the triangle MATRIX.
+	 */
 	
 	//--==== quad-edges ====--
 	

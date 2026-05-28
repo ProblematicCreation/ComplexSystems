@@ -54,6 +54,7 @@ private:
 		FQuadEdgeRef* Next; //points to an edge that has the same start pos (vertex or face node), the next counter-clockwise edge to this one   
 		FQuadEdgeRef* Rotate; 
 	};
+	
 	FQuadEdgeRef *Rotate(FQuadEdgeRef* Edge) { return Edge->Rotate; } //rot
 	FQuadEdgeRef *SymmetricEdge(FQuadEdgeRef* Edge) { return Edge->Rotate->Rotate; } //sym
 	FQuadEdgeRef *RotateOtherWay(FQuadEdgeRef* Edge) { return Edge->Rotate->Rotate->Rotate; } //tor
@@ -67,10 +68,10 @@ private:
 	void SwapNexts(FQuadEdgeRef* A, FQuadEdgeRef* B);
 	void Splice(FQuadEdgeRef* A, FQuadEdgeRef* B);
 
-	//--== generate a triangle using the 3 vector 2d points ==--
+	//--== Generate a triangle using 3 FVector2D points ==--
 	FQuadEdgeRef* MakeTriangle(FVector2D A, FVector2D B, FVector2D C);
 
-	//--== connect edges together ==--
+	//--== Connect 2 Quad-Edge-References together ==--
 	FQuadEdgeRef* Connect(FQuadEdgeRef* A, FQuadEdgeRef* B);
 
 	//--== remove the connected edge ==--
