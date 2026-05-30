@@ -2,11 +2,16 @@
 
 
 #include "ProblematicFunctions.h"
+
+#include "BlueprintActionDatabase.h"
+#include "DelaunayTriangle.h"
 #include "Dungeon.h"
 #include "EdgePathway.h"
 #include "MatrixTypes.h"
 #include "NodeArea.h"
 #include "ProblematicGameInstance.h"
+#include "DSP/Osc.h"
+#include "Engine/CoreSettings.h"
 #include "Kismet/GameplayStatics.h"
 
 void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAndFrequency, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, float SpaceBetweenAreas,int32 RoomAmountToSpawn, UObject* WorldContextObject)
@@ -107,10 +112,10 @@ TArray<FVector2D> UProblematicFunctions::MinimumSpanningTreeAlgorithm(TArray<ANo
 	return RemainingEdges;
 }
 
-TArray<FVector2D> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArray<ANodeArea*> Nodes, ADungeon* DungeonMap)
+TArray<FDelaunayEdge> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArray<ANodeArea*> Nodes, ADungeon* DungeonMap)
 {
 	FMatrix MatrixForDetermenant;
-	TArray<FVector2D> Edges;
+	TArray<FDelaunayEdge> Edges;
 	int32 Iterator = 0;
 	
 	//--== get Most positive node away ==--
@@ -162,122 +167,38 @@ TArray<FVector2D> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArray<A
 	FVector2D SuperV1 = FVector2D(MaxNegativeX - (BoundingBox.GetExtent().X * 0.1f), MaxPositiveY + (BoundingBox.GetExtent().Y * 2.f));
 	FVector2D SuperV2 = FVector2D(MaxNegativeX - (BoundingBox.GetExtent().X * 0.1f), MaxNegativeY - (BoundingBox.GetExtent().Y * 2.f));
 	FVector2D SuperV3 = FVector2D(MaxPositiveX + (BoundingBox.GetExtent().X * 1.1f), MaxNegativeY + (BoundingBox.GetExtent().Y));
-	
-	for (auto Node : Nodes)
-	{
-		FVector2D NodePos2D(Node->GetActorLocation().X,Node->GetActorLocation().Y);
-		
-		for (auto OtherNode : Nodes)
-		{
-			FMatrix ABCMatrix = 
-			{
-				FPlane(SuperV1.X,SuperV1.Y,(SuperV1.X * SuperV1.X) + (SuperV1.Y * SuperV1.Y),1),
-				FPlane(SuperV2.X,SuperV2.Y,(SuperV2.X * SuperV2.X) + (SuperV1.Y * SuperV1.Y),1),
-				FPlane(SuperV3.X,SuperV3.Y,(SuperV3.X * SuperV3.X) + (SuperV1.Y * SuperV1.Y),1),
-				FPlane(NodePos2D.X,NodePos2D.Y,(NodePos2D.X * NodePos2D.X) + (NodePos2D.Y * NodePos2D.Y),1)
-			};
+	DelaunayTriangle* SuperTriangle = new DelaunayTriangle(SuperV1, SuperV2, SuperV3);
 
-			/*float deter = (float)ABCMatrix.Determinant();
-			
-			switch (deter)
-			{
-			case -1:
-				//--== not inside circle
-				break;
-			case 0:
-				//--== on circumference of circle ==--
-				break;
-			case 1:
-				//--== is inside of circle ==--
-				break;
-			default:
-				//--== Invalid data ==--
-				break;
-			};*/
+	TArray<DelaunayTriangle*> Triangles;
+	Triangles.Add(SuperTriangle);
+	//--== triangulate each vertex ==--
+	for (auto FocusedNode : Nodes)
+	{
+		AddVertex(FocusedNode->Get2DLocation(), Triangles);
+	}
+	
+	//--== remove the triangles that share edges with super triangle ==--
+	TArray<int32> TrianglesToDestroySafely;
+	for (int32 i = 0; i < Triangles.Num(); i++)
+	{
+		if (ShouldDestroyTriangle(Triangles[i], SuperV1, SuperV2, SuperV3))
+		{
+			TrianglesToDestroySafely.Add(i);
 		}
-		
+	}
+	for (int32 Index : TrianglesToDestroySafely)
+	{
+		delete Triangles[Index];
+		Triangles.RemoveAt(Index);
 	}
 
-//--==== method of adding a new point to the graph ====--
-	//--== 1. locate the triangle that the point is within ==--
-	//Start with triangle ABC -- then connect point P that is within the triangle by splitting the triangle into 3 smaller triangles
-	FVector2D P = FVector2d::ZeroVector;
-	//MakeTriangle(SuperV1, SuperV2, P); //ABP
-	//MakeTriangle(SuperV2, SuperV3, P); //BCP
-	//MakeTriangle(SuperV3, SuperV1, P); //CAP
-	FMatrix3x3 ABC;
-	ABC.Row1 = FVector(SuperV1.X, SuperV1.Y, 1.f);
-	ABC.Row2 = FVector(SuperV2.X, SuperV2.Y, 1.f);
-	ABC.Row3 = FVector(SuperV3.X, SuperV3.Y, 1.f);
-	//--== 2. make 3 new matrix using that point ==--
-	FMatrix3x3 ABP;
-	ABP.Row1 = FVector(SuperV1.X, SuperV1.Y, 1.f);
-	ABP.Row2 = FVector(SuperV2.X, SuperV2.Y, 1.f);
-	ABP.Row3 = FVector(P.X, P.Y, 1.f);
-	FMatrix3x3 BCP;
-	BCP.Row1 = FVector(SuperV2.X, SuperV2.Y, 1.f);
-	BCP.Row2 = FVector(SuperV3.X, SuperV3.Y, 1.f);
-	BCP.Row3 = FVector(P.X, P.Y, 1.f);
-	FMatrix3x3 CAP;
-	CAP.Row1 = FVector(SuperV3.X, SuperV3.Y, 1.f);
-	CAP.Row2 = FVector(SuperV1.X, SuperV1.Y, 1.f);
-	CAP.Row3 = FVector(P.X, P.Y, 1.f);
-	//--== 3. calculate the determenant for each
-	//determine if all the vertecies are listead in counter-clockwise order (is the point to the left of every outer edge)
-	bool IsPointInTriangle = false;
-	if (Determenant(ABP) > 0)
+	//--== finally get all the current edges from the triangles ==--
+	for (auto FocusedTriangle : Triangles)
 	{
-		//counter-clockwise
-		if (Determenant(BCP) > 0)
-		{
-			//counter-clockwise
-			if (Determenant(CAP) > 0)
-			{
-				//counter-clockwise
-				
-				IsPointInTriangle = true;
-			}
-			else
-			{
-				//clockwise
-				//check triangle on the other side of this edge
-			}
-		}
-		else
-		{
-			//clockwise
-			//check triangle on the other side of this edge
-		}
-		
+		Edges.Add(FDelaunayEdge(FocusedTriangle->GetVertex1(), FocusedTriangle->GetVertex2()));
+		Edges.Add(FDelaunayEdge(FocusedTriangle->GetVertex2(), FocusedTriangle->GetVertex3()));
+		Edges.Add(FDelaunayEdge(FocusedTriangle->GetVertex3(), FocusedTriangle->GetVertex1()));
 	}
-	else  
-	{
-		//clockwise
-		//check triangle on the other side of this edge
-	}
-
-	if (IsPointInTriangle)
-	{
-		//very good
-	}
-	else
-	{
-		//unfortunate
-	}
-	
-	
-	// my method
-	//Calculate the sign of the oriented area for each triangle via the determinant of a 3x3 matrix with z = 1
-	/*
-	 *
-	 * This tells you whether the triangles verts are listed clockwise (negative), or counter-clockwise (positive),
-	 * if all of these triangles are counter-clockwise then the point is inside the triangle.
-	 * ANOTHER way this can be explained:
-	 * If every triangle's determenant is negative then the point is 'to the left' of every edge of the triangle MATRIX.
-	 */
-	
-	//--==== quad-edges ====--
-	
 	return Edges;
 }
 
@@ -449,8 +370,94 @@ void UProblematicFunctions::FlipDiagonalEdge(FQuadEdgeRef* Edge)
 	Destination(Edge) = Destination(B);
 }
 
-float UProblematicFunctions::Determenant(FMatrix3x3 Matrix)
+float UProblematicFunctions::Determinant3x3(FMatrix3x3 Matrix)
 {
-	return Matrix.Row1.X((Matrix.Row2.Y * Matrix.Row3.Z) - (Matrix.Row2.Z * Matrix.Row3.Y)) - Matrix.Row1.Y * ((Matrix.Row2.X * Matrix.Row3.Z) - (Matrix.Row2.Z * Matrix.Row3.X)) + Matrix.Row1.Z * ((Matrix.Row2.X * Matrix.Row3.Y) - (Matrix.Row2.Y * Matrix.Row3.X));
+	float deter = Matrix.Row1.X * 
+	((Matrix.Row2.Y * Matrix.Row3.Z) - (Matrix.Row2.Z * Matrix.Row3.Y)) - Matrix.Row1.Y *
+		((Matrix.Row2.X * Matrix.Row3.Z) - (Matrix.Row2.Z * Matrix.Row3.X)) + Matrix.Row1.Z *
+			((Matrix.Row2.X * Matrix.Row3.Y) - (Matrix.Row2.Y * Matrix.Row3.X));
+	
+	return deter;
+}
+
+void UProblematicFunctions::AddVertex(FVector2D Vertex, TArray<DelaunayTriangle*> &Triangles)
+{
+	TArray<FDelaunayEdge> Edges;
+	TArray<DelaunayTriangle*> TempTriangles;
+	//filter through triangles
+	for (auto Triangle : Triangles)
+	{
+		//if the vertex in inside the circle of the 3 points
+		if (Triangle->InCircle(Vertex))
+		{
+			Edges.Add(FDelaunayEdge(Triangle->GetVertex1(), Triangle->GetVertex2()));
+			Edges.Add(FDelaunayEdge(Triangle->GetVertex2(), Triangle->GetVertex3()));
+			Edges.Add(FDelaunayEdge(Triangle->GetVertex3(), Triangle->GetVertex1()));
+		}
+	}
+
+	//remove any duplicated edges from the array
+	Edges = UniqueEdges(Edges);
+	
+	//update the triangles array
+	for (auto Edge : Edges)
+	{
+		Triangles.Add(new DelaunayTriangle(Edge.StartPoint, Edge.EndPoint, Vertex));
+		//DrawDebugLine(WorldContextObject, Edge.StartPoint, Edge.EndPoint, FColor::Red, false, -1, 0, 10.f);
+	}
+}
+
+TArray<FDelaunayEdge> UProblematicFunctions::UniqueEdges(TArray<FDelaunayEdge> Edges)
+{
+	TArray<FDelaunayEdge> UniqueEdges;
+
+	//--== this function removes any duplicated edges from the edges array ==--
+	for (int i = 0; i < Edges.Num(); i++)
+	{
+		bool IsEdgeUnique = true;
+		
+		for (int j = 0; j < Edges.Num(); j++)
+		{
+			if ((i != j) && (EquivelentEdges(Edges[i], Edges[j])))
+			{
+				//remove this edge
+				IsEdgeUnique = false;
+				break;
+			}
+		}
+		
+		if (IsEdgeUnique)
+		{
+			UniqueEdges.Add(Edges[i]);
+		}
+	}
+
+	return UniqueEdges;
+}
+
+bool UProblematicFunctions::EquivelentEdges(FDelaunayEdge Edge1, FDelaunayEdge Edge2)
+{
+	if (Edge1.StartPoint == Edge2.StartPoint)
+	{
+		if (Edge1.EndPoint == Edge2.EndPoint)
+		{
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+bool UProblematicFunctions::ShouldDestroyTriangle(DelaunayTriangle* Triangle, FVector2D V1, FVector2D V2, FVector2D V3)
+{
+	for (int i = 0; i < 3; i++)
+	{
+		if (Triangle->GetCollatedVerticies()[i] == V1 || Triangle->GetCollatedVerticies()[i] == V2 || Triangle->GetCollatedVerticies()[i] == V3)
+		{
+			//remove triangle
+			return true;
+		}
+	}
+	return false;
 }
 

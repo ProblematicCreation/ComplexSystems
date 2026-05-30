@@ -6,6 +6,7 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "ProblematicFunctions.generated.h"
 
+class DelaunayTriangle;
 class ADungeon;
 class ANodeArea;
 class AEdgePathway;
@@ -39,6 +40,32 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "Mathematics")
 	FVector Row3;
 };
+
+USTRUCT(BlueprintType)
+struct FDelaunayEdge
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector2D StartPoint;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector2D EndPoint;
+};
+
+USTRUCT(BlueprintType)
+struct FTriangle
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector2D Vertex1;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector2D Vertex2;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector2D Vertex3;
+};
+
 UCLASS()
 class PROBLEMATICPLUGIN_API UProblematicFunctions : public UBlueprintFunctionLibrary
 {
@@ -56,7 +83,7 @@ public:
 	
 private:
 	static TArray<FVector2D> MinimumSpanningTreeAlgorithm(TArray<ANodeArea*> Nodes, TArray<FVector2D> Edges);
-	static TArray<FVector2D> DelaunayTriangulationAlgorithm(TArray<ANodeArea*> Nodes, ADungeon* DungeonMap);
+	static TArray<FDelaunayEdge> DelaunayTriangulationAlgorithm(TArray<ANodeArea*> Nodes, ADungeon* DungeonMap);
 	static void SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes, float HalfSpaceBetweenAreas);
 	
 	//--==== delaunay triangulation data ====--
@@ -95,5 +122,13 @@ private:
 	//--== fundmental feature ==--
 	static void FlipDiagonalEdge(FQuadEdgeRef* Edge);
 
-	static float Determenant(FMatrix3x3 Matrix);
+	static float Determinant3x3(FMatrix3x3 Matrix); 
+
+	static void AddVertex(FVector2D Vertex, TArray<DelaunayTriangle*> &Triangles);
+	
+	static TArray<FDelaunayEdge> UniqueEdges(TArray<FDelaunayEdge> Edges);
+
+	static bool EquivelentEdges(FDelaunayEdge Edge1, FDelaunayEdge Edge2);
+
+	static bool ShouldDestroyTriangle(DelaunayTriangle* Triangle, FVector2D V1, FVector2D V2, FVector2D V3);
 };

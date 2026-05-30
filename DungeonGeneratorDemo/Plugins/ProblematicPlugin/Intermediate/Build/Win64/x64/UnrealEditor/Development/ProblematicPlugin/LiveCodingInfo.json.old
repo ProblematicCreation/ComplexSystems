@@ -11,9 +11,10 @@
 			"Dungeon.cpp.obj",
 			"EdgePathway.cpp.obj",
 			"NodeArea.cpp.obj",
-			"ProblematicFunctions.cpp.obj",
 			"ProblematicGameInstance.cpp.obj",
-			"ProblematicPlugin.cpp.obj"
+			"ProblematicPlugin.cpp.obj",
+			"ProblematicFunctions.cpp.obj",
+			"DelaunayTriangle.cpp.obj"
 		]
 	}
 }
