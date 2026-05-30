@@ -4,6 +4,7 @@
 #include "ProblematicFunctions.h"
 #include "Dungeon.h"
 #include "EdgePathway.h"
+#include "MatrixTypes.h"
 #include "NodeArea.h"
 #include "ProblematicGameInstance.h"
 #include "Kismet/GameplayStatics.h"
@@ -199,12 +200,76 @@ TArray<FVector2D> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArray<A
 
 //--==== method of adding a new point to the graph ====--
 	//--== 1. locate the triangle that the point is within ==--
-	//make 3 new triangles ==--
+	//Start with triangle ABC -- then connect point P that is within the triangle by splitting the triangle into 3 smaller triangles
+	FVector2D P = FVector2d::ZeroVector;
+	//MakeTriangle(SuperV1, SuperV2, P); //ABP
+	//MakeTriangle(SuperV2, SuperV3, P); //BCP
+	//MakeTriangle(SuperV3, SuperV1, P); //CAP
+	FMatrix3x3 ABC;
+	ABC.Row1 = FVector(SuperV1.X, SuperV1.Y, 1.f);
+	ABC.Row2 = FVector(SuperV2.X, SuperV2.Y, 1.f);
+	ABC.Row3 = FVector(SuperV3.X, SuperV3.Y, 1.f);
+	//--== 2. make 3 new matrix using that point ==--
+	FMatrix3x3 ABP;
+	ABP.Row1 = FVector(SuperV1.X, SuperV1.Y, 1.f);
+	ABP.Row2 = FVector(SuperV2.X, SuperV2.Y, 1.f);
+	ABP.Row3 = FVector(P.X, P.Y, 1.f);
+	FMatrix3x3 BCP;
+	BCP.Row1 = FVector(SuperV2.X, SuperV2.Y, 1.f);
+	BCP.Row2 = FVector(SuperV3.X, SuperV3.Y, 1.f);
+	BCP.Row3 = FVector(P.X, P.Y, 1.f);
+	FMatrix3x3 CAP;
+	CAP.Row1 = FVector(SuperV3.X, SuperV3.Y, 1.f);
+	CAP.Row2 = FVector(SuperV1.X, SuperV1.Y, 1.f);
+	CAP.Row3 = FVector(P.X, P.Y, 1.f);
+	//--== 3. calculate the determenant for each
+	//determine if all the vertecies are listead in counter-clockwise order (is the point to the left of every outer edge)
+	bool IsPointInTriangle = false;
+	if (Determenant(ABP) > 0)
+	{
+		//counter-clockwise
+		if (Determenant(BCP) > 0)
+		{
+			//counter-clockwise
+			if (Determenant(CAP) > 0)
+			{
+				//counter-clockwise
+				
+				IsPointInTriangle = true;
+			}
+			else
+			{
+				//clockwise
+				//check triangle on the other side of this edge
+			}
+		}
+		else
+		{
+			//clockwise
+			//check triangle on the other side of this edge
+		}
+		
+	}
+	else  
+	{
+		//clockwise
+		//check triangle on the other side of this edge
+	}
+
+	if (IsPointInTriangle)
+	{
+		//very good
+	}
+	else
+	{
+		//unfortunate
+	}
 	
-	//MakeTriangle(); //BCP
-	//MakeTriangle(); //CAP
+	
+	// my method
 	//Calculate the sign of the oriented area for each triangle via the determinant of a 3x3 matrix with z = 1
 	/*
+	 *
 	 * This tells you whether the triangles verts are listed clockwise (negative), or counter-clockwise (positive),
 	 * if all of these triangles are counter-clockwise then the point is inside the triangle.
 	 * ANOTHER way this can be explained:
@@ -321,7 +386,7 @@ void UProblematicFunctions::Splice(FQuadEdgeRef* A, FQuadEdgeRef* B)
 	SwapNexts(A, B);
 }
 
-UProblematicFunctions::FQuadEdgeRef* UProblematicFunctions::MakeTriangle(FVector2D A, FVector2D B, FVector2D C)
+void UProblematicFunctions::MakeTriangle(FVector2D A, FVector2D B, FVector2D C)
 {
 	FQuadEdgeRef* AB = MakeQuadEdge(A, B);
 	FQuadEdgeRef* BC = MakeQuadEdge(B, C);
@@ -331,7 +396,7 @@ UProblematicFunctions::FQuadEdgeRef* UProblematicFunctions::MakeTriangle(FVector
 	Splice(SymmetricEdge(BC), CA);
 	Splice(SymmetricEdge(CA), AB);
 	
-	return AB;
+	//return AB;
 }
 
 UProblematicFunctions::FQuadEdgeRef* UProblematicFunctions::Connect(FQuadEdgeRef* A, FQuadEdgeRef* B)
@@ -383,4 +448,9 @@ void UProblematicFunctions::FlipDiagonalEdge(FQuadEdgeRef* Edge)
 	Edge->Data = Destination(A);
 	Destination(Edge) = Destination(B);
 }
- 
+
+float UProblematicFunctions::Determenant(FMatrix3x3 Matrix)
+{
+	return Matrix.Row1.X((Matrix.Row2.Y * Matrix.Row3.Z) - (Matrix.Row2.Z * Matrix.Row3.Y)) - Matrix.Row1.Y * ((Matrix.Row2.X * Matrix.Row3.Z) - (Matrix.Row2.Z * Matrix.Row3.X)) + Matrix.Row1.Z * ((Matrix.Row2.X * Matrix.Row3.Y) - (Matrix.Row2.Y * Matrix.Row3.X));
+}
+

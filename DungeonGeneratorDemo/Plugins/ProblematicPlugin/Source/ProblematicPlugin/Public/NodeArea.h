@@ -16,7 +16,10 @@ class PROBLEMATICPLUGIN_API ANodeArea : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ANodeArea();
-	
+
+	UFUNCTION(BlueprintCallable)
+	FVector2D Get2DLocation() { return FVector2D(GetActorLocation().X, GetActorLocation().Y); }
+
 	void BoundingBox(FBox2D& Inner, FBox2D& Outer, float OuterBoxScale);
 
 protected:
