@@ -31,7 +31,7 @@ bool DelaunayTriangle::InCircle(FVector2D Vertex)
 	//is the vertex inside the circle? -- reversing return condition because the points are listed in clockwise order
 	float var = TestMatrix.Determinant();
 	
-	if (var >= 0.f)
+	if (var > 0.f)
 	{
 		return true;
 	}

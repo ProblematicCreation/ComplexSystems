@@ -194,44 +194,29 @@ TArray<FDelaunayEdge> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArr
 	for (auto FocusedNode : Nodes)
 	{
 		AddVertex(FocusedNode->Get2DLocation(), Triangles);
-		
-		
-		// test if this node is in any triangle in the triangulation
-		int32 TriangleIndex = 0;
-		for (auto FocusedTriangle : Triangles)
-		{
-			if (FocusedTriangle->InCircle(FocusedNode->Get2DLocation()))
-			{
-				BadTriangles.Add(TriangleIndex);
-			}
-			TriangleIndex++;
-		}
-	}
-	//remove any triangles that contain a Node within them
-	for (auto Index : BadTriangles)
-	{
-		
-		delete Triangles[Index];
-		Triangles.RemoveAt(Index);
 	}
 	
+	for (auto FocusedNode : Nodes)
+	{
+		Triangles.RemoveAll([FocusedNode] (DelaunayTriangle* DTri) -> bool
+		{
+			bool bRemoved = DTri->InCircle(FocusedNode->Get2DLocation());
+			if (bRemoved)
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Ran predicate (true)"));
+			}
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Ran predicate (false)"));
+			}
+			return bRemoved;
+		});
+	}
 	//--== remove the triangles that share edges with super triangle ==--
-	TArray<int32> TrianglesToDestroySafely;
-	for (int32 i = 0; i < Triangles.Num(); i++)
-	{
-		if (ShouldDestroyTriangle(Triangles[i], SuperV1, SuperV2, SuperV3))
+	Triangles.RemoveAll([SuperV1, SuperV2, SuperV3] (DelaunayTriangle* DTri) -> bool
 		{
-			TrianglesToDestroySafely.Add(i);
-		}
-	}
-	for (auto index : TrianglesToDestroySafely)
-	{
-		if (index <= Triangles.Num())
-		{
-			delete Triangles[index];
-			Triangles.RemoveAt(index);
-		}
-	}
+			return ShouldDestroyTriangle(DTri, SuperV1, SuperV2, SuperV3);
+		});
 
 	//--== finally get all the current edges from the triangles ==--
 	for (auto FocusedTriangle : Triangles)
@@ -241,7 +226,7 @@ TArray<FDelaunayEdge> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArr
 		Edges.Add(FDelaunayEdge(FocusedTriangle->GetVertex3(), FocusedTriangle->GetVertex1()));
 	}
 	
-	Edges = UniqueEdges(Edges);
+	//Edges = UniqueEdges(Edges);
 	
 	return Edges;
 }
@@ -324,7 +309,8 @@ float UProblematicFunctions::Determinant3x3(FMatrix3x3 Matrix)
 void UProblematicFunctions::AddVertex(FVector2D Vertex, TArray<DelaunayTriangle*> &Triangles)
 {
 	TArray<FDelaunayEdge> Edges;
-	TArray<DelaunayTriangle*> TempTriangles;
+	//TArray<DelaunayTriangle*> TempTriangles;
+	
 	//filter through triangles
 	for (auto Triangle : Triangles)
 	{
@@ -332,15 +318,13 @@ void UProblematicFunctions::AddVertex(FVector2D Vertex, TArray<DelaunayTriangle*
 		if (Triangle->InCircle(Vertex))
 		{
 			Edges.Add(FDelaunayEdge(Triangle->GetVertex1(), Triangle->GetVertex2()));
-			
 			Edges.Add(FDelaunayEdge(Triangle->GetVertex2(), Triangle->GetVertex3()));
-			
 			Edges.Add(FDelaunayEdge(Triangle->GetVertex3(), Triangle->GetVertex1()));
 		}
 	}
 
 	//remove any duplicated edges from the array
-	//Edges = UniqueEdges(Edges);
+	Edges = UniqueEdges(Edges);
 	
 	//update the triangles array
 	for (auto Edge : Edges)
