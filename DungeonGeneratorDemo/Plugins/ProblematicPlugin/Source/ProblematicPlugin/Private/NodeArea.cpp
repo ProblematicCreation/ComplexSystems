@@ -35,9 +35,6 @@ void ANodeArea::BoundingBox(FBox2D& Inner, FBox2D& Outer, float OuterBoxScale)
 	
 	Outer.Min = Inner.Min * OuterBoxScale;
 	Outer.Max = Inner.Max * OuterBoxScale;
-	
-	DrawDebugBox(GetWorld(), FVector(Inner.GetCenter(),0.f), FVector(Inner.GetExtent(), 0.f), FColor::Yellow, false, -1, 0, 5.f);
-	DrawDebugBox(GetWorld(), FVector(Inner.GetCenter(),0.f), FVector(Inner.GetExtent(), 0.f), FColor::Red, false, -1, 0, 5.f);
 }
 
 

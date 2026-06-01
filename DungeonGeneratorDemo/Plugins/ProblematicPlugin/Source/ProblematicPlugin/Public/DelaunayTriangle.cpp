@@ -28,8 +28,10 @@ bool DelaunayTriangle::InCircle(FVector2D Vertex)
 		FPlane(Vertex.X, Vertex.Y, (Vertex.X * Vertex.X) + (Vertex.Y * Vertex.Y), 1.f)
 		);
 
-	//is the vertex inside the circle?
-	if (TestMatrix.Determinant() >= 0)
+	//is the vertex inside the circle? -- reversing return condition because the points are listed in clockwise order
+	float var = TestMatrix.Determinant();
+	
+	if (var >= 0.f)
 	{
 		return true;
 	}

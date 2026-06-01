@@ -10,8 +10,8 @@ public:
 	~DelaunayTriangle();
 	//--== Getters ==--
 	FVector2D GetVertex1() const { return Vertex1; }
-	FVector2D GetVertex2() const { return Vertex1; }
-	FVector2D GetVertex3() const { return Vertex1; }
+	FVector2D GetVertex2() const { return Vertex2; }
+	FVector2D GetVertex3() const { return Vertex3; }
 	TArray<FVector2D> GetCollatedVerticies() const { return {Vertex1, Vertex2, Vertex3}; }
 	//--== Setters ==--
 	void SetVertex1(const FVector2D NewVertex) { Vertex1 = NewVertex; }

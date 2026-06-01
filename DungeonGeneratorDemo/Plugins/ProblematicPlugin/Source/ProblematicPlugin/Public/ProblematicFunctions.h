@@ -53,19 +53,6 @@ public:
 	FVector2D EndPoint;
 };
 
-USTRUCT(BlueprintType)
-struct FTriangle
-{
-	GENERATED_BODY()
-public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector2D Vertex1;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector2D Vertex2;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector2D Vertex3;
-};
-
 UCLASS()
 class PROBLEMATICPLUGIN_API UProblematicFunctions : public UBlueprintFunctionLibrary
 {
@@ -83,44 +70,10 @@ public:
 	
 private:
 	static TArray<FVector2D> MinimumSpanningTreeAlgorithm(TArray<ANodeArea*> Nodes, TArray<FVector2D> Edges);
-	static TArray<FDelaunayEdge> DelaunayTriangulationAlgorithm(TArray<ANodeArea*> Nodes, ADungeon* DungeonMap);
+	static TArray<FDelaunayEdge> DelaunayTriangulationAlgorithm(TArray<ANodeArea*> Nodes, ADungeon* DungeonMap, UObject* WorldContextObject);
 	static void SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes, float HalfSpaceBetweenAreas);
 	
-	//--==== delaunay triangulation data ====--
-	struct FQuadEdgeRef
-	{
-		FVector2D Data;
-		FQuadEdgeRef* Next; //points to an edge that has the same start pos (vertex or face node), the next counter-clockwise edge to this one   
-		FQuadEdgeRef* Rotate; 
-	};
 	
-	static FQuadEdgeRef *Rotate(FQuadEdgeRef* Edge) { return Edge->Rotate; } //rot
-	static FQuadEdgeRef *SymmetricEdge(FQuadEdgeRef* Edge) { return Edge->Rotate->Rotate; } //sym
-	static FQuadEdgeRef *RotateOtherWay(FQuadEdgeRef* Edge) { return Edge->Rotate->Rotate->Rotate; } //tor
-	static FQuadEdgeRef* GetPreviousEdge(FQuadEdgeRef* Edge) { return Edge->Rotate->Next->Rotate; }
-	static FQuadEdgeRef* LeftOfCurrentEdge(FQuadEdgeRef* Edge) {return RotateOtherWay(Edge)->Next->Rotate; }
-	
-	static FVector2D Destination(FQuadEdgeRef* Edge) { return SymmetricEdge(Edge)->Data; }
-
-	static FQuadEdgeRef* MakeQuadEdge(FVector2D Start, FVector2D End);
-	
-	static void SwapNexts(FQuadEdgeRef* A, FQuadEdgeRef* B);
-	static void Splice(FQuadEdgeRef* A, FQuadEdgeRef* B);
-
-	//--== Generate a triangle using 3 FVector2D points ==--
-	static void MakeTriangle(FVector2D A, FVector2D B, FVector2D C);
-
-	//--== Connect 2 Quad-Edge-References together ==--
-	static FQuadEdgeRef* Connect(FQuadEdgeRef* A, FQuadEdgeRef* B);
-
-	//--== remove the connected edge ==--
-	static void SeverEdge(FQuadEdgeRef* Edge);
-
-	//--== add 2d point vector of node position
-	static FQuadEdgeRef* InsertPoint(FQuadEdgeRef* PolygonEdge, FVector2D NodeLocation);
-
-	//--== fundmental feature ==--
-	static void FlipDiagonalEdge(FQuadEdgeRef* Edge);
 
 	static float Determinant3x3(FMatrix3x3 Matrix); 
 
