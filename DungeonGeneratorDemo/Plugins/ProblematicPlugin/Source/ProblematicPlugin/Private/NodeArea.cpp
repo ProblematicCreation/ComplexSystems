@@ -18,6 +18,16 @@ ANodeArea::ANodeArea()
 	CollisionBox->SetupAttachment(Root);
 }
 
+FVector2D ANodeArea::GetCenter2DLocation()
+{
+	if (InnerPerimeter.bIsValid)
+	{
+		return InnerPerimeter.GetCenter();
+	}
+	
+	return FVector2D(0);
+}
+
 void ANodeArea::BoundingBox(FBox2D& Inner, FBox2D& Outer, float OuterBoxScale)
 {
 	//--== get the bounds of this actor ==--
@@ -35,6 +45,7 @@ void ANodeArea::BoundingBox(FBox2D& Inner, FBox2D& Outer, float OuterBoxScale)
 	
 	Outer.Min = Inner.Min * OuterBoxScale;
 	Outer.Max = Inner.Max * OuterBoxScale;
+	
 }
 
 

@@ -19,8 +19,17 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	FVector2D Get2DLocation() { return FVector2D(GetActorLocation().X, GetActorLocation().Y); }
+	FVector2D GetCenter2DLocation();
 
 	void BoundingBox(FBox2D& Inner, FBox2D& Outer, float OuterBoxScale);
+	
+	UFUNCTION(BlueprintCallable)
+	FBox2D GetInnerPerimeter() { return InnerPerimeter; }
+	UFUNCTION(BlueprintCallable)
+	FBox2D GetOuterPerimeter() { return OuterPerimeter; }
+	
+	UFUNCTION(BlueprintCallable)
+	void SetInnerAndOuterPerimeter( FBox2D Inner, FBox2D Outer) {InnerPerimeter = Inner; OuterPerimeter = Outer; }
 
 protected:
 	// Called when the game starts or when spawned
@@ -31,6 +40,8 @@ protected:
 	
 private:
 	TArray<FVector2D> DoorwayLocations;
+	FBox2D InnerPerimeter;
+	FBox2D OuterPerimeter;
 	
 
 };

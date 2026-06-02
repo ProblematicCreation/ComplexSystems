@@ -51,6 +51,11 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FVector2D EndPoint;
+	
+	bool operator==(const FDelaunayEdge& Other) const
+	{
+		return (Other.StartPoint == StartPoint && Other.EndPoint == EndPoint) || (Other.StartPoint == EndPoint && Other.EndPoint == StartPoint);
+	}
 };
 
 UCLASS()
@@ -77,11 +82,12 @@ private:
 
 	static float Determinant3x3(FMatrix3x3 Matrix); 
 
-	static void AddVertex(FVector2D Vertex, TArray<DelaunayTriangle*> &Triangles);
+	static void AddVertex(FVector2D Vertex, TArray<DelaunayTriangle*> &Triangles, UObject* WorldContextObject);
 	
 	static TArray<FDelaunayEdge> UniqueEdges(TArray<FDelaunayEdge> Edges);
 
 	static bool EquivelentEdges(FDelaunayEdge Edge1, FDelaunayEdge Edge2);
 
 	static bool ShouldDestroyTriangle(DelaunayTriangle* Triangle, FVector2D V1, FVector2D V2, FVector2D V3);
+	static TArray<FDelaunayEdge> RemoveOverlappingEdges(TArray<FDelaunayEdge> Edges);
 };

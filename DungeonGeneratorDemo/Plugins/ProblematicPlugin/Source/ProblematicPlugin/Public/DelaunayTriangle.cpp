@@ -17,10 +17,21 @@ DelaunayTriangle::~DelaunayTriangle()
 }
 
 
+TArray<FDelaunayEdge> DelaunayTriangle::GetEdges()
+{
+	TArray<FDelaunayEdge> Edges;
+	Edges.Add(FDelaunayEdge(GetVertex1(), GetVertex2()));
+	Edges.Add(FDelaunayEdge(GetVertex2(), GetVertex3()));
+	Edges.Add(FDelaunayEdge(GetVertex3(), GetVertex1()));
+	
+	return Edges;
+}
 
 bool DelaunayTriangle::InCircle(FVector2D Vertex)
 {
-	FMatrix TestMatrix
+	if (Vertex1 != Vertex && Vertex2 != Vertex && Vertex3 != Vertex)
+	{
+		FMatrix TestMatrix
 		(
 		FPlane(GetVertex1().X, GetVertex1().Y, (GetVertex1().X * GetVertex1().X) + (GetVertex1().Y * GetVertex1().Y), 1.f),
 		FPlane(GetVertex2().X, GetVertex2().Y, (GetVertex2().X * GetVertex2().X) + (GetVertex2().Y * GetVertex2().Y), 1.f),
@@ -28,12 +39,13 @@ bool DelaunayTriangle::InCircle(FVector2D Vertex)
 		FPlane(Vertex.X, Vertex.Y, (Vertex.X * Vertex.X) + (Vertex.Y * Vertex.Y), 1.f)
 		);
 
-	//is the vertex inside the circle? -- reversing return condition because the points are listed in clockwise order
-	float var = TestMatrix.Determinant();
+		//is the vertex inside the circle? -- reversing return condition because the points are listed in clockwise order
+		float var = TestMatrix.Determinant();
 	
-	if (var > 0.f)
-	{
-		return true;
+		if (var >= 0.f)
+		{
+			return true;
+		}
 	}
 	
 	return false;

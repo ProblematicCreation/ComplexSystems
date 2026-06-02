@@ -15,6 +15,9 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define PROBLEMATICPLUGIN_NodeArea_generated_h
 
 #define FID_Users_s241270_Documents_GitHub_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_NodeArea_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execSetInnerAndOuterPerimeter); \
+	DECLARE_FUNCTION(execGetOuterPerimeter); \
+	DECLARE_FUNCTION(execGetInnerPerimeter); \
 	DECLARE_FUNCTION(execGet2DLocation);
 
 
