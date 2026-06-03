@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "ProblematicPlugin/Public/Dungeon.h"
+#include "ProblematicPlugin/Public/UnrealC++Classes/Dungeon.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeDungeon() {}
 
@@ -29,7 +29,7 @@ struct Z_Construct_UFunction_ADungeon_AddArea_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Dungeon Map" },
-		{ "ModuleRelativePath", "Public/Dungeon.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/Dungeon.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_Node;
@@ -75,7 +75,7 @@ struct Z_Construct_UFunction_ADungeon_GetAllNodeAreas_Statics
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "//--==== Getter Functions ====--\n" },
 #endif
-		{ "ModuleRelativePath", "Public/Dungeon.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/Dungeon.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "--==== Getter Functions ====--" },
 #endif
@@ -123,7 +123,7 @@ struct Z_Construct_UFunction_ADungeon_GetCentrePoint_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Dungeon Map" },
-		{ "ModuleRelativePath", "Public/Dungeon.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/Dungeon.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
@@ -175,20 +175,20 @@ struct Z_Construct_UClass_ADungeon_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
-		{ "IncludePath", "Dungeon.h" },
-		{ "ModuleRelativePath", "Public/Dungeon.h" },
+		{ "IncludePath", "UnrealC++Classes/Dungeon.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/Dungeon.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CentrePoint_MetaData[] = {
 		{ "Category", "Dungeon Map" },
-		{ "ModuleRelativePath", "Public/Dungeon.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/Dungeon.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AllNodeAreas_MetaData[] = {
 		{ "Category", "Dungeon Map" },
-		{ "ModuleRelativePath", "Public/Dungeon.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/Dungeon.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AllEdgePathways_MetaData[] = {
 		{ "Category", "Dungeon Map" },
-		{ "ModuleRelativePath", "Public/Dungeon.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/Dungeon.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStructPropertyParams NewProp_CentrePoint;
@@ -199,9 +199,9 @@ struct Z_Construct_UClass_ADungeon_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_ADungeon_AddArea, "AddArea" }, // 834203386
-		{ &Z_Construct_UFunction_ADungeon_GetAllNodeAreas, "GetAllNodeAreas" }, // 1080568148
-		{ &Z_Construct_UFunction_ADungeon_GetCentrePoint, "GetCentrePoint" }, // 2049501956
+		{ &Z_Construct_UFunction_ADungeon_AddArea, "AddArea" }, // 1380919359
+		{ &Z_Construct_UFunction_ADungeon_GetAllNodeAreas, "GetAllNodeAreas" }, // 3146564132
+		{ &Z_Construct_UFunction_ADungeon_GetCentrePoint, "GetCentrePoint" }, // 2219789400
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -259,14 +259,14 @@ ADungeon::~ADungeon() {}
 // End Class ADungeon
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_Dungeon_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_Dungeon_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ADungeon, ADungeon::StaticClass, TEXT("ADungeon"), &Z_Registration_Info_UClass_ADungeon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ADungeon), 2335721425U) },
+		{ Z_Construct_UClass_ADungeon, ADungeon::StaticClass, TEXT("ADungeon"), &Z_Registration_Info_UClass_ADungeon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ADungeon), 1441064487U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_Dungeon_h_4198706055(TEXT("/Script/ProblematicPlugin"),
-	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_Dungeon_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_Dungeon_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_Dungeon_h_1135148452(TEXT("/Script/ProblematicPlugin"),
+	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_Dungeon_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_Dungeon_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

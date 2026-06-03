@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "ProblematicPlugin/Public/NodeArea.h"
+#include "ProblematicPlugin/Public/UnrealC++Classes/NodeArea.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeNodeArea() {}
 
@@ -28,7 +28,7 @@ struct Z_Construct_UFunction_ANodeArea_Get2DLocation_Statics
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "Public/NodeArea.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
@@ -69,7 +69,7 @@ struct Z_Construct_UFunction_ANodeArea_GetInnerPerimeter_Statics
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "Public/NodeArea.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
@@ -110,7 +110,7 @@ struct Z_Construct_UFunction_ANodeArea_GetOuterPerimeter_Statics
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "Public/NodeArea.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
@@ -152,7 +152,7 @@ struct Z_Construct_UFunction_ANodeArea_SetInnerAndOuterPerimeter_Statics
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "ModuleRelativePath", "Public/NodeArea.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStructPropertyParams NewProp_Inner;
@@ -210,23 +210,23 @@ struct Z_Construct_UClass_ANodeArea_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
-		{ "IncludePath", "NodeArea.h" },
-		{ "ModuleRelativePath", "Public/NodeArea.h" },
+		{ "IncludePath", "UnrealC++Classes/NodeArea.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CollisionBox_MetaData[] = {
 		{ "Category", "NodeArea" },
 		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "Public/NodeArea.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_CollisionBox;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_ANodeArea_Get2DLocation, "Get2DLocation" }, // 1169770991
-		{ &Z_Construct_UFunction_ANodeArea_GetInnerPerimeter, "GetInnerPerimeter" }, // 3235842311
-		{ &Z_Construct_UFunction_ANodeArea_GetOuterPerimeter, "GetOuterPerimeter" }, // 2072637034
-		{ &Z_Construct_UFunction_ANodeArea_SetInnerAndOuterPerimeter, "SetInnerAndOuterPerimeter" }, // 2158726405
+		{ &Z_Construct_UFunction_ANodeArea_Get2DLocation, "Get2DLocation" }, // 2817914752
+		{ &Z_Construct_UFunction_ANodeArea_GetInnerPerimeter, "GetInnerPerimeter" }, // 2895495935
+		{ &Z_Construct_UFunction_ANodeArea_GetOuterPerimeter, "GetOuterPerimeter" }, // 4141747407
+		{ &Z_Construct_UFunction_ANodeArea_SetInnerAndOuterPerimeter, "SetInnerAndOuterPerimeter" }, // 2237226484
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -276,14 +276,14 @@ ANodeArea::~ANodeArea() {}
 // End Class ANodeArea
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_NodeArea_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ANodeArea, ANodeArea::StaticClass, TEXT("ANodeArea"), &Z_Registration_Info_UClass_ANodeArea, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANodeArea), 1307191801U) },
+		{ Z_Construct_UClass_ANodeArea, ANodeArea::StaticClass, TEXT("ANodeArea"), &Z_Registration_Info_UClass_ANodeArea, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANodeArea), 4193621595U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_NodeArea_h_3470997861(TEXT("/Script/ProblematicPlugin"),
-	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_NodeArea_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_NodeArea_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_1437521243(TEXT("/Script/ProblematicPlugin"),
+	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

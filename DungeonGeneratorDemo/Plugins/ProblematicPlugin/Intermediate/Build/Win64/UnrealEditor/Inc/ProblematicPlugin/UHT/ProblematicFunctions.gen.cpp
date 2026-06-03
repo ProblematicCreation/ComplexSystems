@@ -5,14 +5,13 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "ProblematicPlugin/Public/ProblematicFunctions.h"
+#include "ProblematicPlugin/Public/UnrealC++Classes/ProblematicFunctions.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeProblematicFunctions() {}
 
 // Begin Cross Module References
 COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 COREUOBJECT_API UClass* Z_Construct_UClass_UObject_NoRegister();
-COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector2D();
 ENGINE_API UClass* Z_Construct_UClass_UBlueprintFunctionLibrary();
 PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_AEdgePathway_NoRegister();
@@ -20,7 +19,6 @@ PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_ANodeArea_NoRegister();
 PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_UProblematicFunctions();
 PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_UProblematicFunctions_NoRegister();
 PROBLEMATICPLUGIN_API UScriptStruct* Z_Construct_UScriptStruct_FAreaAndFrequency();
-PROBLEMATICPLUGIN_API UScriptStruct* Z_Construct_UScriptStruct_FMatrix3x3();
 UPackage* Z_Construct_UPackage__Script_ProblematicPlugin();
 // End Cross Module References
 
@@ -46,15 +44,15 @@ struct Z_Construct_UScriptStruct_FAreaAndFrequency_Statics
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "/**\n * \n */" },
 #endif
-		{ "ModuleRelativePath", "Public/ProblematicFunctions.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/ProblematicFunctions.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_FrequencyMinimum_MetaData[] = {
 		{ "Category", "AreaAndFrequency" },
-		{ "ModuleRelativePath", "Public/ProblematicFunctions.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/ProblematicFunctions.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_NodeAreaClass_MetaData[] = {
 		{ "Category", "AreaAndFrequency" },
-		{ "ModuleRelativePath", "Public/ProblematicFunctions.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/ProblematicFunctions.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FIntPropertyParams NewProp_FrequencyMinimum;
@@ -96,82 +94,6 @@ UScriptStruct* Z_Construct_UScriptStruct_FAreaAndFrequency()
 }
 // End ScriptStruct FAreaAndFrequency
 
-// Begin ScriptStruct FMatrix3x3
-static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_Matrix3x3;
-class UScriptStruct* FMatrix3x3::StaticStruct()
-{
-	if (!Z_Registration_Info_UScriptStruct_Matrix3x3.OuterSingleton)
-	{
-		Z_Registration_Info_UScriptStruct_Matrix3x3.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FMatrix3x3, (UObject*)Z_Construct_UPackage__Script_ProblematicPlugin(), TEXT("Matrix3x3"));
-	}
-	return Z_Registration_Info_UScriptStruct_Matrix3x3.OuterSingleton;
-}
-template<> PROBLEMATICPLUGIN_API UScriptStruct* StaticStruct<FMatrix3x3>()
-{
-	return FMatrix3x3::StaticStruct();
-}
-struct Z_Construct_UScriptStruct_FMatrix3x3_Statics
-{
-#if WITH_METADATA
-	static constexpr UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[] = {
-		{ "BlueprintType", "true" },
-		{ "ModuleRelativePath", "Public/ProblematicFunctions.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Row1_MetaData[] = {
-		{ "Category", "Mathematics" },
-		{ "ModuleRelativePath", "Public/ProblematicFunctions.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Row2_MetaData[] = {
-		{ "Category", "Mathematics" },
-		{ "ModuleRelativePath", "Public/ProblematicFunctions.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Row3_MetaData[] = {
-		{ "Category", "Mathematics" },
-		{ "ModuleRelativePath", "Public/ProblematicFunctions.h" },
-	};
-#endif // WITH_METADATA
-	static const UECodeGen_Private::FStructPropertyParams NewProp_Row1;
-	static const UECodeGen_Private::FStructPropertyParams NewProp_Row2;
-	static const UECodeGen_Private::FStructPropertyParams NewProp_Row3;
-	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-	static void* NewStructOps()
-	{
-		return (UScriptStruct::ICppStructOps*)new UScriptStruct::TCppStructOps<FMatrix3x3>();
-	}
-	static const UECodeGen_Private::FStructParams StructParams;
-};
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FMatrix3x3_Statics::NewProp_Row1 = { "Row1", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FMatrix3x3, Row1), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Row1_MetaData), NewProp_Row1_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FMatrix3x3_Statics::NewProp_Row2 = { "Row2", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FMatrix3x3, Row2), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Row2_MetaData), NewProp_Row2_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FMatrix3x3_Statics::NewProp_Row3 = { "Row3", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FMatrix3x3, Row3), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Row3_MetaData), NewProp_Row3_MetaData) };
-const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FMatrix3x3_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FMatrix3x3_Statics::NewProp_Row1,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FMatrix3x3_Statics::NewProp_Row2,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FMatrix3x3_Statics::NewProp_Row3,
-};
-static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FMatrix3x3_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FMatrix3x3_Statics::StructParams = {
-	(UObject* (*)())Z_Construct_UPackage__Script_ProblematicPlugin,
-	nullptr,
-	&NewStructOps,
-	"Matrix3x3",
-	Z_Construct_UScriptStruct_FMatrix3x3_Statics::PropPointers,
-	UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FMatrix3x3_Statics::PropPointers),
-	sizeof(FMatrix3x3),
-	alignof(FMatrix3x3),
-	RF_Public|RF_Transient|RF_MarkAsNative,
-	EStructFlags(0x00000001),
-	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FMatrix3x3_Statics::Struct_MetaDataParams), Z_Construct_UScriptStruct_FMatrix3x3_Statics::Struct_MetaDataParams)
-};
-UScriptStruct* Z_Construct_UScriptStruct_FMatrix3x3()
-{
-	if (!Z_Registration_Info_UScriptStruct_Matrix3x3.InnerSingleton)
-	{
-		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_Matrix3x3.InnerSingleton, Z_Construct_UScriptStruct_FMatrix3x3_Statics::StructParams);
-	}
-	return Z_Registration_Info_UScriptStruct_Matrix3x3.InnerSingleton;
-}
-// End ScriptStruct FMatrix3x3
-
 // Begin Class UProblematicFunctions Function GenerateDungeonAndLoadLevel
 struct Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonAndLoadLevel_Statics
 {
@@ -188,7 +110,7 @@ struct Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonAndLoadLevel_S
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Problematic Functions" },
-		{ "ModuleRelativePath", "Public/ProblematicFunctions.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/ProblematicFunctions.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FNamePropertyParams NewProp_LevelToLoad;
@@ -203,8 +125,8 @@ struct Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonAndLoadLevel_S
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
 const UECodeGen_Private::FNamePropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonAndLoadLevel_Statics::NewProp_LevelToLoad = { "LevelToLoad", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonAndLoadLevel_Parms, LevelToLoad), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonAndLoadLevel_Statics::NewProp_NodesAndFrequency_Inner = { "NodesAndFrequency", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FAreaAndFrequency, METADATA_PARAMS(0, nullptr) }; // 1512496352
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonAndLoadLevel_Statics::NewProp_NodesAndFrequency = { "NodesAndFrequency", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonAndLoadLevel_Parms, NodesAndFrequency), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 1512496352
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonAndLoadLevel_Statics::NewProp_NodesAndFrequency_Inner = { "NodesAndFrequency", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FAreaAndFrequency, METADATA_PARAMS(0, nullptr) }; // 1861139342
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonAndLoadLevel_Statics::NewProp_NodesAndFrequency = { "NodesAndFrequency", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonAndLoadLevel_Parms, NodesAndFrequency), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 1861139342
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonAndLoadLevel_Statics::NewProp_EdgeAsset = { "EdgeAsset", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonAndLoadLevel_Parms, EdgeAsset), Z_Construct_UClass_AEdgePathway_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonAndLoadLevel_Statics::NewProp_MapLocation = { "MapLocation", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonAndLoadLevel_Parms, MapLocation), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonAndLoadLevel_Statics::NewProp_MapSpawnCircle = { "MapSpawnCircle", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonAndLoadLevel_Parms, MapSpawnCircle), METADATA_PARAMS(0, nullptr) };
@@ -264,7 +186,7 @@ struct Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Problematic Functions" },
-		{ "ModuleRelativePath", "Public/ProblematicFunctions.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/ProblematicFunctions.h" },
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStructPropertyParams NewProp_AreasAndFrequency_Inner;
@@ -278,8 +200,8 @@ struct Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_AreasAndFrequency_Inner = { "AreasAndFrequency", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FAreaAndFrequency, METADATA_PARAMS(0, nullptr) }; // 1512496352
-const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_AreasAndFrequency = { "AreasAndFrequency", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonMap_Parms, AreasAndFrequency), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 1512496352
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_AreasAndFrequency_Inner = { "AreasAndFrequency", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FAreaAndFrequency, METADATA_PARAMS(0, nullptr) }; // 1861139342
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_AreasAndFrequency = { "AreasAndFrequency", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonMap_Parms, AreasAndFrequency), EArrayPropertyFlags::None, METADATA_PARAMS(0, nullptr) }; // 1861139342
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_EdgeAsset = { "EdgeAsset", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonMap_Parms, EdgeAsset), Z_Construct_UClass_AEdgePathway_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_MapLocation = { "MapLocation", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonMap_Parms, MapLocation), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap_Statics::NewProp_MapSpawnCircle = { "MapSpawnCircle", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicFunctions_eventGenerateDungeonMap_Parms, MapSpawnCircle), METADATA_PARAMS(0, nullptr) };
@@ -343,20 +265,14 @@ struct Z_Construct_UClass_UProblematicFunctions_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "/*USTRUCT(BlueprintType)\nstruct FDelaunayEdge\n{\n\x09GENERATED_BODY()\npublic:\n\x09UPROPERTY(EditAnywhere, BlueprintReadWrite)\n\x09""FVector2D StartPoint;\n\n\x09UPROPERTY(EditAnywhere, BlueprintReadWrite)\n\x09""FVector2D EndPoint;\n\x09\n\x09""bool operator==(const FDelaunayEdge& Other) const\n\x09{\n\x09\x09return (Other.StartPoint == StartPoint && Other.EndPoint == EndPoint) || (Other.StartPoint == EndPoint && Other.EndPoint == StartPoint);\n\x09}\n};*/" },
-#endif
-		{ "IncludePath", "ProblematicFunctions.h" },
-		{ "ModuleRelativePath", "Public/ProblematicFunctions.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "USTRUCT(BlueprintType)\nstruct FDelaunayEdge\n{\n       GENERATED_BODY()\npublic:\n       UPROPERTY(EditAnywhere, BlueprintReadWrite)\n       FVector2D StartPoint;\n\n       UPROPERTY(EditAnywhere, BlueprintReadWrite)\n       FVector2D EndPoint;\n\n       bool operator==(const FDelaunayEdge& Other) const\n       {\n               return (Other.StartPoint == StartPoint && Other.EndPoint == EndPoint) || (Other.StartPoint == EndPoint && Other.EndPoint == StartPoint);\n       }\n};" },
-#endif
+		{ "IncludePath", "UnrealC++Classes/ProblematicFunctions.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/ProblematicFunctions.h" },
 	};
 #endif // WITH_METADATA
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonAndLoadLevel, "GenerateDungeonAndLoadLevel" }, // 355082754
-		{ &Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap, "GenerateDungeonMap" }, // 1882766786
+		{ &Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonAndLoadLevel, "GenerateDungeonAndLoadLevel" }, // 2373560960
+		{ &Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonMap, "GenerateDungeonMap" }, // 60108355
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -402,19 +318,18 @@ UProblematicFunctions::~UProblematicFunctions() {}
 // End Class UProblematicFunctions
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_ProblematicFunctions_h_Statics
 {
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
-		{ FAreaAndFrequency::StaticStruct, Z_Construct_UScriptStruct_FAreaAndFrequency_Statics::NewStructOps, TEXT("AreaAndFrequency"), &Z_Registration_Info_UScriptStruct_AreaAndFrequency, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FAreaAndFrequency), 1512496352U) },
-		{ FMatrix3x3::StaticStruct, Z_Construct_UScriptStruct_FMatrix3x3_Statics::NewStructOps, TEXT("Matrix3x3"), &Z_Registration_Info_UScriptStruct_Matrix3x3, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FMatrix3x3), 2530902505U) },
+		{ FAreaAndFrequency::StaticStruct, Z_Construct_UScriptStruct_FAreaAndFrequency_Statics::NewStructOps, TEXT("AreaAndFrequency"), &Z_Registration_Info_UScriptStruct_AreaAndFrequency, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FAreaAndFrequency), 1861139342U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UProblematicFunctions, UProblematicFunctions::StaticClass, TEXT("UProblematicFunctions"), &Z_Registration_Info_UClass_UProblematicFunctions, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UProblematicFunctions), 3583581726U) },
+		{ Z_Construct_UClass_UProblematicFunctions, UProblematicFunctions::StaticClass, TEXT("UProblematicFunctions"), &Z_Registration_Info_UClass_UProblematicFunctions, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UProblematicFunctions), 2674104687U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_153562743(TEXT("/Script/ProblematicPlugin"),
-	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics::ClassInfo),
-	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics::ScriptStructInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_ProblematicFunctions_h_564210934(TEXT("/Script/ProblematicPlugin"),
+	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_ProblematicFunctions_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_ProblematicFunctions_h_Statics::ClassInfo),
+	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_ProblematicFunctions_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_ProblematicFunctions_h_Statics::ScriptStructInfo),
 	nullptr, 0);
 // End Registration
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

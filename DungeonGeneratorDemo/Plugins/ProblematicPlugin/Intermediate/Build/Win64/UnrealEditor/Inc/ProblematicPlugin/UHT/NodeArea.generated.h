@@ -4,7 +4,7 @@
 	DO NOT modify this manually! Edit the corresponding .h files instead!
 ===========================================================================*/
 
-// IWYU pragma: private, include "NodeArea.h"
+// IWYU pragma: private, include "UnrealC++Classes/NodeArea.h"
 #include "UObject/ObjectMacros.h"
 #include "UObject/ScriptMacros.h"
 
@@ -14,14 +14,14 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define PROBLEMATICPLUGIN_NodeArea_generated_h
 
-#define FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_NodeArea_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execSetInnerAndOuterPerimeter); \
 	DECLARE_FUNCTION(execGetOuterPerimeter); \
 	DECLARE_FUNCTION(execGetInnerPerimeter); \
 	DECLARE_FUNCTION(execGet2DLocation);
 
 
-#define FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_NodeArea_h_14_INCLASS_NO_PURE_DECLS \
+#define FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_15_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesANodeArea(); \
 	friend struct Z_Construct_UClass_ANodeArea_Statics; \
@@ -30,7 +30,7 @@ public: \
 	DECLARE_SERIALIZER(ANodeArea)
 
 
-#define FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_NodeArea_h_14_ENHANCED_CONSTRUCTORS \
+#define FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	ANodeArea(ANodeArea&&); \
@@ -42,13 +42,13 @@ public: \
 	NO_API virtual ~ANodeArea();
 
 
-#define FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_NodeArea_h_11_PROLOG
-#define FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_NodeArea_h_14_GENERATED_BODY \
+#define FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_12_PROLOG
+#define FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_15_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_NodeArea_h_14_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_NodeArea_h_14_INCLASS_NO_PURE_DECLS \
-	FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_NodeArea_h_14_ENHANCED_CONSTRUCTORS \
+	FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_15_INCLASS_NO_PURE_DECLS \
+	FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -56,7 +56,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> PROBLEMATICPLUGIN_API UClass* StaticClass<class ANodeArea>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_NodeArea_h
+#define CURRENT_FILE_ID FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

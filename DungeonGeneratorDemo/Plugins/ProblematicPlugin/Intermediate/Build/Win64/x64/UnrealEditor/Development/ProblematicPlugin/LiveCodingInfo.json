@@ -2,10 +2,6 @@
 	"RemapUnityFiles": 
 	{
 		"Module.ProblematicPlugin.cpp.obj": [
-			"Dungeon.cpp.obj",
-			"EdgePathway.cpp.obj",
-			"NodeArea.cpp.obj",
-			"ProblematicGameInstance.cpp.obj",
 			"ProblematicPlugin.cpp.obj",
 			"Dungeon.gen.cpp.obj",
 			"EdgePathway.gen.cpp.obj",
@@ -13,9 +9,13 @@
 			"ProblematicFunctions.gen.cpp.obj",
 			"ProblematicGameInstance.gen.cpp.obj",
 			"ProblematicPlugin.init.gen.cpp.obj",
-			"ProblematicFunctions.cpp.obj",
 			"DelaunayEdge.cpp.obj",
-			"DelaunayTriangle.cpp.obj"
+			"DelaunayTriangle.cpp.obj",
+			"Dungeon.cpp.obj",
+			"EdgePathway.cpp.obj",
+			"NodeArea.cpp.obj",
+			"ProblematicFunctions.cpp.obj",
+			"ProblematicGameInstance.cpp.obj"
 		]
 	}
 }

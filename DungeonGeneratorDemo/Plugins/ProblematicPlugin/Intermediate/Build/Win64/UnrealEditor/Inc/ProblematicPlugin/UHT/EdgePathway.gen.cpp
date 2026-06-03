@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "ProblematicPlugin/Public/EdgePathway.h"
+#include "ProblematicPlugin/Public/UnrealC++Classes/EdgePathway.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeEdgePathway() {}
 
@@ -29,8 +29,8 @@ struct Z_Construct_UClass_AEdgePathway_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
-		{ "IncludePath", "EdgePathway.h" },
-		{ "ModuleRelativePath", "Public/EdgePathway.h" },
+		{ "IncludePath", "UnrealC++Classes/EdgePathway.h" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/EdgePathway.h" },
 	};
 #endif // WITH_METADATA
 	static UObject* (*const DependentSingletons[])();
@@ -76,14 +76,14 @@ AEdgePathway::~AEdgePathway() {}
 // End Class AEdgePathway
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_EdgePathway_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_EdgePathway_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AEdgePathway, AEdgePathway::StaticClass, TEXT("AEdgePathway"), &Z_Registration_Info_UClass_AEdgePathway, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEdgePathway), 1044863295U) },
+		{ Z_Construct_UClass_AEdgePathway, AEdgePathway::StaticClass, TEXT("AEdgePathway"), &Z_Registration_Info_UClass_AEdgePathway, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AEdgePathway), 1774562960U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_EdgePathway_h_1959803911(TEXT("/Script/ProblematicPlugin"),
-	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_EdgePathway_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_EdgePathway_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_EdgePathway_h_3839508675(TEXT("/Script/ProblematicPlugin"),
+	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_EdgePathway_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_EdgePathway_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration
