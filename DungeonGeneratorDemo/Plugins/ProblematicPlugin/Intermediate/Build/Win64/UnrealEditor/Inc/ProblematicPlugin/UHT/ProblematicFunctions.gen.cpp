@@ -20,7 +20,6 @@ PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_ANodeArea_NoRegister();
 PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_UProblematicFunctions();
 PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_UProblematicFunctions_NoRegister();
 PROBLEMATICPLUGIN_API UScriptStruct* Z_Construct_UScriptStruct_FAreaAndFrequency();
-PROBLEMATICPLUGIN_API UScriptStruct* Z_Construct_UScriptStruct_FDelaunayEdge();
 PROBLEMATICPLUGIN_API UScriptStruct* Z_Construct_UScriptStruct_FMatrix3x3();
 UPackage* Z_Construct_UPackage__Script_ProblematicPlugin();
 // End Cross Module References
@@ -172,75 +171,6 @@ UScriptStruct* Z_Construct_UScriptStruct_FMatrix3x3()
 	return Z_Registration_Info_UScriptStruct_Matrix3x3.InnerSingleton;
 }
 // End ScriptStruct FMatrix3x3
-
-// Begin ScriptStruct FDelaunayEdge
-static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_DelaunayEdge;
-class UScriptStruct* FDelaunayEdge::StaticStruct()
-{
-	if (!Z_Registration_Info_UScriptStruct_DelaunayEdge.OuterSingleton)
-	{
-		Z_Registration_Info_UScriptStruct_DelaunayEdge.OuterSingleton = GetStaticStruct(Z_Construct_UScriptStruct_FDelaunayEdge, (UObject*)Z_Construct_UPackage__Script_ProblematicPlugin(), TEXT("DelaunayEdge"));
-	}
-	return Z_Registration_Info_UScriptStruct_DelaunayEdge.OuterSingleton;
-}
-template<> PROBLEMATICPLUGIN_API UScriptStruct* StaticStruct<FDelaunayEdge>()
-{
-	return FDelaunayEdge::StaticStruct();
-}
-struct Z_Construct_UScriptStruct_FDelaunayEdge_Statics
-{
-#if WITH_METADATA
-	static constexpr UECodeGen_Private::FMetaDataPairParam Struct_MetaDataParams[] = {
-		{ "BlueprintType", "true" },
-		{ "ModuleRelativePath", "Public/ProblematicFunctions.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_StartPoint_MetaData[] = {
-		{ "Category", "DelaunayEdge" },
-		{ "ModuleRelativePath", "Public/ProblematicFunctions.h" },
-	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_EndPoint_MetaData[] = {
-		{ "Category", "DelaunayEdge" },
-		{ "ModuleRelativePath", "Public/ProblematicFunctions.h" },
-	};
-#endif // WITH_METADATA
-	static const UECodeGen_Private::FStructPropertyParams NewProp_StartPoint;
-	static const UECodeGen_Private::FStructPropertyParams NewProp_EndPoint;
-	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-	static void* NewStructOps()
-	{
-		return (UScriptStruct::ICppStructOps*)new UScriptStruct::TCppStructOps<FDelaunayEdge>();
-	}
-	static const UECodeGen_Private::FStructParams StructParams;
-};
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FDelaunayEdge_Statics::NewProp_StartPoint = { "StartPoint", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FDelaunayEdge, StartPoint), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_StartPoint_MetaData), NewProp_StartPoint_MetaData) };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FDelaunayEdge_Statics::NewProp_EndPoint = { "EndPoint", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FDelaunayEdge, EndPoint), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_EndPoint_MetaData), NewProp_EndPoint_MetaData) };
-const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FDelaunayEdge_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FDelaunayEdge_Statics::NewProp_StartPoint,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FDelaunayEdge_Statics::NewProp_EndPoint,
-};
-static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FDelaunayEdge_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FDelaunayEdge_Statics::StructParams = {
-	(UObject* (*)())Z_Construct_UPackage__Script_ProblematicPlugin,
-	nullptr,
-	&NewStructOps,
-	"DelaunayEdge",
-	Z_Construct_UScriptStruct_FDelaunayEdge_Statics::PropPointers,
-	UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FDelaunayEdge_Statics::PropPointers),
-	sizeof(FDelaunayEdge),
-	alignof(FDelaunayEdge),
-	RF_Public|RF_Transient|RF_MarkAsNative,
-	EStructFlags(0x00000001),
-	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FDelaunayEdge_Statics::Struct_MetaDataParams), Z_Construct_UScriptStruct_FDelaunayEdge_Statics::Struct_MetaDataParams)
-};
-UScriptStruct* Z_Construct_UScriptStruct_FDelaunayEdge()
-{
-	if (!Z_Registration_Info_UScriptStruct_DelaunayEdge.InnerSingleton)
-	{
-		UECodeGen_Private::ConstructUScriptStruct(Z_Registration_Info_UScriptStruct_DelaunayEdge.InnerSingleton, Z_Construct_UScriptStruct_FDelaunayEdge_Statics::StructParams);
-	}
-	return Z_Registration_Info_UScriptStruct_DelaunayEdge.InnerSingleton;
-}
-// End ScriptStruct FDelaunayEdge
 
 // Begin Class UProblematicFunctions Function GenerateDungeonAndLoadLevel
 struct Z_Construct_UFunction_UProblematicFunctions_GenerateDungeonAndLoadLevel_Statics
@@ -413,8 +343,14 @@ struct Z_Construct_UClass_UProblematicFunctions_Statics
 {
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/*USTRUCT(BlueprintType)\nstruct FDelaunayEdge\n{\n\x09GENERATED_BODY()\npublic:\n\x09UPROPERTY(EditAnywhere, BlueprintReadWrite)\n\x09""FVector2D StartPoint;\n\n\x09UPROPERTY(EditAnywhere, BlueprintReadWrite)\n\x09""FVector2D EndPoint;\n\x09\n\x09""bool operator==(const FDelaunayEdge& Other) const\n\x09{\n\x09\x09return (Other.StartPoint == StartPoint && Other.EndPoint == EndPoint) || (Other.StartPoint == EndPoint && Other.EndPoint == StartPoint);\n\x09}\n};*/" },
+#endif
 		{ "IncludePath", "ProblematicFunctions.h" },
 		{ "ModuleRelativePath", "Public/ProblematicFunctions.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "USTRUCT(BlueprintType)\nstruct FDelaunayEdge\n{\n       GENERATED_BODY()\npublic:\n       UPROPERTY(EditAnywhere, BlueprintReadWrite)\n       FVector2D StartPoint;\n\n       UPROPERTY(EditAnywhere, BlueprintReadWrite)\n       FVector2D EndPoint;\n\n       bool operator==(const FDelaunayEdge& Other) const\n       {\n               return (Other.StartPoint == StartPoint && Other.EndPoint == EndPoint) || (Other.StartPoint == EndPoint && Other.EndPoint == StartPoint);\n       }\n};" },
+#endif
 	};
 #endif // WITH_METADATA
 	static UObject* (*const DependentSingletons[])();
@@ -466,20 +402,19 @@ UProblematicFunctions::~UProblematicFunctions() {}
 // End Class UProblematicFunctions
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_s241270_Documents_GitHub_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics
 {
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
 		{ FAreaAndFrequency::StaticStruct, Z_Construct_UScriptStruct_FAreaAndFrequency_Statics::NewStructOps, TEXT("AreaAndFrequency"), &Z_Registration_Info_UScriptStruct_AreaAndFrequency, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FAreaAndFrequency), 1512496352U) },
 		{ FMatrix3x3::StaticStruct, Z_Construct_UScriptStruct_FMatrix3x3_Statics::NewStructOps, TEXT("Matrix3x3"), &Z_Registration_Info_UScriptStruct_Matrix3x3, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FMatrix3x3), 2530902505U) },
-		{ FDelaunayEdge::StaticStruct, Z_Construct_UScriptStruct_FDelaunayEdge_Statics::NewStructOps, TEXT("DelaunayEdge"), &Z_Registration_Info_UScriptStruct_DelaunayEdge, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FDelaunayEdge), 3814199588U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UProblematicFunctions, UProblematicFunctions::StaticClass, TEXT("UProblematicFunctions"), &Z_Registration_Info_UClass_UProblematicFunctions, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UProblematicFunctions), 363282520U) },
+		{ Z_Construct_UClass_UProblematicFunctions, UProblematicFunctions::StaticClass, TEXT("UProblematicFunctions"), &Z_Registration_Info_UClass_UProblematicFunctions, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UProblematicFunctions), 3583581726U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_s241270_Documents_GitHub_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_2698248797(TEXT("/Script/ProblematicPlugin"),
-	Z_CompiledInDeferFile_FID_Users_s241270_Documents_GitHub_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_s241270_Documents_GitHub_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics::ClassInfo),
-	Z_CompiledInDeferFile_FID_Users_s241270_Documents_GitHub_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_s241270_Documents_GitHub_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics::ScriptStructInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_153562743(TEXT("/Script/ProblematicPlugin"),
+	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics::ClassInfo),
+	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_ProblematicFunctions_h_Statics::ScriptStructInfo),
 	nullptr, 0);
 // End Registration
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

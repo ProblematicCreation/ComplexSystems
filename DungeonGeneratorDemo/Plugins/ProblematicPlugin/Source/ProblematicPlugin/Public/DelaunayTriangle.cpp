@@ -1,14 +1,15 @@
 #include "DelaunayTriangle.h"
 
+#include "DelaunayEdge.h"
 #include "ProblematicFunctions.h"
 
 DelaunayTriangle::DelaunayTriangle()
-	:Vertex1(FVector2D::ZeroVector), Vertex2(FVector2D::ZeroVector), Vertex3(FVector2D::ZeroVector)
+	:Vertex1(FVector2D::ZeroVector), Vertex2(FVector2D::ZeroVector), Vertex3(FVector2D::ZeroVector), IsBad(false)
 {
 }
 
 DelaunayTriangle::DelaunayTriangle(FVector2D V1, FVector2D V2, FVector2D V3)
-:Vertex1(V1), Vertex2(V2), Vertex3(V3)
+:Vertex1(V1), Vertex2(V2), Vertex3(V3), IsBad(false)
 {
 }
 
@@ -17,12 +18,12 @@ DelaunayTriangle::~DelaunayTriangle()
 }
 
 
-TArray<FDelaunayEdge> DelaunayTriangle::GetEdges()
+TArray<DelaunayEdge*> DelaunayTriangle::GetEdges()
 {
-	TArray<FDelaunayEdge> Edges;
-	Edges.Add(FDelaunayEdge(GetVertex1(), GetVertex2()));
-	Edges.Add(FDelaunayEdge(GetVertex2(), GetVertex3()));
-	Edges.Add(FDelaunayEdge(GetVertex3(), GetVertex1()));
+	TArray<DelaunayEdge*> Edges;
+	Edges.Add(new DelaunayEdge(GetVertex1(), GetVertex2()));
+	Edges.Add(new DelaunayEdge(GetVertex2(), GetVertex3()));
+	Edges.Add(new DelaunayEdge(GetVertex3(), GetVertex1()));
 	
 	return Edges;
 }

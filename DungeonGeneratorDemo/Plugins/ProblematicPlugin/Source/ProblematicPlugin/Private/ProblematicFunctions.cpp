@@ -4,6 +4,7 @@
 #include "ProblematicFunctions.h"
 
 #include "BlueprintActionDatabase.h"
+#include "DelaunayEdge.h"
 #include "DelaunayTriangle.h"
 #include "Dungeon.h"
 #include "EdgePathway.h"
@@ -13,6 +14,7 @@
 #include "DSP/Osc.h"
 #include "Elements/Framework/TypedElementAssetEditorToolkitHostMixin.h"
 #include "Engine/CoreSettings.h"
+#include "GeometryCollection/GeometryCollectionDebugDrawActor.h"
 #include "Kismet/GameplayStatics.h"
 
 void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAndFrequency, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, float SpaceBetweenAreas,int32 RoomAmountToSpawn, UObject* WorldContextObject)
@@ -91,17 +93,15 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 		SeparationSteeringAlgorithm(NewMap->GetAllNodeAreas(), SpaceBetweenAreas);
 
 		//--==== Connect rooms together via triangulation ====--
-		TArray<FDelaunayEdge> InitialEdges = DelaunayTriangulationAlgorithm(NewMap->GetAllNodeAreas(), NewMap, WorldContextObject);
+		TArray<DelaunayEdge*> InitialEdges = DelaunayTriangulationAlgorithm(NewMap->GetAllNodeAreas(), NewMap, WorldContextObject);
 		
 		for (auto Edge : InitialEdges)
 		{
-			DrawDebugLine(WorldContextObject->GetWorld(), FVector(Edge.StartPoint, 25.f), FVector(Edge.EndPoint, 25.f), FColor::Red, true, -1, 0, 5.f);
+			DrawDebugLine(WorldContextObject->GetWorld(), FVector(Edge->GetStartPoint(), 25.f), FVector(Edge->GetEndPoint(), 25.f), FColor::Red, true, -1, 0, 5.f);
 		}
-		
-		FString newText = FString::Printf(TEXT("--==== Num of Edges: %d"), InitialEdges.Num());
-		
 		if (GEngine)
 		{
+			FString newText = FString::Printf(TEXT("--==== Num of Edges: %d"), InitialEdges.Num());
 			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, newText);
 		}
 		
@@ -120,15 +120,67 @@ void UProblematicFunctions::GenerateDungeonAndLoadLevel(FName levelToLoad, TArra
 	}
 }
 
-TArray<FVector2D> UProblematicFunctions::MinimumSpanningTreeAlgorithm(TArray<ANodeArea*> Nodes, TArray<FVector2D> Edges)
+TArray<DelaunayEdge*> UProblematicFunctions::MinimumSpanningTreeAlgorithm(TArray<ANodeArea*> Nodes, TArray<DelaunayEdge*> Edges)
 {
-	TArray<FVector2D> RemainingEdges;
-	return RemainingEdges;
+	/*for (ANodeArea* FocusedNode : Nodes)
+	{
+		for (int i = 0; i < Edges.Num(); i++)
+		{
+			if (Edges[i]->GetStartPoint() == FocusedNode->Get2DLocation() || Edges[i]->GetEndPoint() == FocusedNode->Get2DLocation())
+			{
+				FocusedNode->AddConnectedEdge(Edges[i]);
+			}
+		}
+	}
+	Edges.Sort([] (DelaunayEdge* Edge1, DelaunayEdge* Edge2)
+	{
+		return Edge1->GetDistance() < Edge2->GetDistance();
+	});*/
+
+	TArray<FVector2D> OpenSetOfVerts;
+	TArray<FVector2D> ClosedSetOfVerts;
+	TArray<DelaunayEdge*> ResultingEdges;
+	ANodeArea* StartingNode = Nodes[0];
+	
+	for (DelaunayEdge* Edge : Edges)
+	{
+		OpenSetOfVerts.Add(Edge->GetStartPoint());
+		OpenSetOfVerts.Add(Edge->GetEndPoint());
+	}
+
+	ClosedSetOfVerts.Add(StartingNode->Get2DLocation());
+
+	//--==== while there are still verts to process ====--
+	while (OpenSetOfVerts.Num() > 0)
+	{
+		bool Chosen = false;
+		DelaunayEdge* ChosenEdge = nullptr;
+		float MinWeight = FLT_MAX;
+
+		//--==== iterate through every edge to determine if it would make a cyclic redundency ====--
+		for (int32 i = 0; i < Edges.Num(); i++)
+		{
+			int32 ClosedVertsCount = 0;
+			//--== if the end point is in the verts that it ain't allowed to touch ==-- 
+			if (!ClosedSetOfVerts.Contains(Edges[i]->GetEndPoint()))
+			{
+				ClosedVertsCount++;
+			}
+			//--== if the start point is int the array of verts that ain't allowed to touch ==--
+			if (!ClosedSetOfVerts.Contains(Edges[i]->GetStartPoint()))
+			{
+				ClosedVertsCount++;
+			}
+		}
+	}
+	
+
+	
+	return ResultingEdges;
 }
 
-TArray<FDelaunayEdge> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArray<ANodeArea*> Nodes, ADungeon* DungeonMap, UObject* WorldContextObject)
+TArray<DelaunayEdge*> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArray<ANodeArea*> Nodes, ADungeon* DungeonMap, UObject* WorldContextObject)
 {
-	TArray<FDelaunayEdge> Edges;
 	int32 Iterator = 0;
 	
 	//--== get Most positive node away ==--
@@ -184,34 +236,77 @@ TArray<FDelaunayEdge> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArr
 	DrawDebugLine(WorldContextObject->GetWorld(), FVector(SuperV1, 0.f), FVector(SuperV2, 0.f), FColor::Green, true, -1, 0, 10.f);
 	DrawDebugLine(WorldContextObject->GetWorld(), FVector(SuperV2, 0.f), FVector(SuperV3, 0.f), FColor::Green, true, -1, 0, 10.f);
 	DrawDebugLine(WorldContextObject->GetWorld(), FVector(SuperV3, 0.f), FVector(SuperV1, 0.f), FColor::Green, true, -1, 0, 10.f);
-		
+	
 	DelaunayTriangle* SuperTriangle = new DelaunayTriangle(SuperV1, SuperV2, SuperV3);
 
 	TArray<DelaunayTriangle*> Triangles;
 	TArray<int32> BadTriangles;
 	Triangles.Add(SuperTriangle);
-	//--== triangulate each vertex ==--
-	for (auto FocusedNode : Nodes)
+
+	//--==== iterate through all nodes ====--
+	for (int32 i = 0; i < Nodes.Num(); i++)
 	{
-		AddVertex(FocusedNode->Get2DLocation(), Triangles, WorldContextObject);
-		DrawDebugSphere(WorldContextObject->GetWorld(), FocusedNode->GetActorLocation(), 20.f, 12.f, FColor::Green, true, -1, 0, 3.f);
+		TArray<DelaunayEdge*> Polygon;
+
+		//--==== iterate through all triangles in the triangulation ====--
+		for (int32 t = 0; t < Triangles.Num(); t++)
+		{
+			if (Triangles[t]->InCircle(Nodes[i]->Get2DLocation()))
+			{
+				Triangles[t]->SetIsBad(true);
+				Polygon.Add(new DelaunayEdge(Triangles[t]->GetVertex1(), Triangles[t]->GetVertex2()));
+				Polygon.Add(new DelaunayEdge(Triangles[t]->GetVertex2(), Triangles[t]->GetVertex3()));
+				Polygon.Add(new DelaunayEdge(Triangles[t]->GetVertex3(), Triangles[t]->GetVertex1()));
+			}
+		}
+
+		//--==== remove all triangles that contain a node within ====--
+		Triangles.RemoveAll([] (DelaunayTriangle* Tri) -> bool
+		{
+			return Tri->GetIsBad();
+		});
+
+		for (int p1 = 0; p1 < Polygon.Num(); p1++)
+		{
+			for (int p2 = p1 + 1; p2 < Polygon.Num() ; p2++)
+			{
+				//--== almost equal function? ==--
+				if (DelaunayEdge::AlmostEqual(Polygon[p1], Polygon[p2]))
+				{
+					Polygon[p1]->SetIsBad(true);
+					Polygon[p2]->SetIsBad(true);
+				}
+			}
+		}
+
+		//--==== remove all the edges that are the same ====--
+		Polygon.RemoveAll([] (DelaunayEdge* Edge) -> bool
+		{
+			return Edge->GetIsBad();
+		});
+
+		for (DelaunayEdge* Edge : Polygon)
+		{
+			Triangles.Add(new DelaunayTriangle(Edge->GetStartPoint(), Edge->GetEndPoint(), Nodes[i]->Get2DLocation()));
+		}
 	}
-	
-	//--== remove the triangles that share edges with super triangle ==--
+
+	//--==== remove all triangles that contain a vertex with the super triangle
 	Triangles.RemoveAll([SuperV1, SuperV2, SuperV3] (DelaunayTriangle* DTri) -> bool
 	{
 		return ShouldDestroyTriangle(DTri, SuperV1, SuperV2, SuperV3);
 	});
 
-	//--== finally get all the current edges from the triangles ==--
-	for (auto FocusedTriangle : Triangles)
+	//--==== hashset ====--
+	TArray<DelaunayEdge*> HashSet;
+	for (int i = 0; i < (int)Triangles.Num(); i++)
 	{
-		Edges.Add(FDelaunayEdge(FocusedTriangle->GetVertex1(), FocusedTriangle->GetVertex2()));
-		Edges.Add(FDelaunayEdge(FocusedTriangle->GetVertex2(), FocusedTriangle->GetVertex3()));
-		Edges.Add(FDelaunayEdge(FocusedTriangle->GetVertex3(), FocusedTriangle->GetVertex1()));
+		HashSet.Add(new DelaunayEdge(Triangles[i]->GetVertex1(), Triangles[i]->GetVertex2()));
+		HashSet.Add(new DelaunayEdge(Triangles[i]->GetVertex2(), Triangles[i]->GetVertex3()));
+		HashSet.Add(new DelaunayEdge(Triangles[i]->GetVertex3(), Triangles[i]->GetVertex1()));
 	}
 	
-	return Edges;
+	return HashSet;
 }
 
 void UProblematicFunctions::SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes, float HalfSpaceBetweenAreas)
@@ -282,7 +377,7 @@ void UProblematicFunctions::SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes
 
 void UProblematicFunctions::AddVertex(FVector2D Vertex, TArray<DelaunayTriangle*> &Triangles, UObject* WorldContextObject)
 {
-	TArray<FDelaunayEdge> Edges;
+	/*TArray<FDelaunayEdge> Edges;
 	TArray<DelaunayTriangle*> TempTriangles;
 	
 	//filter through triangles
@@ -316,12 +411,12 @@ void UProblematicFunctions::AddVertex(FVector2D Vertex, TArray<DelaunayTriangle*
 							break;
 						}
 					
-						Edges.Add(FDelaunayEdge(BadTriangle->GetEdges()[i]));
+						Edges.Add(new DelaunayEdge(BadTriangle->GetEdges()[i]));
 					}
 				}
 			}
 		}
-	}
+	}*/
 	
 	/*Triangles.RemoveAll([TempTriangles] (DelaunayTriangle* DTri) -> bool
 	{
@@ -337,19 +432,19 @@ void UProblematicFunctions::AddVertex(FVector2D Vertex, TArray<DelaunayTriangle*
 	});*/
 	
 	//remove any duplicated edges from the array
-	Edges = UniqueEdges(Edges);
+	/*Edges = UniqueEdges(Edges);
 	
 	//update the triangles array
 	for (auto Edge : Edges)
 	{
 		Triangles.Add(new DelaunayTriangle(Edge.StartPoint, Edge.EndPoint, Vertex));
 		DrawDebugLine(WorldContextObject->GetWorld(), FVector(Edge.StartPoint, 25.f), FVector(Edge.EndPoint, 25.f), FColor::Black, true, -1, 0, 2.f);
-	}
+	}*/
 }
 
-TArray<FDelaunayEdge> UProblematicFunctions::UniqueEdges(TArray<FDelaunayEdge> Edges)
+TArray<DelaunayEdge*> UProblematicFunctions::UniqueEdges(TArray<DelaunayEdge*> Edges)
 {
-	TArray<FDelaunayEdge> UniqueEdges;
+	TArray<DelaunayEdge*> UniqueEdges;
 
 	//--== this function removes any duplicated edges from the edges array ==--
 	for (int i = 0; i < Edges.Num(); i++)
@@ -358,7 +453,7 @@ TArray<FDelaunayEdge> UProblematicFunctions::UniqueEdges(TArray<FDelaunayEdge> E
 		
 		for (int j = 0; j < Edges.Num(); j++)
 		{
-			if ((i != j) && (EquivelentEdges(Edges[i], Edges[j])))
+			if ((i != j) && ((Edges[i] == Edges[j])))
 			{
 				//remove this edge
 				IsEdgeUnique = false;
@@ -375,19 +470,6 @@ TArray<FDelaunayEdge> UProblematicFunctions::UniqueEdges(TArray<FDelaunayEdge> E
 	return UniqueEdges;
 }
 
-bool UProblematicFunctions::EquivelentEdges(FDelaunayEdge Edge1, FDelaunayEdge Edge2)
-{
-	if (Edge1.StartPoint == Edge2.StartPoint)
-	{
-		if (Edge1.EndPoint == Edge2.EndPoint)
-		{
-			return true;
-		}
-	}
-	
-	return false;
-}
-
 bool UProblematicFunctions::ShouldDestroyTriangle(DelaunayTriangle* Triangle, FVector2D V1, FVector2D V2, FVector2D V3)
 {
 	for (auto vertex : Triangle->GetCollatedVerticies())
@@ -400,20 +482,4 @@ bool UProblematicFunctions::ShouldDestroyTriangle(DelaunayTriangle* Triangle, FV
 	}
 	return false;
 }
-
-/*TArray<FDelaunayEdge> UProblematicFunctions::RemoveOverlappingEdges(TArray<FDelaunayEdge> Edges)
-{
-	for (int i = 0; i < Edges.Num(); i++)
-	{
-		for (int j = 0; j < Edges.Num(); j++)
-		{
-			if (i != j)
-			{
-				FVector2D Determinant = (Edges[i].StartPoint * Edges[j].EndPoint) - (Edges[i].EndPoint * Edges[j].StartPoint);
-				
-			}
-		}
-	}
-	
-}*/
 

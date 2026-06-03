@@ -20,6 +20,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	FVector2D Get2DLocation() { return FVector2D(GetActorLocation().X, GetActorLocation().Y); }
 	FVector2D GetCenter2DLocation();
+	TArray<DelaunayEdge*> GetConnectedEdges() { return ConnectedEdges; }
 
 	void BoundingBox(FBox2D& Inner, FBox2D& Outer, float OuterBoxScale);
 	
@@ -30,6 +31,9 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void SetInnerAndOuterPerimeter( FBox2D Inner, FBox2D Outer) {InnerPerimeter = Inner; OuterPerimeter = Outer; }
+
+	void AddConnectedEdge(DelaunayEdge* Edge) { ConnectedEdges.Add(Edge); }
+	void RemoveConnectedEdge(DelaunayEdge* Edge) { ConnectedEdges.Remove(Edge); }
 
 protected:
 	// Called when the game starts or when spawned
@@ -42,6 +46,7 @@ private:
 	TArray<FVector2D> DoorwayLocations;
 	FBox2D InnerPerimeter;
 	FBox2D OuterPerimeter;
+	TArray<DelaunayEdge*> ConnectedEdges;
 	
 
 };
