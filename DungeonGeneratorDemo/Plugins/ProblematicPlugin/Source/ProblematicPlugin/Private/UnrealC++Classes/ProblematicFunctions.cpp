@@ -86,23 +86,106 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 
 		//--==== Connect rooms together via triangulation ====--
 		TArray<DelaunayEdge*> InitialEdges = DelaunayTriangulationAlgorithm(NewMap->GetAllNodeAreas(), NewMap, WorldContextObject);
-		TArray<DelaunayEdge*> MSTEdges = MinimumSpanningTreeAlgorithm(InitialEdges[0]->GetStartPoint(), InitialEdges);
-		
-		/*for (auto Edge : InitialEdges)
-		{
-			DrawDebugLine(WorldContextObject->GetWorld(), FVector(Edge->GetStartPoint(), 25.f), FVector(Edge->GetEndPoint(), 25.f), FColor::Black, true);
-		}*/
+		int32 init = InitialEdges.Num();
 		if (GEngine)
 		{
-			FString newText = FString::Printf(TEXT("--==== Initial Edges: %d"), InitialEdges.Num());
+			FString newText = FString::Printf(TEXT("--==== Initial Edges BEFORE MST: %d"), InitialEdges.Num());
 			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, newText);
-			FString newText1 = FString::Printf(TEXT("--==== MST Edges: %d"), MSTEdges.Num());
-			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, newText1);
+		}
+		//--==== minimum spanning tree on those connections ====--
+		TArray<DelaunayEdge*> MSTEdges = MinimumSpanningTreeAlgorithm(InitialEdges[0]->GetStartPoint(), InitialEdges);
+
+		InitialEdges.RemoveAll([MSTEdges] (DelaunayEdge* Edge) -> bool
+		{
+			for (DelaunayEdge* MSTEdge : MSTEdges)
+			{
+				if (DelaunayEdge::AlmostEqual(Edge, MSTEdge))
+				{
+					return true;
+				}
+			}
+			return false;
+		});
+
+		//--==== remaining initial edges from delaunay triangulation ====--
+		TArray<DelaunayEdge*> AddedBackEdges;
+		for (int32 i = 0; i < InitialEdges.Num(); i++)
+		{
+			if (FMath::RandRange(0.f, 1.f) < 0.125f)
+			{
+				AddedBackEdges.Add(InitialEdges[i]);
+			}
 		}
 		
+		TArray<DelaunayEdge*> FinalEdges;
+		for (int32 i = 0; i < AddedBackEdges.Num(); i++)
+		{
+			FinalEdges.Add(AddedBackEdges[i]);
+		}
+		for (int32 i = 0; i < MSTEdges.Num(); i++)
+		{
+			FinalEdges.Add(MSTEdges[i]);
+		}
+
+		//--==== generate portals to connecting rooms ====--
+		for (ANodeArea* Node : NewMap->GetAllNodeAreas())
+		{
+			for (DelaunayEdge* Edge : FinalEdges)
+			{
+				if (DelaunayEdge::AlmostEqualVertexToABS(Edge->GetStartPoint(), Node->Get2DLocation()))
+				{
+					for (ANodeArea* DestNode : NewMap->GetAllNodeAreas())
+					{
+						if (DelaunayEdge::AlmostEqualVertexToABS(Edge->GetEndPoint(), DestNode->Get2DLocation()))
+						{
+							Node->GenerateTeleporter(DestNode);
+							break;
+						}
+					}
+				}
+				else if (DelaunayEdge::AlmostEqualVertexToABS(Edge->GetEndPoint(), Node->Get2DLocation()))
+				{
+					for (ANodeArea* DestNode : NewMap->GetAllNodeAreas())
+					{
+						if (DelaunayEdge::AlmostEqualVertexToABS(Edge->GetStartPoint(), DestNode->Get2DLocation()))
+						{
+							Node->GenerateTeleporter(DestNode);
+							break;
+						}
+					}
+				}
+			}
+		}
+		//--==== run the setup function for the portals once all of them have been added as actor components to the nodes====--
+		for (ANodeArea* Node : NewMap->GetAllNodeAreas())
+		{
+			Node->FinaliseTeleporterSetup();
+		}
+		
+		//------====== DEBUG INFORMATION ======------
+		for (auto Edge : AddedBackEdges)
+		{
+			DrawDebugLine(WorldContextObject->GetWorld(), FVector(Edge->GetStartPoint(), 25.f), FVector(Edge->GetEndPoint(), 25.f), FColor::Black, true);
+		}
 		for (auto Edge : MSTEdges)
 		{
 			DrawDebugLine(WorldContextObject->GetWorld(), FVector(Edge->GetStartPoint(), 25.f), FVector(Edge->GetEndPoint(), 25.f), FColor::Red, true, -1, 0, 5.f);
+		}
+		if (GEngine)
+		{
+			FString newText = FString::Printf(TEXT("--==== Initial Edges AFTER MST: %d"), InitialEdges.Num());
+			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, newText);
+			
+			FString newText1 = FString::Printf(TEXT("--==== MST Edges: %d"), MSTEdges.Num());
+			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, newText1);
+			
+			FString newText2 = FString::Printf(TEXT("--==== Added Back Edges: %d"), AddedBackEdges.Num());
+			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Green, newText2);
+
+			int32 init2 = MSTEdges.Num();
+			int32 init3 = InitialEdges.Num();
+			FString newText3 = FString::Printf(TEXT("--==== Difference: %d"), init - init2 - init3);
+			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, newText3);
 		}
 	}
 }
@@ -371,101 +454,6 @@ void UProblematicFunctions::SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes
 	{
 		SeparationSteeringAlgorithm(Nodes, HalfSpaceBetweenAreas);
 	}
-}
-
-void UProblematicFunctions::AddVertex(FVector2D Vertex, TArray<DelaunayTriangle*> &Triangles, UObject* WorldContextObject)
-{
-	/*TArray<FDelaunayEdge> Edges;
-	TArray<DelaunayTriangle*> TempTriangles;
-	
-	//filter through triangles
-	for (auto Triangle : Triangles)
-	{
-		//if the vertex in inside the circle of the 3 points
-		if (Triangle->InCircle(Vertex))
-		{
-			//Edges.Add(FDelaunayEdge(Triangle->GetVertex1(), Triangle->GetVertex2()));
-			//Edges.Add(FDelaunayEdge(Triangle->GetVertex2(), Triangle->GetVertex3()));
-			//Edges.Add(FDelaunayEdge(Triangle->GetVertex3(), Triangle->GetVertex1()));
-			
-			TempTriangles.Add(Triangle);
-		}
-	}
-	
-	for (auto BadTriangle : TempTriangles)
-	{ 
-		if (BadTriangle != TempTriangles[0])
-		{
-			for (auto OtherBadTriangle : TempTriangles)
-			{
-				//--==== make sure it's not the same triangle
-				if (BadTriangle != OtherBadTriangle)
-				{
-					for (int i = 0; i < BadTriangle->GetEdges().Num(); i++)
-					{
-						//--==== check if the edge is shared with another triangle
-						if ((BadTriangle->GetEdges()[i] == OtherBadTriangle->GetEdges()[0]) || (BadTriangle->GetEdges()[i] == OtherBadTriangle->GetEdges()[1]) || (BadTriangle->GetEdges()[i] == OtherBadTriangle->GetEdges()[2]))
-						{
-							break;
-						}
-					
-						Edges.Add(new DelaunayEdge(BadTriangle->GetEdges()[i]));
-					}
-				}
-			}
-		}
-	}*/
-	
-	/*Triangles.RemoveAll([TempTriangles] (DelaunayTriangle* DTri) -> bool
-	{
-		for (auto Triangle : TempTriangles)
-		{
-			if (Triangle == DTri)
-			{
-				return true;
-			}
-		}
-		
-		return false;
-	});*/
-	
-	//remove any duplicated edges from the array
-	/*Edges = UniqueEdges(Edges);
-	
-	//update the triangles array
-	for (auto Edge : Edges)
-	{
-		Triangles.Add(new DelaunayTriangle(Edge.StartPoint, Edge.EndPoint, Vertex));
-		DrawDebugLine(WorldContextObject->GetWorld(), FVector(Edge.StartPoint, 25.f), FVector(Edge.EndPoint, 25.f), FColor::Black, true, -1, 0, 2.f);
-	}*/
-}
-
-TArray<DelaunayEdge*> UProblematicFunctions::UniqueEdges(TArray<DelaunayEdge*> Edges)
-{
-	TArray<DelaunayEdge*> UniqueEdges;
-
-	//--== this function removes any duplicated edges from the edges array ==--
-	for (int i = 0; i < Edges.Num(); i++)
-	{
-		bool IsEdgeUnique = true;
-		
-		for (int j = 0; j < Edges.Num(); j++)
-		{
-			if ((i != j) && ((Edges[i] == Edges[j])))
-			{
-				//remove this edge
-				IsEdgeUnique = false;
-				break;
-			}
-		}
-		
-		if (IsEdgeUnique)
-		{
-			UniqueEdges.Add(Edges[i]);
-		}
-	}
-
-	return UniqueEdges;
 }
 
 bool UProblematicFunctions::ShouldDestroyTriangle(DelaunayTriangle* Triangle, FVector2D V1, FVector2D V2, FVector2D V3)

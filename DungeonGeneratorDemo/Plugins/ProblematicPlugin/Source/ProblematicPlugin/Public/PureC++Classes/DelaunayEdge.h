@@ -1,4 +1,5 @@
 #pragma once
+#include "CoreMinimal.h"
 
 class DelaunayEdge
 {
@@ -19,9 +20,9 @@ public:
 	bool operator==(const DelaunayEdge& Other) const;
 
 	static bool AlmostEqual(DelaunayEdge* Edge1, DelaunayEdge* Edge2);
-private:
 	static bool AlmostEqualABS(float X, float Y);
 	static bool AlmostEqualVertexToABS(FVector2D Vert1, FVector2D Vert2);
+private:
 	FVector2D StartPoint;
 	FVector2D EndPoint;
 

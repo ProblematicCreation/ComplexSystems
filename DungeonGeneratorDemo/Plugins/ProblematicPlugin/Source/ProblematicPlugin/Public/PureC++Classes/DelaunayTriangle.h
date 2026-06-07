@@ -1,4 +1,5 @@
 #pragma once
+#include "CoreMinimal.h"
 
 class DelaunayEdge;
 struct FDelaunayEdge;

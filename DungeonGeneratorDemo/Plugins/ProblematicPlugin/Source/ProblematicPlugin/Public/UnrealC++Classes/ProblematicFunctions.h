@@ -22,10 +22,10 @@ struct FAreaAndFrequency
 {
 	GENERATED_BODY()
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,  Category = "Problematic Frequency-Per-Node")
 	int32 FrequencyMinimum;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Problematic Nodes")
 	TSubclassOf<ANodeArea> NodeAreaClass;
 };
 
@@ -49,9 +49,5 @@ private:
 	static TArray<DelaunayEdge*> DelaunayTriangulationAlgorithm(TArray<ANodeArea*> Nodes, ADungeon* DungeonMap, UObject* WorldContextObject);
 	static void SeparationSteeringAlgorithm(TArray<ANodeArea*> Nodes, float HalfSpaceBetweenAreas);
 	
-	
-	//old functions -- scrapped
-	static void AddVertex(FVector2D Vertex, TArray<DelaunayTriangle*> &Triangles, UObject* WorldContextObject);
-	static TArray<DelaunayEdge*> UniqueEdges(TArray<DelaunayEdge*> Edges);
 	static bool ShouldDestroyTriangle(DelaunayTriangle* Triangle, FVector2D V1, FVector2D V2, FVector2D V3);
 };

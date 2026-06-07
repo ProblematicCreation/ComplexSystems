@@ -12,7 +12,9 @@
             "c:\\program files\\epic games\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\components\\boxcomponent.h",
             "c:\\program files\\epic games\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\components\\shapecomponent.h",
             "c:\\program files\\epic games\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\shapecomponent.generated.h",
-            "c:\\program files\\epic games\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\boxcomponent.generated.h"
+            "c:\\program files\\epic games\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\boxcomponent.generated.h",
+            "c:\\users\\user\\documents\\aie git\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\source\\problematicplugin\\public\\unrealc++classes\\nodeareateleporter.h",
+            "c:\\users\\user\\documents\\aie git\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\nodeareateleporter.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

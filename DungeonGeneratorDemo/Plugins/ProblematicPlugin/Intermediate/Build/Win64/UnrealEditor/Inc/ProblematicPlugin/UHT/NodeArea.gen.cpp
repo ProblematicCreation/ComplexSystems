@@ -13,9 +13,9 @@ void EmptyLinkFunctionForGeneratedCodeNodeArea() {}
 COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FBox2D();
 COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector2D();
 ENGINE_API UClass* Z_Construct_UClass_AActor();
-ENGINE_API UClass* Z_Construct_UClass_UBoxComponent_NoRegister();
 PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_ANodeArea();
 PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_ANodeArea_NoRegister();
+PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_UNodeAreaTeleporter_NoRegister();
 UPackage* Z_Construct_UPackage__Script_ProblematicPlugin();
 // End Cross Module References
 
@@ -28,7 +28,14 @@ struct Z_Construct_UFunction_ANodeArea_Get2DLocation_Statics
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Problematic Node" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//--==== Getters ====--\n" },
+#endif
 		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "--==== Getters ====--" },
+#endif
 	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStructPropertyParams NewProp_ReturnValue;
@@ -69,6 +76,7 @@ struct Z_Construct_UFunction_ANodeArea_GetInnerPerimeter_Statics
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Problematic Node" },
 		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
 	};
 #endif // WITH_METADATA
@@ -110,6 +118,7 @@ struct Z_Construct_UFunction_ANodeArea_GetOuterPerimeter_Statics
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Problematic Node" },
 		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
 	};
 #endif // WITH_METADATA
@@ -152,6 +161,7 @@ struct Z_Construct_UFunction_ANodeArea_SetInnerAndOuterPerimeter_Statics
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Problematic Node" },
 		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
 	};
 #endif // WITH_METADATA
@@ -213,20 +223,20 @@ struct Z_Construct_UClass_ANodeArea_Statics
 		{ "IncludePath", "UnrealC++Classes/NodeArea.h" },
 		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CollisionBox_MetaData[] = {
-		{ "Category", "NodeArea" },
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Portals_MetaData[] = {
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
 	};
 #endif // WITH_METADATA
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_CollisionBox;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_Portals_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_Portals;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_ANodeArea_Get2DLocation, "Get2DLocation" }, // 2817914752
-		{ &Z_Construct_UFunction_ANodeArea_GetInnerPerimeter, "GetInnerPerimeter" }, // 2895495935
-		{ &Z_Construct_UFunction_ANodeArea_GetOuterPerimeter, "GetOuterPerimeter" }, // 4141747407
-		{ &Z_Construct_UFunction_ANodeArea_SetInnerAndOuterPerimeter, "SetInnerAndOuterPerimeter" }, // 2237226484
+		{ &Z_Construct_UFunction_ANodeArea_Get2DLocation, "Get2DLocation" }, // 1467145226
+		{ &Z_Construct_UFunction_ANodeArea_GetInnerPerimeter, "GetInnerPerimeter" }, // 363336705
+		{ &Z_Construct_UFunction_ANodeArea_GetOuterPerimeter, "GetOuterPerimeter" }, // 389923615
+		{ &Z_Construct_UFunction_ANodeArea_SetInnerAndOuterPerimeter, "SetInnerAndOuterPerimeter" }, // 1293952083
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -234,9 +244,11 @@ struct Z_Construct_UClass_ANodeArea_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANodeArea_Statics::NewProp_CollisionBox = { "CollisionBox", nullptr, (EPropertyFlags)0x0020080000080009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANodeArea, CollisionBox), Z_Construct_UClass_UBoxComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CollisionBox_MetaData), NewProp_CollisionBox_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANodeArea_Statics::NewProp_Portals_Inner = { "Portals", nullptr, (EPropertyFlags)0x0000000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UNodeAreaTeleporter_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ANodeArea_Statics::NewProp_Portals = { "Portals", nullptr, (EPropertyFlags)0x0040008000000008, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANodeArea, Portals), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Portals_MetaData), NewProp_Portals_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ANodeArea_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANodeArea_Statics::NewProp_CollisionBox,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANodeArea_Statics::NewProp_Portals_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANodeArea_Statics::NewProp_Portals,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ANodeArea_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_ANodeArea_Statics::DependentSingletons[])() = {
@@ -279,10 +291,10 @@ ANodeArea::~ANodeArea() {}
 struct Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ANodeArea, ANodeArea::StaticClass, TEXT("ANodeArea"), &Z_Registration_Info_UClass_ANodeArea, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANodeArea), 4193621595U) },
+		{ Z_Construct_UClass_ANodeArea, ANodeArea::StaticClass, TEXT("ANodeArea"), &Z_Registration_Info_UClass_ANodeArea, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANodeArea), 1347516906U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_1437521243(TEXT("/Script/ProblematicPlugin"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_1755205699(TEXT("/Script/ProblematicPlugin"),
 	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

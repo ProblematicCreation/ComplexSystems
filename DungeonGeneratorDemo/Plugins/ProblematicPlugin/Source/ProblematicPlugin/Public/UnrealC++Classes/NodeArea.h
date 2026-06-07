@@ -7,6 +7,7 @@
 #include "PureC++Classes/DelaunayEdge.h"
 #include "NodeArea.generated.h"
 
+class UNodeAreaTeleporter;
 class UBoxComponent;
 
 UCLASS()
@@ -18,33 +19,40 @@ public:
 	// Sets default values for this actor's properties
 	ANodeArea();
 
-	UFUNCTION(BlueprintCallable)
+	//--==== Getters ====--
+	UFUNCTION(BlueprintCallable, Category = "Problematic Node")
 	FVector2D Get2DLocation() { return FVector2D(GetActorLocation().X, GetActorLocation().Y); }
 	FVector2D GetCenter2DLocation();
 	TArray<DelaunayEdge*> GetConnectedEdges() { return ConnectedEdges; }
 
 	void BoundingBox(FBox2D& Inner, FBox2D& Outer, float OuterBoxScale);
 	
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Problematic Node")
 	FBox2D GetInnerPerimeter() { return InnerPerimeter; }
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Problematic Node")
 	FBox2D GetOuterPerimeter() { return OuterPerimeter; }
 	
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category = "Problematic Node")
 	void SetInnerAndOuterPerimeter( FBox2D Inner, FBox2D Outer) {InnerPerimeter = Inner; OuterPerimeter = Outer; }
 
 	void AddConnectedEdge(DelaunayEdge* Edge) { ConnectedEdges.Add(Edge); }
 	void RemoveConnectedEdge(DelaunayEdge* Edge) { ConnectedEdges.Remove(Edge); }
 
+	//--==== Standard Functions ====--
+	void GenerateTeleporter(ANodeArea* ConnectedNode);
+	void FinaliseTeleporterSetup();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	
-	UPROPERTY(EditAnywhere)
-	UBoxComponent* CollisionBox;
+	//UPROPERTY(EditAnywhere)
+	//UBoxComponent* CollisionBox;
 	
 private:
 	TArray<FVector2D> DoorwayLocations;
+	UPROPERTY()
+	TArray<UNodeAreaTeleporter*> Portals;
 	FBox2D InnerPerimeter;
 	FBox2D OuterPerimeter;
 	TArray<DelaunayEdge*> ConnectedEdges;
