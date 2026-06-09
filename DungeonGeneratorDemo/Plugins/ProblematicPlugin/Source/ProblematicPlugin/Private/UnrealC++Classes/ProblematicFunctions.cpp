@@ -8,11 +8,14 @@
 #include "UnrealC++Classes/NodeArea.h"
 #include "UnrealC++Classes/ProblematicGameInstance.h"
 #include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetMathLibrary.h"
 
-void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAndFrequency, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, float SpaceBetweenAreas,int32 RoomAmountToSpawn, UObject* WorldContextObject)
+void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAndFrequency, FVector2D MapLocation, float MapSpawnCircle, float SpaceBetweenAreas,int32 RoomAmountToSpawn, UObject* WorldContextObject)
 {
 	if (IsValid(WorldContextObject))
 	{
+		double StartTime = FPlatformTime::Seconds();
+		
 		//--==== create a dungeon actor instance to save rooms to ====--
 		FVector Location = FVector(MapLocation.X, MapLocation.Y, 0.f);
 		FActorSpawnParameters SpawnParams;
@@ -37,9 +40,10 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 			for (int32 i = 0; i < AreaAndMinimum.FrequencyMinimum; i++)
 			{
 				//--== set random location in a circular area ==--
-				float Angle = FMath::FRandRange(0, 365.f); // circle angle point
-				float CosAngle = FMath::Cos(Angle);
-				float SinAngle = FMath::Sin(Angle);
+				float Angle = FMath::FRandRange(0.f, 2.f * PI); // circle angle point
+				float Radius = MapSpawnCircle * FMath::Sqrt(UKismetMathLibrary::RandomFloatInRange(0, 1.f));
+				float CosAngle = Radius * FMath::Cos(Angle);
+				float SinAngle = Radius * FMath::Sin(Angle);
 		
 				FVector NodeLocation;
 				NodeLocation.X = CosAngle * MapSpawnCircle + MapLocation.X;
@@ -61,11 +65,11 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 		{
 			//--== randomise which area to spawn ==--
 			float Iterator = FMath::FRandRange(0.f, NodesAndFrequency.Num());
-
+			float Radius = MapSpawnCircle * FMath::Sqrt(UKismetMathLibrary::RandomFloatInRange(0, 1.f));
 			//--== set random location in a circular area ==--
 			float Angle = FMath::FRandRange(0, 365.f); // circle angle point
-			float CosAngle = FMath::Cos(Angle);
-			float SinAngle = FMath::Sin(Angle);
+			float CosAngle = Radius * FMath::Cos(Angle);
+			float SinAngle = Radius * FMath::Sin(Angle);
 			FVector NodeLocation;
 			NodeLocation.X = CosAngle * MapSpawnCircle + MapLocation.X;
 			NodeLocation.Y = SinAngle * MapSpawnCircle + MapLocation.Y;
@@ -76,10 +80,6 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 			//--== add to dungeon actor ==--
 			NewMap->AddArea(NewRoom);
 		}
-
-		bool ShouldExecuteDelaunayTriangulationOnceCompleted = false;
-		if (IsValid(EdgeAsset))
-			ShouldExecuteDelaunayTriangulationOnceCompleted = true;
 		
 		//--==== Move each room apart from one another ====--
 		SeparationSteeringAlgorithm(NewMap->GetAllNodeAreas(), SpaceBetweenAreas);
@@ -87,11 +87,11 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 		//--==== Connect rooms together via triangulation ====--
 		TArray<DelaunayEdge*> InitialEdges = DelaunayTriangulationAlgorithm(NewMap->GetAllNodeAreas(), NewMap, WorldContextObject);
 		int32 init = InitialEdges.Num();
-		if (GEngine)
+		/*if (GEngine)
 		{
 			FString newText = FString::Printf(TEXT("--==== Initial Edges BEFORE MST: %d"), InitialEdges.Num());
 			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, newText);
-		}
+		}*/
 		//--==== minimum spanning tree on those connections ====--
 		TArray<DelaunayEdge*> MSTEdges = MinimumSpanningTreeAlgorithm(InitialEdges[0]->GetStartPoint(), InitialEdges);
 
@@ -162,8 +162,13 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 			Node->FinaliseTeleporterSetup();
 		}
 		
+		double EndTime = FPlatformTime::Seconds();
+		float Duration = (EndTime - StartTime) * 1000.f;
+		UE_LOG(LogTemp, Error, TEXT("--==== Generate Dungeon took: %f ms"), Duration);
+
+		
 		//------====== DEBUG INFORMATION ======------
-		for (auto Edge : AddedBackEdges)
+		/*for (auto Edge : AddedBackEdges)
 		{
 			DrawDebugLine(WorldContextObject->GetWorld(), FVector(Edge->GetStartPoint(), 25.f), FVector(Edge->GetEndPoint(), 25.f), FColor::Black, true);
 		}
@@ -186,7 +191,7 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 			int32 init3 = InitialEdges.Num();
 			FString newText3 = FString::Printf(TEXT("--==== Difference: %d"), init - init2 - init3);
 			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, newText3);
-		}
+		}*/
 	}
 }
 
@@ -308,15 +313,15 @@ TArray<DelaunayEdge*> UProblematicFunctions::DelaunayTriangulationAlgorithm(TArr
 	 *O-----------------|
 	 */
 	FBox2D BoundingBox(BottomLeft,TopRight);
-	DrawDebugBox(WorldContextObject->GetWorld(), FVector(BoundingBox.GetCenter().X, BoundingBox.GetCenter().Y, 0.f), FVector(BoundingBox.GetExtent().X, BoundingBox.GetExtent().Y, 10.f), FColor::Green, true, -1, 0, 2.f);
+	//DrawDebugBox(WorldContextObject->GetWorld(), FVector(BoundingBox.GetCenter().X, BoundingBox.GetCenter().Y, 0.f), FVector(BoundingBox.GetExtent().X, BoundingBox.GetExtent().Y, 10.f), FColor::Green, true, -1, 0, 2.f);
 	
 	//--==== Super Triangle ====--
 	FVector2D SuperV1 = FVector2D(MaxNegativeX - (BoundingBox.GetExtent().X * 0.1f), MaxPositiveY + (BoundingBox.GetExtent().Y * 2.f));
 	FVector2D SuperV2 = FVector2D(MaxNegativeX - (BoundingBox.GetExtent().X * 0.1f), MaxNegativeY - (BoundingBox.GetExtent().Y * 2.f));
 	FVector2D SuperV3 = FVector2D(MaxPositiveX + (BoundingBox.GetExtent().X * 1.1f), MaxNegativeY + (BoundingBox.GetExtent().Y));
-	DrawDebugLine(WorldContextObject->GetWorld(), FVector(SuperV1, 0.f), FVector(SuperV2, 0.f), FColor::Green, true, -1, 0, 10.f);
-	DrawDebugLine(WorldContextObject->GetWorld(), FVector(SuperV2, 0.f), FVector(SuperV3, 0.f), FColor::Green, true, -1, 0, 10.f);
-	DrawDebugLine(WorldContextObject->GetWorld(), FVector(SuperV3, 0.f), FVector(SuperV1, 0.f), FColor::Green, true, -1, 0, 10.f);
+	//DrawDebugLine(WorldContextObject->GetWorld(), FVector(SuperV1, 0.f), FVector(SuperV2, 0.f), FColor::Green, true, -1, 0, 10.f);
+	//DrawDebugLine(WorldContextObject->GetWorld(), FVector(SuperV2, 0.f), FVector(SuperV3, 0.f), FColor::Green, true, -1, 0, 10.f);
+	//DrawDebugLine(WorldContextObject->GetWorld(), FVector(SuperV3, 0.f), FVector(SuperV1, 0.f), FColor::Green, true, -1, 0, 10.f);
 	
 	DelaunayTriangle* SuperTriangle = new DelaunayTriangle(SuperV1, SuperV2, SuperV3);
 

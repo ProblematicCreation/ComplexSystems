@@ -37,7 +37,7 @@ class PROBLEMATICPLUGIN_API UProblematicFunctions : public UBlueprintFunctionLib
 public:
 	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") 
 	static void GenerateDungeonMap(
-	TArray<FAreaAndFrequency> AreasAndFrequency, AEdgePathway* EdgeAsset, 
+	TArray<FAreaAndFrequency> AreasAndFrequency, 
 	FVector2D MapLocation, float MapSpawnCircle, float OuterPerimeterSizeMultiplier, int32 RoomAmountToSpawn, 
 	UObject* WorldContextObject);
 	
