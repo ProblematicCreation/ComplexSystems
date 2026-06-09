@@ -46,8 +46,8 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 				float SinAngle = Radius * FMath::Sin(Angle);
 		
 				FVector NodeLocation;
-				NodeLocation.X = CosAngle * MapSpawnCircle + MapLocation.X;
-				NodeLocation.Y = SinAngle * MapSpawnCircle + MapLocation.Y;
+				NodeLocation.X = CosAngle + MapLocation.X;
+				NodeLocation.Y = SinAngle + MapLocation.Y;
 				NodeLocation.Z = 0.f;
 
 				//--== spawn room ==--
@@ -71,8 +71,8 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 			float CosAngle = Radius * FMath::Cos(Angle);
 			float SinAngle = Radius * FMath::Sin(Angle);
 			FVector NodeLocation;
-			NodeLocation.X = CosAngle * MapSpawnCircle + MapLocation.X;
-			NodeLocation.Y = SinAngle * MapSpawnCircle + MapLocation.Y;
+			NodeLocation.X = CosAngle + MapLocation.X;
+			NodeLocation.Y = SinAngle + MapLocation.Y;
 			NodeLocation.Z = 0.f;
 
 			//--== spawn room ==--
@@ -166,7 +166,8 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 		float Duration = (EndTime - StartTime) * 1000.f;
 		UE_LOG(LogTemp, Error, TEXT("--==== Generate Dungeon took: %f ms"), Duration);
 
-		
+		UKismetSystemLibrary::DrawDebugCircle(WorldContextObject->GetWorld(), FVector(NewMap->GetCentrePoint(), 0.f), MapSpawnCircle, 20, FLinearColor::White, 1000000, 5.f, FVector(1,0,0), FVector(0,1,0), false);
+
 		//------====== DEBUG INFORMATION ======------
 		/*for (auto Edge : AddedBackEdges)
 		{

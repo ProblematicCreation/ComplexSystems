@@ -6,6 +6,7 @@
 #include "Components/BoxComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "UnrealC++Classes/NodeArea.h"
 
@@ -36,7 +37,10 @@ void UNodeAreaTeleporter::OnBoxOverlapBegin(UPrimitiveComponent* Comp, AActor* O
 				CanContinue = true;
 
 			if (CanContinue)
-				PlayerCharRef->SetActorLocation(FVector(ConnectingNodeArea->GetActorLocation().X, ConnectingNodeArea->GetActorLocation().Y, ConnectingNodeArea->GetActorLocation().Z + 200.f));
+			{
+				PlayerCharRef->SetActorLocation(FVector(ConnectingNodeArea->GetActorLocation().X, ConnectingNodeArea->GetActorLocation().Y, ConnectingNodeArea->GetActorLocation().Z + PlayerCharRef->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * 2.f));
+				PlayerCharRef->GetCharacterMovement()->Velocity = FVector::ZeroVector;
+			}
 		}
 	}
 }
