@@ -64,10 +64,10 @@ void UNodeAreaTeleporter::InitialSetup(ANodeArea* NodeAreaToTeleport, UBoxCompon
 void UNodeAreaTeleporter::FinalisedSetup(FVector CollisionLocation)
 {
 	CollisionBox->SetWorldLocation(CollisionLocation);
-	/*if (IsValid(CollisionBox))
+	if (IsValid(CollisionBox))
 	{
 		DrawDebugBox(this->GetWorld(), CollisionBox->GetComponentLocation(), CollisionBox->GetScaledBoxExtent(), FColor::Red, true);
-	}*/
+	}
 }
 
 // Called when the game starts

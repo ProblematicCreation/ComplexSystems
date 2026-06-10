@@ -169,7 +169,7 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 		UKismetSystemLibrary::DrawDebugCircle(WorldContextObject->GetWorld(), FVector(NewMap->GetCentrePoint(), 0.f), MapSpawnCircle, 20, FLinearColor::White, 1000000, 5.f, FVector(1,0,0), FVector(0,1,0), false);
 
 		//------====== DEBUG INFORMATION ======------
-		/*for (auto Edge : AddedBackEdges)
+		for (auto Edge : AddedBackEdges)
 		{
 			DrawDebugLine(WorldContextObject->GetWorld(), FVector(Edge->GetStartPoint(), 25.f), FVector(Edge->GetEndPoint(), 25.f), FColor::Black, true);
 		}
@@ -192,7 +192,7 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 			int32 init3 = InitialEdges.Num();
 			FString newText3 = FString::Printf(TEXT("--==== Difference: %d"), init - init2 - init3);
 			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, newText3);
-		}*/
+		}
 	}
 }
 

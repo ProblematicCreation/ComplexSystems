@@ -5,20 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d83ce0c-3fa7-4d80-984a-210f6494f5dd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.DungeonGeneratorDemo.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DungeonGeneratorDemo.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Dungeon/BP_CircleRoom.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Dungeon/BP_CircleRoom.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Dungeon/LargeRoom.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Dungeon/LargeRoom.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Dungeon/LevelTravel/BP_Portal.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Dungeon/LevelTravel/BP_Portal.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/FirstPerson/Maps/FirstPersonMap/1/JT/XIHYQ8ZTVL6F9GCUZX1AQ2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/FirstPerson/Maps/FirstPersonMap/1/JT/XIHYQ8ZTVL6F9GCUZX1AQ2.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/FirstPerson/Maps/FirstPersonMap/4/CY/GCDAOJUINZJCIOPWCRHOTR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/FirstPerson/Maps/FirstPersonMap/4/CY/GCDAOJUINZJCIOPWCRHOTR.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/FirstPerson/Maps/FirstPersonMap/7/5X/6EW8RE9VA2GGHRWK614FCI.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/FirstPerson/Maps/FirstPersonMap/7/5X/6EW8RE9VA2GGHRWK614FCI.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/FirstPerson/Maps/FirstPersonMap/7/DF/1GID8P6B00XRWKYCXU7HT1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/FirstPerson/Maps/FirstPersonMap/7/DF/1GID8P6B00XRWKYCXU7HT1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/FirstPerson/Maps/FirstPersonMap/8/Z7/W1SXRCM1KAKBJOIZDLHZ47.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/FirstPerson/Maps/FirstPersonMap/8/Z7/W1SXRCM1KAKBJOIZDLHZ47.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/FirstPerson/Maps/FirstPersonMap/F/2F/0SPQG8P507LI9VUAFG20OA.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/FirstPerson/Maps/FirstPersonMap/F/2F/0SPQG8P507LI9VUAFG20OA.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DungeonGeneratorDemo.uproject.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/DungeonGeneratorDemo.uproject.DotSettings.user" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Binaries/Win64/UnrealEditor-ProblematicPlugin.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Binaries/Win64/UnrealEditor-ProblematicPlugin.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/UnrealEditor/Inc/ProblematicPlugin/UHT/Timestamp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/UnrealEditor/Inc/ProblematicPlugin/UHT/Timestamp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/LiveCodingInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/LiveCodingInfo.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/LiveCodingInfo.json.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/LiveCodingInfo.json.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/Module.ProblematicPlugin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/Module.ProblematicPlugin.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/Module.ProblematicPlugin.cpp.dep.json" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/Module.ProblematicPlugin.cpp.dep.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/Module.ProblematicPlugin.cpp.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/Module.ProblematicPlugin.cpp.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/UnrealEditor-ProblematicPlugin.dll.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/UnrealEditor-ProblematicPlugin.dll.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/UnrealEditor-ProblematicPlugin.dll.rsp.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/UnrealEditor-ProblematicPlugin.dll.rsp.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/UnrealEditor-ProblematicPlugin.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/UnrealEditor-ProblematicPlugin.exp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/UnrealEditor-ProblematicPlugin.lib.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/UnrealEditor-ProblematicPlugin.lib.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/UnrealEditor-ProblematicPlugin.lib.rsp.old" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Intermediate/Build/Win64/x64/UnrealEditor/Development/ProblematicPlugin/UnrealEditor-ProblematicPlugin.lib.rsp.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Source/ProblematicPlugin/Private/UnrealC++Classes/NodeAreaTeleporter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Source/ProblematicPlugin/Private/UnrealC++Classes/NodeAreaTeleporter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Source/ProblematicPlugin/Private/UnrealC++Classes/ProblematicFunctions.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/ProblematicPlugin/Source/ProblematicPlugin/Private/UnrealC++Classes/ProblematicFunctions.cpp" afterDir="false" />
     </list>
@@ -34,6 +33,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="cidr-memory-view://2" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Core/Public/Containers/Array.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Core/Public/Containers/ContainerAllocationPolicies.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Core/Public/Templates/ReversePredicate.h" root0="FORCE_HIGHLIGHTING" />
@@ -50,6 +50,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
@@ -263,6 +264,8 @@
       <workItem from="1780372454312" duration="3927000" />
       <workItem from="1780377877528" duration="5355000" />
       <workItem from="1780961586445" duration="12143000" />
+      <workItem from="1781047789545" duration="2978000" />
+      <workItem from="1781068970099" duration="3437000" />
     </task>
     <servers />
   </component>
