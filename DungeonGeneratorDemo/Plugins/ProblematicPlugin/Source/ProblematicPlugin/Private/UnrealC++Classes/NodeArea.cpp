@@ -54,15 +54,30 @@ void ANodeArea::GenerateTeleporter(ANodeArea* ConnectedNode)
 		Portal->RegisterComponent();
 		this->AddInstanceComponent(Portal);
 		
-		UBoxComponent* CollisionBox = NewObject<UBoxComponent>(this, UBoxComponent::StaticClass());
-		if (IsValid(CollisionBox))
+		UStaticMeshComponent* PortalMesh = NewObject<UStaticMeshComponent>(this, UStaticMeshComponent::StaticClass());
+		
+		if (IsValid(PortalMesh))
 		{
-			CollisionBox->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
-			CollisionBox->RegisterComponent();
-			this->AddInstanceComponent(CollisionBox);
+			PortalMesh->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
+			PortalMesh->RegisterComponent();
+			this->AddInstanceComponent(PortalMesh);
+
+			if (TeleporterMesh != nullptr)
+			{
+				PortalMesh->SetStaticMesh(TeleporterMesh);
+			}
+			if (TeleporterMaterial != nullptr)
+			{
+				PortalMesh->SetMaterial(0, TeleporterMaterial);
+			}
+			if (TeleporterScale != FVector(0))
+			{
+				PortalMesh->SetWorldScale3D(TeleporterScale);
+			}
 		}
 		
-		Portal->InitialSetup(ConnectedNode, CollisionBox);
+		Portal->InitialSetup(ConnectedNode, PortalMesh);
+		
 		
 		Portals.Add(Portal);
 	}
@@ -78,6 +93,15 @@ void ANodeArea::FinaliseTeleporterSetup()
 	
 	if (Portals.Num() > 1)
 	{
+		float WidthOfPortalsCombined = TeleporterMesh->GetBoundingBox().GetSize().X * Portals.Num();
+		bool ShouldUseOppositeWall = false;
+		
+		//--==== determine if the width of all the portals combined is greater than the width of the wall ====--
+		if (WidthOfPortalsCombined > Extents.X * 2)
+		{
+			ShouldUseOppositeWall = true;
+		}
+		
 		//--==== if the portal count is odd ====--
 		if (PortalLocationsCount & 1)
 		{
@@ -94,28 +118,36 @@ void ANodeArea::FinaliseTeleporterSetup()
 		for (int32 i = PortalLocationsCount; i > 0; i--)
 		{
 			FVector PortalLocation;
-			
-			if (HalfRemainingPortals <= 0)
+
+			//--==== split the portals between 2 walls ====--
+			if (ShouldUseOppositeWall)
 			{
-				if (HalfRemainingPortals == 0)
-				{
-					PortalLocation = FVector((Origin.X) - XLocation, Origin.Y + (Extents.Y / 1.5f), Origin.Z );
-				}
-				else
-				{
-					PortalLocation = FVector((PreviousPortalOffset) - XLocation, Origin.Y+ (Extents.Y / 1.5f), Origin.Z);
-				}
+				
 			}
-			else
+			else //--==== only 1 wall ====--
 			{
-				if (i == PortalLocationsCount)
+				if (HalfRemainingPortals <= 0)
 				{
-					PortalLocation = FVector((Origin.X) + XLocation, Origin.Y + (Extents.Y / 1.5f), Origin.Z);
+					if (HalfRemainingPortals == 0)
+					{
+						PortalLocation = FVector((Origin.X) - XLocation, Origin.Y + (Extents.Y / 1.5f), Origin.Z );
+					}
+					else
+					{
+						PortalLocation = FVector((PreviousPortalOffset) - XLocation, Origin.Y+ (Extents.Y / 1.5f), Origin.Z);
+					}
 				}
 				else
 				{
-					PortalLocation = FVector((PreviousPortalOffset) + XLocation, Origin.Y + (Extents.Y / 1.5f), Origin.Z);
-				}
+					if (i == PortalLocationsCount)
+					{
+						PortalLocation = FVector((Origin.X) + XLocation, Origin.Y + (Extents.Y / 1.5f), Origin.Z);
+					}
+					else
+					{
+						PortalLocation = FVector((PreviousPortalOffset) + XLocation, Origin.Y + (Extents.Y / 1.5f), Origin.Z);
+					}
+				}	
 			}
 			
 			PreviousPortalOffset = PortalLocation.X;

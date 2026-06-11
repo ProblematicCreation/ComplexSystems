@@ -42,6 +42,14 @@ public:
 	void GenerateTeleporter(ANodeArea* ConnectedNode);
 	void FinaliseTeleporterSetup();
 
+	//--==== Variables ====--
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Problematic Node")
+	UMaterialInterface* TeleporterMaterial;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Problematic Node")
+	UStaticMesh* TeleporterMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Problematic Node")
+	FVector TeleporterScale;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

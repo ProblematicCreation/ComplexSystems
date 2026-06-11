@@ -20,7 +20,8 @@ public:
 	UNodeAreaTeleporter();
 
 	//--==== Getters ====--
-	UBoxComponent* GetCollisionBox() { return CollisionBox; }
+	//UBoxComponent* GetCollisionBox() { return CollisionBox; }
+	UStaticMeshComponent* GetPortalMesh() {return PortalMesh;}
 	ANodeArea* GetConnectedNodeArea() { return ConnectingNodeArea; }
 	
 	//--==== Setters ====--
@@ -30,11 +31,11 @@ public:
 	UFUNCTION()
 	void OnBoxOverlapBegin(UPrimitiveComponent* Comp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
-	void InitialSetup(ANodeArea* NodeAreaToTeleport, UBoxComponent* Collision);
+	void InitialSetup(ANodeArea* NodeAreaToTeleport, UStaticMeshComponent* StaticMesh);
 	void FinalisedSetup(FVector CollisionLocation);
-
+	
 	UPROPERTY(VisibleAnywhere, Category = "Problematic Portal")
-	UBoxComponent* CollisionBox;
+	UStaticMeshComponent* PortalMesh;
 	
 protected:
 	// Called when the game starts

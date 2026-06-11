@@ -13,7 +13,7 @@
 
 // Sets default values for this component's properties
 UNodeAreaTeleporter::UNodeAreaTeleporter()
-	:ConnectingNodeArea(nullptr), CollisionBox(nullptr)
+	:ConnectingNodeArea(nullptr), PortalMesh(nullptr), PlayerCharRef(nullptr)
 {
 	PrimaryComponentTick.bCanEverTick = false;
 }
@@ -45,28 +45,26 @@ void UNodeAreaTeleporter::OnBoxOverlapBegin(UPrimitiveComponent* Comp, AActor* O
 	}
 }
 
-void UNodeAreaTeleporter::InitialSetup(ANodeArea* NodeAreaToTeleport, UBoxComponent* Collision)
+void UNodeAreaTeleporter::InitialSetup(ANodeArea* NodeAreaToTeleport, UStaticMeshComponent* StaticMesh)
 {
 	ConnectingNodeArea = NodeAreaToTeleport;
-	CollisionBox = Collision;
+	PortalMesh = StaticMesh;
 	
-	if (IsValid(CollisionBox))
+	if (IsValid(PortalMesh))
 	{
-		CollisionBox->SetBoxExtent(FVector(20.f,20.f,100.f));
-		CollisionBox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-		CollisionBox->SetCollisionResponseToAllChannels(ECR_Overlap);
-		CollisionBox->SetGenerateOverlapEvents(true);
+		PortalMesh->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+		PortalMesh->SetCollisionResponseToAllChannels(ECR_Overlap);
+		PortalMesh->SetGenerateOverlapEvents(true);
 		
-		CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &UNodeAreaTeleporter::OnBoxOverlapBegin);
+		PortalMesh->OnComponentBeginOverlap.AddDynamic(this, &UNodeAreaTeleporter::OnBoxOverlapBegin);
 	}
 }
 
 void UNodeAreaTeleporter::FinalisedSetup(FVector CollisionLocation)
 {
-	CollisionBox->SetWorldLocation(CollisionLocation);
-	if (IsValid(CollisionBox))
+	if (IsValid(PortalMesh))
 	{
-		DrawDebugBox(this->GetWorld(), CollisionBox->GetComponentLocation(), CollisionBox->GetScaledBoxExtent(), FColor::Red, true);
+		PortalMesh->SetWorldLocation(CollisionLocation);
 	}
 }
 
