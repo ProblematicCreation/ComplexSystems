@@ -14,10 +14,10 @@
 			"DelaunayTriangle.cpp.obj",
 			"Dungeon.cpp.obj",
 			"EdgePathway.cpp.obj",
-			"NodeArea.cpp.obj",
-			"ProblematicFunctions.cpp.obj",
+			"NodeAreaTeleporter.cpp.obj",
 			"ProblematicGameInstance.cpp.obj",
-			"NodeAreaTeleporter.cpp.obj"
+			"NodeArea.cpp.obj",
+			"ProblematicFunctions.cpp.obj"
 		]
 	}
 }

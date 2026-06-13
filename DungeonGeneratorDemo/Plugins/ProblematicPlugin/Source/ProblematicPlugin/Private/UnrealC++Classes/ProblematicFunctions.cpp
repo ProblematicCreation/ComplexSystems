@@ -5,12 +5,15 @@
 #include "UnrealC++Classes/Dungeon.h"
 #include "UnrealC++Classes/EdgePathway.h"
 #include "MatrixTypes.h"
+#include "Components/CapsuleComponent.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "UnrealC++Classes/NodeArea.h"
 #include "UnrealC++Classes/ProblematicGameInstance.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 
-void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAndFrequency, FVector2D MapLocation, float MapSpawnCircle, float SpaceBetweenAreas,int32 RoomAmountToSpawn, UObject* WorldContextObject)
+ADungeon* UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAndFrequency, FVector2D MapLocation, float MapSpawnCircle, float SpaceBetweenAreas,int32 RoomAmountToSpawn, UObject* WorldContextObject)
 {
 	if (IsValid(WorldContextObject))
 	{
@@ -114,6 +117,10 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 			if (FMath::RandRange(0.f, 1.f) < 0.125f)
 			{
 				AddedBackEdges.Add(InitialEdges[i]);
+				
+				//remove from the list
+				InitialEdges.RemoveAt(i);
+				--i;
 			}
 		}
 		
@@ -193,7 +200,11 @@ void UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAn
 			FString newText3 = FString::Printf(TEXT("--==== Difference: %d"), init - init2 - init3);
 			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, newText3);
 		}
+		
+		return NewMap;
 	}
+	
+	return nullptr;
 }
 
 void UProblematicFunctions::GenerateDungeonAndLoadLevel(FName levelToLoad, TArray<FAreaAndFrequency> NodesAndFrequency, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, int32 RoomAmountToSpawn, UObject* WorldContextObject)
@@ -203,6 +214,18 @@ void UProblematicFunctions::GenerateDungeonAndLoadLevel(FName levelToLoad, TArra
 	{
 		//--==== load level after the game instance gets updated ====--
 		UGameplayStatics::OpenLevel(WorldContextObject, levelToLoad);
+	}
+}
+
+void UProblematicFunctions::EnterDungeon(ADungeon* DungeonMap, UObject* WorldContextObject)
+{
+	if (IsValid(DungeonMap))
+	{
+		if (ACharacter* PlayerCharRef = UGameplayStatics::GetPlayerCharacter(WorldContextObject, 0))
+		{
+			PlayerCharRef->SetActorLocation(DungeonMap->GetAllNodeAreas()[0]->GetActorLocation() + PlayerCharRef->GetCapsuleComponent()->GetScaledCapsuleHalfHeight() * 2.f);
+			PlayerCharRef->GetMovementComponent()->Velocity = FVector::ZeroVector;
+		}
 	}
 }
 

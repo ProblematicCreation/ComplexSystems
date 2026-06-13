@@ -36,14 +36,15 @@ class PROBLEMATICPLUGIN_API UProblematicFunctions : public UBlueprintFunctionLib
 	
 public:
 	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") 
-	static void GenerateDungeonMap(
+	static ADungeon* GenerateDungeonMap(
 	TArray<FAreaAndFrequency> AreasAndFrequency, 
 	FVector2D MapLocation, float MapSpawnCircle, float OuterPerimeterSizeMultiplier, int32 RoomAmountToSpawn, 
 	UObject* WorldContextObject);
 	
 	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") 
 	static void GenerateDungeonAndLoadLevel(FName LevelToLoad, TArray<FAreaAndFrequency> NodesAndFrequency, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, int32 RoomAmountToSpawn, UObject* WorldContextObject);
-	
+	UFUNCTION(BlueprintCallable, Category = "Problematic Functions")
+	static void EnterDungeon(ADungeon* DungeonMap, UObject* WorldContextObject);
 private:
 	static TArray<DelaunayEdge*> MinimumSpanningTreeAlgorithm(FVector2D StartPoint, TArray<DelaunayEdge*> Edges); 
 	static TArray<DelaunayEdge*> DelaunayTriangulationAlgorithm(TArray<ANodeArea*> Nodes, ADungeon* DungeonMap, UObject* WorldContextObject);

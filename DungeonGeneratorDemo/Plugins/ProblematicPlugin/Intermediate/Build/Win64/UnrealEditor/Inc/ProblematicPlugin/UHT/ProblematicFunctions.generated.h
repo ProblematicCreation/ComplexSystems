@@ -9,6 +9,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class ADungeon;
 class AEdgePathway;
 class UObject;
 struct FAreaAndFrequency;
@@ -25,6 +26,7 @@ struct FAreaAndFrequency;
 template<> PROBLEMATICPLUGIN_API UScriptStruct* StaticStruct<struct FAreaAndFrequency>();
 
 #define FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_ProblematicFunctions_h_35_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execEnterDungeon); \
 	DECLARE_FUNCTION(execGenerateDungeonAndLoadLevel); \
 	DECLARE_FUNCTION(execGenerateDungeonMap);
 
