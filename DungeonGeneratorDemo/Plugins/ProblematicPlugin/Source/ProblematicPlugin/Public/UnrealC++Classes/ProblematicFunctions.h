@@ -37,12 +37,17 @@ class PROBLEMATICPLUGIN_API UProblematicFunctions : public UBlueprintFunctionLib
 public:
 	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") 
 	static ADungeon* GenerateDungeonMap(
-	TArray<FAreaAndFrequency> AreasAndFrequency, 
-	FVector2D MapLocation, float MapSpawnCircle, float OuterPerimeterSizeMultiplier, int32 RoomAmountToSpawn, 
-	UObject* WorldContextObject);
+		TArray<FAreaAndFrequency> AreasAndFrequency, 
+		FVector2D MapLocation, float MapSpawnCircle, float OuterPerimeterSizeMultiplier, int32 RoomAmountToSpawn,
+		int32 ObjectiveCount, UStaticMesh* ObjectiveMesh = nullptr,
+		UObject* WorldContextObject);
 	
 	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") 
-	static void GenerateDungeonAndLoadLevel(FName LevelToLoad, TArray<FAreaAndFrequency> NodesAndFrequency, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, int32 RoomAmountToSpawn, UObject* WorldContextObject);
+	static void GenerateDungeonAndLoadLevel(
+		FName LevelToLoad, TArray<FAreaAndFrequency> AreasAndFrequency, 
+		FVector2D MapLocation, float MapSpawnCircle, float OuterPerimeterSizeMultiplier, int32 RoomAmountToSpawn, 
+		UObject* WorldContextObject);
+	
 	UFUNCTION(BlueprintCallable, Category = "Problematic Functions")
 	static void EnterDungeon(ADungeon* DungeonMap, UObject* WorldContextObject);
 private:

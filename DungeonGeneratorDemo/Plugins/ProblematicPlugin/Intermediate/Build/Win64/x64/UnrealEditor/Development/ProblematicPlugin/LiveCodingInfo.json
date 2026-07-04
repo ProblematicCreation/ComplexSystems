@@ -6,18 +6,18 @@
 			"EdgePathway.gen.cpp.obj",
 			"NodeArea.gen.cpp.obj",
 			"NodeAreaTeleporter.gen.cpp.obj",
-			"ProblematicGameInstance.gen.cpp.obj",
 			"ProblematicPlugin.cpp.obj",
 			"DelaunayEdge.cpp.obj",
 			"DelaunayTriangle.cpp.obj",
 			"Dungeon.cpp.obj",
 			"EdgePathway.cpp.obj",
-			"NodeAreaTeleporter.cpp.obj",
-			"ProblematicGameInstance.cpp.obj",
-			"ProblematicFunctions.gen.cpp.obj",
-			"ProblematicPlugin.init.gen.cpp.obj",
 			"NodeArea.cpp.obj",
-			"ProblematicFunctions.cpp.obj"
+			"NodeAreaTeleporter.cpp.obj",
+			"ProblematicFunctions.gen.cpp.obj",
+			"ProblematicGameInstance.gen.cpp.obj",
+			"ProblematicPlugin.init.gen.cpp.obj",
+			"ProblematicFunctions.cpp.obj",
+			"ProblematicGameInstance.cpp.obj"
 		]
 	}
 }

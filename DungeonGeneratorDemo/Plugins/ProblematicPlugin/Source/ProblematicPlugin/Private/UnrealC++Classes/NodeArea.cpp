@@ -13,6 +13,7 @@ ANodeArea::ANodeArea()
 	SetRootComponent(Root);
 	
     TeleporterScale = FVector(1.f);
+	ObjectiveMesh = nullptr;
 }
 
 FVector2D ANodeArea::GetCenter2DLocation()
@@ -282,6 +283,40 @@ void ANodeArea::FinaliseTeleporterSetup()
 		}
 		
 		Portals[i]->FinalisedSetup(PortalLocations[i]);
+	}
+}
+
+void ANodeArea::AddObjectiveComponent()
+{
+	UStaticMeshComponent* ObjectiveComp = NewObject<UStaticMeshComponent>(this, UStaticMeshComponent::StaticClass());
+		
+	if (IsValid(ObjectiveComp))
+	{
+		ObjectiveComp->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
+		ObjectiveComp->RegisterComponent();
+		this->AddInstanceComponent(ObjectiveComp);
+
+		if (ObjectiveMesh)
+		{
+			ObjectiveComp->SetStaticMesh(ObjectiveMesh);
+		}
+	}
+}
+
+void ANodeArea::AddObjectiveComponentWithMesh(UStaticMesh* Mesh)
+{
+	UStaticMeshComponent* ObjectiveComp = NewObject<UStaticMeshComponent>(this, UStaticMeshComponent::StaticClass());
+		
+	if (IsValid(ObjectiveComp))
+	{
+		ObjectiveComp->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
+		ObjectiveComp->RegisterComponent();
+		this->AddInstanceComponent(ObjectiveComp);
+
+		if (Mesh)
+		{
+			ObjectiveComp->SetStaticMesh(Mesh);
+		}
 	}
 }
 

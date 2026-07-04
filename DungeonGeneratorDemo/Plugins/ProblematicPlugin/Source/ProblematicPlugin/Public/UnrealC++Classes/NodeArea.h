@@ -10,6 +10,8 @@
 class UNodeAreaTeleporter;
 class UBoxComponent;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnObjectiveCollected);
+
 UCLASS()
 class PROBLEMATICPLUGIN_API ANodeArea : public AActor
 {
@@ -41,6 +43,8 @@ public:
 	//--==== Standard Functions ====--
 	void GenerateTeleporter(ANodeArea* ConnectedNode);
 	void FinaliseTeleporterSetup();
+	void AddObjectiveComponent();
+	void AddObjectiveComponentWithMesh(UStaticMesh* Mesh);
 
 	//--==== Variables ====--
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Problematic Node")
@@ -49,13 +53,15 @@ public:
 	UStaticMesh* TeleporterMesh;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Problematic Node")
 	FVector TeleporterScale;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Problematic Node")
+	UStaticMesh* ObjectiveMesh;
+
+	UPROPERTY(BlueprintAssignable, Category = "Problematic Node")
+	FOnObjectiveCollected OnObjectiveCollected;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
-	//UPROPERTY(EditAnywhere)
-	//UBoxComponent* CollisionBox;
 	
 private:
 	TArray<FVector2D> DoorwayLocations;

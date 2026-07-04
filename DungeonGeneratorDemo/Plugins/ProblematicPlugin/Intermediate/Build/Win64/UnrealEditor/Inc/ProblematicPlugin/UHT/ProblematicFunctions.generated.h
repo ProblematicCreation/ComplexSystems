@@ -10,7 +10,6 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class ADungeon;
-class AEdgePathway;
 class UObject;
 struct FAreaAndFrequency;
 #ifdef PROBLEMATICPLUGIN_ProblematicFunctions_generated_h

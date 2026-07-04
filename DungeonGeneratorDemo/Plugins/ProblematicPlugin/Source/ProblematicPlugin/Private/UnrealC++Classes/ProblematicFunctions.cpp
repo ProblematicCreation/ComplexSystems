@@ -13,7 +13,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 
-ADungeon* UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAndFrequency, FVector2D MapLocation, float MapSpawnCircle, float SpaceBetweenAreas,int32 RoomAmountToSpawn, UObject* WorldContextObject)
+ADungeon* UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAndFrequency, FVector2D MapLocation, float MapSpawnCircle, float SpaceBetweenAreas,int32 RoomAmountToSpawn, int32 ObjectiveCount, UStaticMesh* ObjectiveMesh, UObject* WorldContextObject)
 {
 	if (IsValid(WorldContextObject))
 	{
@@ -168,11 +168,35 @@ ADungeon* UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> No
 		{
 			Node->FinaliseTeleporterSetup();
 		}
+
+		//If there is an objective amount set
+		if (ObjectiveCount > 0)
+		{
+			if (ObjectiveMesh)
+			{
+				for (int32 i = 0; i < ObjectiveCount; i++)
+				{
+					//select node at random
+					int32 RandomIndex = FMath::RandRange(0, NewMap->GetAllNodeAreas().Num()-1);
+					NewMap->GetAllNodeAreas()[RandomIndex]->AddObjectiveComponentWithMesh(ObjectiveMesh);
+				}	
+			}
+			else
+			{
+				for (int32 i = 0; i < ObjectiveCount; i++)
+				{
+					//select node at random
+					int32 RandomIndex = FMath::RandRange(0, NewMap->GetAllNodeAreas().Num()-1);
+					NewMap->GetAllNodeAreas()[RandomIndex]->AddObjectiveComponent();
+				
+				}	
+			}
+		}
 		
 		double EndTime = FPlatformTime::Seconds();
 		float Duration = (EndTime - StartTime) * 1000.f;
 		UE_LOG(LogTemp, Error, TEXT("--==== Generate Dungeon took: %f ms"), Duration);
-
+		
 		UKismetSystemLibrary::DrawDebugCircle(WorldContextObject->GetWorld(), FVector(NewMap->GetCentrePoint(), 0.f), MapSpawnCircle, 20, FLinearColor::White, 1000000, 5.f, FVector(1,0,0), FVector(0,1,0), false);
 
 		//------====== DEBUG INFORMATION ======------
@@ -207,13 +231,16 @@ ADungeon* UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> No
 	return nullptr;
 }
 
-void UProblematicFunctions::GenerateDungeonAndLoadLevel(FName levelToLoad, TArray<FAreaAndFrequency> NodesAndFrequency, AEdgePathway* EdgeAsset, FVector2D MapLocation, float MapSpawnCircle, int32 RoomAmountToSpawn, UObject* WorldContextObject)
+void UProblematicFunctions::GenerateDungeonAndLoadLevel(FName LevelToLoad, TArray<FAreaAndFrequency> AreasAndFrequency,
+	FVector2D MapLocation, float MapSpawnCircle, float OuterPerimeterSizeMultiplier, int32 RoomAmountToSpawn,
+	UObject* WorldContextObject)
 {
 	//--==== check if the current game instance is the problematic game instance ====--
-	if (UProblematicGameInstance* instance = Cast<UProblematicGameInstance>(WorldContextObject->GetWorld()->GetGameInstance()))
+	if (UProblematicGameInstance* InstanceRef = Cast<UProblematicGameInstance>(WorldContextObject->GetWorld()->GetGameInstance()))
 	{
+		InstanceRef->CachedDungeonToGenerate(AreasAndFrequency, MapLocation, MapSpawnCircle, OuterPerimeterSizeMultiplier, RoomAmountToSpawn);
 		//--==== load level after the game instance gets updated ====--
-		UGameplayStatics::OpenLevel(WorldContextObject, levelToLoad);
+		UGameplayStatics::OpenLevel(WorldContextObject, LevelToLoad);
 	}
 }
 

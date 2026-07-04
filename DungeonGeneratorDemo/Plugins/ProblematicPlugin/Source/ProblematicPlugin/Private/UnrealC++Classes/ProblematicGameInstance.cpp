@@ -1,28 +1,33 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "UnrealC++Classes/ProblematicGameInstance.h"
+
 #include "UnrealC++Classes/ProblematicFunctions.h"
 
 
 UProblematicGameInstance::UProblematicGameInstance()
 {
-	CachedEdgeAsset = nullptr;
-	CachedMapLocation = FVector2D::ZeroVector;
-	CachedNodeAreaAmountToSpawn = 0.f;
-	CachedNodeAreaSpawnRadius = 0.f;
-	CachedNodesAndFrequency.Empty();
+	ResetDungeonGenerationData();
 }
 
-void UProblematicGameInstance::CachedDungeonToGenerate(TArray<FAreaAndFrequency> NodesAndFrequency,
-                                                       AEdgePathway* EdgeAsset, FVector2D MapLocation, float NodeAreaSpawnRadius, int32 NodeAreaAmountToSpawn,
-                                                       UObject* WorldContextObject)
+void UProblematicGameInstance::CachedDungeonToGenerate(TArray<FAreaAndFrequency> AreasAndFrequency,
+	FVector2D MapLocation, float MapSpawnCircle, float OuterPerimeterSizeMultiplier, int32 RoomAmountToSpawn)
 {
-	CachedEdgeAsset = EdgeAsset;
-	CachedMapLocation = MapLocation;
-	CachedNodeAreaAmountToSpawn = NodeAreaAmountToSpawn;
-	CachedNodeAreaSpawnRadius = NodeAreaSpawnRadius;
-	CachedNodesAndFrequency = NodesAndFrequency;
+	CachedData.NodesAndFrequency = AreasAndFrequency;
+	CachedData.DungeonLocation = MapLocation;
+	CachedData.NodeAreaAmountToSpawn = RoomAmountToSpawn;
+	CachedData.NodeAreaSpawnRadius = MapSpawnCircle;
+	CachedData.NodeAreaPerimeterMultiplier = OuterPerimeterSizeMultiplier;
+	
+	bShouldGenerateDungeonOnOpen = true; 
 }
 
-void UProblematicGameInstance::GenerateDungeonOnOpen()
+void UProblematicGameInstance::ResetDungeonGenerationData()
 {
+	CachedData.DungeonLocation = FVector2D::ZeroVector;
+	CachedData.NodeAreaAmountToSpawn = 0.f;
+	CachedData.NodeAreaSpawnRadius = 0.f;
+	CachedData.NodeAreaPerimeterMultiplier = 0.f;
+	CachedData.NodesAndFrequency.Empty();
+	
+	bShouldGenerateDungeonOnOpen = false; 
 }
