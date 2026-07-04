@@ -11,12 +11,15 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeProblematicGameInstance() {}
 
 // Begin Cross Module References
+COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector2D();
 ENGINE_API UClass* Z_Construct_UClass_UGameInstance();
+ENGINE_API UClass* Z_Construct_UClass_UStaticMesh_NoRegister();
 PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_UProblematicGameInstance();
 PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_UProblematicGameInstance_NoRegister();
 PROBLEMATICPLUGIN_API UScriptStruct* Z_Construct_UScriptStruct_FAreaAndFrequency();
 PROBLEMATICPLUGIN_API UScriptStruct* Z_Construct_UScriptStruct_FCachedData();
+UMG_API UClass* Z_Construct_UClass_UUserWidget_NoRegister();
 UPackage* Z_Construct_UPackage__Script_ProblematicPlugin();
 // End Cross Module References
 
@@ -64,6 +67,18 @@ struct Z_Construct_UScriptStruct_FCachedData_Statics
 		{ "Category", "CachedData" },
 		{ "ModuleRelativePath", "Public/UnrealC++Classes/ProblematicGameInstance.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ObjectiveCount_MetaData[] = {
+		{ "Category", "CachedData" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/ProblematicGameInstance.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ObjectiveMesh_MetaData[] = {
+		{ "Category", "CachedData" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/ProblematicGameInstance.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DisplayAfterCollectingAllObjectives_MetaData[] = {
+		{ "Category", "CachedData" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/ProblematicGameInstance.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FStructPropertyParams NewProp_NodesAndFrequency_Inner;
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_NodesAndFrequency;
@@ -71,6 +86,9 @@ struct Z_Construct_UScriptStruct_FCachedData_Statics
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_NodeAreaSpawnRadius;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_NodeAreaPerimeterMultiplier;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_NodeAreaAmountToSpawn;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_ObjectiveCount;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_ObjectiveMesh;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_DisplayAfterCollectingAllObjectives;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static void* NewStructOps()
 	{
@@ -84,6 +102,9 @@ const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FCached
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FCachedData_Statics::NewProp_NodeAreaSpawnRadius = { "NodeAreaSpawnRadius", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FCachedData, NodeAreaSpawnRadius), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_NodeAreaSpawnRadius_MetaData), NewProp_NodeAreaSpawnRadius_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UScriptStruct_FCachedData_Statics::NewProp_NodeAreaPerimeterMultiplier = { "NodeAreaPerimeterMultiplier", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FCachedData, NodeAreaPerimeterMultiplier), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_NodeAreaPerimeterMultiplier_MetaData), NewProp_NodeAreaPerimeterMultiplier_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UScriptStruct_FCachedData_Statics::NewProp_NodeAreaAmountToSpawn = { "NodeAreaAmountToSpawn", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FCachedData, NodeAreaAmountToSpawn), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_NodeAreaAmountToSpawn_MetaData), NewProp_NodeAreaAmountToSpawn_MetaData) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UScriptStruct_FCachedData_Statics::NewProp_ObjectiveCount = { "ObjectiveCount", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FCachedData, ObjectiveCount), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ObjectiveCount_MetaData), NewProp_ObjectiveCount_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UScriptStruct_FCachedData_Statics::NewProp_ObjectiveMesh = { "ObjectiveMesh", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FCachedData, ObjectiveMesh), Z_Construct_UClass_UStaticMesh_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ObjectiveMesh_MetaData), NewProp_ObjectiveMesh_MetaData) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UScriptStruct_FCachedData_Statics::NewProp_DisplayAfterCollectingAllObjectives = { "DisplayAfterCollectingAllObjectives", nullptr, (EPropertyFlags)0x0014000000000005, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FCachedData, DisplayAfterCollectingAllObjectives), Z_Construct_UClass_UClass, Z_Construct_UClass_UUserWidget_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DisplayAfterCollectingAllObjectives_MetaData), NewProp_DisplayAfterCollectingAllObjectives_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FCachedData_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FCachedData_Statics::NewProp_NodesAndFrequency_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FCachedData_Statics::NewProp_NodesAndFrequency,
@@ -91,6 +112,9 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FC
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FCachedData_Statics::NewProp_NodeAreaSpawnRadius,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FCachedData_Statics::NewProp_NodeAreaPerimeterMultiplier,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FCachedData_Statics::NewProp_NodeAreaAmountToSpawn,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FCachedData_Statics::NewProp_ObjectiveCount,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FCachedData_Statics::NewProp_ObjectiveMesh,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FCachedData_Statics::NewProp_DisplayAfterCollectingAllObjectives,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FCachedData_Statics::PropPointers) < 2048);
 const UECodeGen_Private::FStructParams Z_Construct_UScriptStruct_FCachedData_Statics::StructParams = {
@@ -126,10 +150,15 @@ struct Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_St
 		float MapSpawnCircle;
 		float OuterPerimeterSizeMultiplier;
 		int32 RoomAmountToSpawn;
+		int32 ObjectivesCount;
+		UStaticMesh* ObjectiveMesh;
+		TSubclassOf<UUserWidget> DisplayAfterCollectingAllObjectives;
 	};
 #if WITH_METADATA
 	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
 		{ "Category", "Problematic Instance Functions" },
+		{ "CPP_Default_DisplayAfterCollectingAllObjectives", "None" },
+		{ "CPP_Default_ObjectiveMesh", "None" },
 		{ "ModuleRelativePath", "Public/UnrealC++Classes/ProblematicGameInstance.h" },
 	};
 #endif // WITH_METADATA
@@ -139,6 +168,9 @@ struct Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_St
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_MapSpawnCircle;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_OuterPerimeterSizeMultiplier;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_RoomAmountToSpawn;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_ObjectivesCount;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_ObjectiveMesh;
+	static const UECodeGen_Private::FClassPropertyParams NewProp_DisplayAfterCollectingAllObjectives;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
@@ -148,6 +180,9 @@ const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UProblemati
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_MapSpawnCircle = { "MapSpawnCircle", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicGameInstance_eventCachedDungeonToGenerate_Parms, MapSpawnCircle), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_OuterPerimeterSizeMultiplier = { "OuterPerimeterSizeMultiplier", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicGameInstance_eventCachedDungeonToGenerate_Parms, OuterPerimeterSizeMultiplier), METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_RoomAmountToSpawn = { "RoomAmountToSpawn", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicGameInstance_eventCachedDungeonToGenerate_Parms, RoomAmountToSpawn), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_ObjectivesCount = { "ObjectivesCount", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicGameInstance_eventCachedDungeonToGenerate_Parms, ObjectivesCount), METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_ObjectiveMesh = { "ObjectiveMesh", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicGameInstance_eventCachedDungeonToGenerate_Parms, ObjectiveMesh), Z_Construct_UClass_UStaticMesh_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FClassPropertyParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_DisplayAfterCollectingAllObjectives = { "DisplayAfterCollectingAllObjectives", nullptr, (EPropertyFlags)0x0014000000000080, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicGameInstance_eventCachedDungeonToGenerate_Parms, DisplayAfterCollectingAllObjectives), Z_Construct_UClass_UClass, Z_Construct_UClass_UUserWidget_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_AreasAndFrequency_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_AreasAndFrequency,
@@ -155,6 +190,9 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UProbl
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_MapSpawnCircle,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_OuterPerimeterSizeMultiplier,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_RoomAmountToSpawn,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_ObjectivesCount,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_ObjectiveMesh,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::NewProp_DisplayAfterCollectingAllObjectives,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::PropPointers) < 2048);
 const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UProblematicGameInstance, nullptr, "CachedDungeonToGenerate", nullptr, nullptr, Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::PropPointers), sizeof(Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::ProblematicGameInstance_eventCachedDungeonToGenerate_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04820401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::Function_MetaDataParams), Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate_Statics::Function_MetaDataParams) };
@@ -175,9 +213,12 @@ DEFINE_FUNCTION(UProblematicGameInstance::execCachedDungeonToGenerate)
 	P_GET_PROPERTY(FFloatProperty,Z_Param_MapSpawnCircle);
 	P_GET_PROPERTY(FFloatProperty,Z_Param_OuterPerimeterSizeMultiplier);
 	P_GET_PROPERTY(FIntProperty,Z_Param_RoomAmountToSpawn);
+	P_GET_PROPERTY(FIntProperty,Z_Param_ObjectivesCount);
+	P_GET_OBJECT(UStaticMesh,Z_Param_ObjectiveMesh);
+	P_GET_OBJECT(UClass,Z_Param_DisplayAfterCollectingAllObjectives);
 	P_FINISH;
 	P_NATIVE_BEGIN;
-	P_THIS->CachedDungeonToGenerate(Z_Param_AreasAndFrequency,Z_Param_MapLocation,Z_Param_MapSpawnCircle,Z_Param_OuterPerimeterSizeMultiplier,Z_Param_RoomAmountToSpawn);
+	P_THIS->CachedDungeonToGenerate(Z_Param_AreasAndFrequency,Z_Param_MapLocation,Z_Param_MapSpawnCircle,Z_Param_OuterPerimeterSizeMultiplier,Z_Param_RoomAmountToSpawn,Z_Param_ObjectivesCount,Z_Param_ObjectiveMesh,Z_Param_DisplayAfterCollectingAllObjectives);
 	P_NATIVE_END;
 }
 // End Class UProblematicGameInstance Function CachedDungeonToGenerate
@@ -199,7 +240,7 @@ struct Z_Construct_UFunction_UProblematicGameInstance_GetCachedDungeonData_Stati
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
-const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UProblematicGameInstance_GetCachedDungeonData_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicGameInstance_eventGetCachedDungeonData_Parms, ReturnValue), Z_Construct_UScriptStruct_FCachedData, METADATA_PARAMS(0, nullptr) }; // 639338955
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UProblematicGameInstance_GetCachedDungeonData_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ProblematicGameInstance_eventGetCachedDungeonData_Parms, ReturnValue), Z_Construct_UScriptStruct_FCachedData, METADATA_PARAMS(0, nullptr) }; // 1942812249
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UProblematicGameInstance_GetCachedDungeonData_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UProblematicGameInstance_GetCachedDungeonData_Statics::NewProp_ReturnValue,
 };
@@ -328,8 +369,8 @@ struct Z_Construct_UClass_UProblematicGameInstance_Statics
 #endif // WITH_METADATA
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate, "CachedDungeonToGenerate" }, // 3397037757
-		{ &Z_Construct_UFunction_UProblematicGameInstance_GetCachedDungeonData, "GetCachedDungeonData" }, // 1793722803
+		{ &Z_Construct_UFunction_UProblematicGameInstance_CachedDungeonToGenerate, "CachedDungeonToGenerate" }, // 2896463405
+		{ &Z_Construct_UFunction_UProblematicGameInstance_GetCachedDungeonData, "GetCachedDungeonData" }, // 1005965010
 		{ &Z_Construct_UFunction_UProblematicGameInstance_ResetDungeonGenerationData, "ResetDungeonGenerationData" }, // 3060959819
 		{ &Z_Construct_UFunction_UProblematicGameInstance_ShouldGenerateDungeonOnBeginBeginPlay, "ShouldGenerateDungeonOnBeginBeginPlay" }, // 3126049884
 	};
@@ -379,13 +420,13 @@ UProblematicGameInstance::~UProblematicGameInstance() {}
 struct Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_ProblematicGameInstance_h_Statics
 {
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
-		{ FCachedData::StaticStruct, Z_Construct_UScriptStruct_FCachedData_Statics::NewStructOps, TEXT("CachedData"), &Z_Registration_Info_UScriptStruct_CachedData, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FCachedData), 639338955U) },
+		{ FCachedData::StaticStruct, Z_Construct_UScriptStruct_FCachedData_Statics::NewStructOps, TEXT("CachedData"), &Z_Registration_Info_UScriptStruct_CachedData, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FCachedData), 1942812249U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UProblematicGameInstance, UProblematicGameInstance::StaticClass, TEXT("UProblematicGameInstance"), &Z_Registration_Info_UClass_UProblematicGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UProblematicGameInstance), 3661897558U) },
+		{ Z_Construct_UClass_UProblematicGameInstance, UProblematicGameInstance::StaticClass, TEXT("UProblematicGameInstance"), &Z_Registration_Info_UClass_UProblematicGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UProblematicGameInstance), 1753382241U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_ProblematicGameInstance_h_850842560(TEXT("/Script/ProblematicPlugin"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_ProblematicGameInstance_h_3436005566(TEXT("/Script/ProblematicPlugin"),
 	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_ProblematicGameInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_ProblematicGameInstance_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_ProblematicGameInstance_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_ProblematicGameInstance_h_Statics::ScriptStructInfo),
 	nullptr, 0);

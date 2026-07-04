@@ -40,11 +40,19 @@ public:
 	void AddConnectedEdge(DelaunayEdge* Edge) { ConnectedEdges.Add(Edge); }
 	void RemoveConnectedEdge(DelaunayEdge* Edge) { ConnectedEdges.Remove(Edge); }
 
+	//--==== Setters ====--
+
+	UFUNCTION(BlueprintCallable, Category = "Problematic Node")
+	void SetParentDungeon(class ADungeon* Parent);
+	
 	//--==== Standard Functions ====--
 	void GenerateTeleporter(ANodeArea* ConnectedNode);
 	void FinaliseTeleporterSetup();
 	void AddObjectiveComponent();
 	void AddObjectiveComponentWithMesh(UStaticMesh* Mesh);
+	UFUNCTION()
+	void OnObjectiveBeginOverlap(UPrimitiveComponent* Comp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 
 	//--==== Variables ====--
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Problematic Node")
@@ -70,6 +78,8 @@ private:
 	FBox2D InnerPerimeter;
 	FBox2D OuterPerimeter;
 	TArray<DelaunayEdge*> ConnectedEdges;
-	
+
+	UPROPERTY()
+	class ADungeon* ParentDungeon;
 
 };

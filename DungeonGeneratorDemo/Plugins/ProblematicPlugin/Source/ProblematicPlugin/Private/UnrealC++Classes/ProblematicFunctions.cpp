@@ -13,7 +13,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 
-ADungeon* UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAndFrequency, FVector2D MapLocation, float MapSpawnCircle, float SpaceBetweenAreas,int32 RoomAmountToSpawn, int32 ObjectiveCount, UStaticMesh* ObjectiveMesh, UObject* WorldContextObject)
+ADungeon* UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> NodesAndFrequency, FVector2D MapLocation, float MapSpawnCircle,
+	float SpaceBetweenAreas,int32 RoomAmountToSpawn, int32 ObjectiveCount, UObject* WorldContextObject, UStaticMesh* ObjectiveMesh, TSubclassOf<UUserWidget> DisplayAfterCollectingAllObjectives)
 {
 	if (IsValid(WorldContextObject))
 	{
@@ -169,16 +170,28 @@ ADungeon* UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> No
 			Node->FinaliseTeleporterSetup();
 		}
 
-		//If there is an objective amount set
+		// If there is an objective amount set
 		if (ObjectiveCount > 0)
 		{
+			NewMap->SetWinDisplay(DisplayAfterCollectingAllObjectives);
+			
+			TArray<ANodeArea*> RoomWithoutObjective = NewMap->GetAllNodeAreas();
+
+			// Can only have 1 objective per room
+			if (ObjectiveCount > RoomWithoutObjective.Num())
+			{
+				ObjectiveCount = RoomWithoutObjective.Num();
+			}
+			
 			if (ObjectiveMesh)
 			{
 				for (int32 i = 0; i < ObjectiveCount; i++)
 				{
 					//select node at random
-					int32 RandomIndex = FMath::RandRange(0, NewMap->GetAllNodeAreas().Num()-1);
-					NewMap->GetAllNodeAreas()[RandomIndex]->AddObjectiveComponentWithMesh(ObjectiveMesh);
+					int32 RandomIndex = FMath::RandRange(0, RoomWithoutObjective.Num()-1);
+					RoomWithoutObjective[RandomIndex]->AddObjectiveComponentWithMesh(ObjectiveMesh);
+
+					RoomWithoutObjective.RemoveAt(RandomIndex);
 				}	
 			}
 			else
@@ -186,9 +199,10 @@ ADungeon* UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> No
 				for (int32 i = 0; i < ObjectiveCount; i++)
 				{
 					//select node at random
-					int32 RandomIndex = FMath::RandRange(0, NewMap->GetAllNodeAreas().Num()-1);
-					NewMap->GetAllNodeAreas()[RandomIndex]->AddObjectiveComponent();
-				
+					int32 RandomIndex = FMath::RandRange(0, RoomWithoutObjective.Num()-1);
+					RoomWithoutObjective[RandomIndex]->AddObjectiveComponent();
+					
+					RoomWithoutObjective.RemoveAt(RandomIndex);
 				}	
 			}
 		}
@@ -232,13 +246,13 @@ ADungeon* UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> No
 }
 
 void UProblematicFunctions::GenerateDungeonAndLoadLevel(FName LevelToLoad, TArray<FAreaAndFrequency> AreasAndFrequency,
-	FVector2D MapLocation, float MapSpawnCircle, float OuterPerimeterSizeMultiplier, int32 RoomAmountToSpawn,
-	UObject* WorldContextObject)
+	FVector2D MapLocation, float MapSpawnCircle, float OuterPerimeterSizeMultiplier, int32 RoomAmountToSpawn, int32 ObjectiveCount, 
+	UObject* WorldContextObject, UStaticMesh* ObjectiveMesh, TSubclassOf<UUserWidget> DisplayAfterCollectingAllObjectives)
 {
 	//--==== check if the current game instance is the problematic game instance ====--
 	if (UProblematicGameInstance* InstanceRef = Cast<UProblematicGameInstance>(WorldContextObject->GetWorld()->GetGameInstance()))
 	{
-		InstanceRef->CachedDungeonToGenerate(AreasAndFrequency, MapLocation, MapSpawnCircle, OuterPerimeterSizeMultiplier, RoomAmountToSpawn);
+		InstanceRef->CachedDungeonToGenerate(AreasAndFrequency, MapLocation, MapSpawnCircle, OuterPerimeterSizeMultiplier, RoomAmountToSpawn, ObjectiveCount, ObjectiveMesh, DisplayAfterCollectingAllObjectives);
 		//--==== load level after the game instance gets updated ====--
 		UGameplayStatics::OpenLevel(WorldContextObject, LevelToLoad);
 	}

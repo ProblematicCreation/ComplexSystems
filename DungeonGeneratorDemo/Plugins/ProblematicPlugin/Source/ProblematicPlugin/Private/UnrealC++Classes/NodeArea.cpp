@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "UnrealC++Classes/NodeArea.h"
 #include "Components/BoxComponent.h"
+#include "UnrealC++Classes/Dungeon.h"
 #include "UnrealC++Classes/NodeAreaTeleporter.h"
 
 // Sets default values
@@ -46,6 +47,11 @@ void ANodeArea::BoundingBox(FBox2D& Inner, FBox2D& Outer, float OuterBoxScale)
 	
 }
 
+
+void ANodeArea::SetParentDungeon(class ADungeon* Parent)
+{
+	ParentDungeon = Parent;
+}
 
 void ANodeArea::GenerateTeleporter(ANodeArea* ConnectedNode)
 {
@@ -300,6 +306,16 @@ void ANodeArea::AddObjectiveComponent()
 		{
 			ObjectiveComp->SetStaticMesh(ObjectiveMesh);
 		}
+		
+		//bind to function overlap
+		ObjectiveComp->OnComponentBeginOverlap.AddDynamic(this, &ANodeArea::OnObjectiveBeginOverlap);
+
+		//set the location
+		FVector Origin;
+		FVector Extents;
+		GetActorBounds(false, Origin, Extents);
+		
+		ObjectiveComp->SetWorldLocation(FVector(Origin.X, Origin.Y + (Extents.Y / 2.f), Origin.Z));
 	}
 }
 
@@ -317,7 +333,33 @@ void ANodeArea::AddObjectiveComponentWithMesh(UStaticMesh* Mesh)
 		{
 			ObjectiveComp->SetStaticMesh(Mesh);
 		}
+		
+		//bind overlap event
+		ObjectiveComp->OnComponentBeginOverlap.AddDynamic(this, &ANodeArea::OnObjectiveBeginOverlap);
+
+		//Set the location
+		FVector Origin;
+		FVector Extents;
+		GetActorBounds(false, Origin, Extents);
+		
+		ObjectiveComp->SetWorldLocation(FVector(Origin.X, Origin.Y + (Extents.Y / 2.f), Origin.Z));
 	}
+}
+
+void ANodeArea::OnObjectiveBeginOverlap(UPrimitiveComponent* Comp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
+	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor->ActorHasTag("Player"))
+	{
+		if (ParentDungeon)
+		{
+			ParentDungeon->DecrementObjectiveRemainingCount();
+		}
+	}
+
+	Comp->DestroyComponent();
+
+	UE_LOG(LogTemp, Warning, TEXT("--==== Coin Overlapped ====--"));
 }
 
 // Called when the game starts or when spawned

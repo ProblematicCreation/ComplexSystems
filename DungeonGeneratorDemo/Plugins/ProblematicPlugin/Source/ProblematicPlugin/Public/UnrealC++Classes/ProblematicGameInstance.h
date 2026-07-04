@@ -30,6 +30,15 @@ struct FCachedData
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 NodeAreaAmountToSpawn;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 ObjectiveCount;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMesh* ObjectiveMesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<UUserWidget> DisplayAfterCollectingAllObjectives;
 };
 
 UCLASS()
@@ -45,7 +54,8 @@ public:
 	void CachedDungeonToGenerate(
 		TArray<FAreaAndFrequency> AreasAndFrequency,
 		FVector2D MapLocation, float MapSpawnCircle,
-		float OuterPerimeterSizeMultiplier, int32 RoomAmountToSpawn);
+		float OuterPerimeterSizeMultiplier, int32 RoomAmountToSpawn,
+		int32 ObjectivesCount, UStaticMesh* ObjectiveMesh = nullptr, TSubclassOf<UUserWidget> DisplayAfterCollectingAllObjectives = nullptr); 
 	
 	UFUNCTION(BlueprintCallable, Category = "Problematic Instance Functions")
 	FCachedData GetCachedDungeonData() { return CachedData;}

@@ -14,13 +14,15 @@ ADungeon::ADungeon()
 	PrimaryActorTick.bCanEverTick = false;
 
 	ObjectiveRemainingCount = 0;
-	WinDisplay = nullptr;
+	WinDisplayClass = nullptr;
+	WinDisplayWidget = nullptr;
 }
 
-ADungeon::ADungeon(UUserWidget* WinScreenWidget)
+ADungeon::ADungeon(TSubclassOf<UUserWidget> WinScreenWidget)
 {
 	ObjectiveRemainingCount = 0;
-	WinDisplay = WinScreenWidget;
+	WinDisplayClass = WinScreenWidget;
+	WinDisplayWidget = nullptr;
 }
 
 void ADungeon::AddArea(ANodeArea* Node)
@@ -37,9 +39,9 @@ void ADungeon::DecrementObjectiveRemainingCount()
 		OnObjectiveCompleted.Broadcast();
 		
 		//if the WinDisplay widget was set
-		if (WinDisplay)
+		if (WinDisplayWidget)
 		{
-			WinDisplay->AddToViewport();
+			WinDisplayWidget->AddToViewport();
 			
 			//get reference to teh controller
 			if (APlayerController* ControllerRef = UGameplayStatics::GetPlayerController(GetWorld(), 0))
@@ -52,13 +54,12 @@ void ADungeon::DecrementObjectiveRemainingCount()
 		}
 		else
 		{
-			WinDisplay = CreateWidget<UUserWidget>(this, UUserWidget::StaticClass());
-
-			WinDisplay->AddToViewport();
-			
 			//get reference to teh controller
 			if (APlayerController* ControllerRef = UGameplayStatics::GetPlayerController(GetWorld(), 0))
 			{
+				WinDisplayWidget = CreateWidget<UUserWidget>(ControllerRef, WinDisplayClass);
+				WinDisplayWidget->AddToViewport();
+				
 				FInputModeUIOnly InputMode;
 				ControllerRef->SetInputMode(InputMode);
 				ControllerRef->SetShowMouseCursor(true);

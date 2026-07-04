@@ -22,7 +22,10 @@ void AProblematicGameMode::BeginPlay()
 				InstanceRef->GetCachedDungeonData().NodeAreaSpawnRadius,
 				InstanceRef->GetCachedDungeonData().NodeAreaPerimeterMultiplier,
 				InstanceRef->GetCachedDungeonData().NodeAreaAmountToSpawn,
-				GetWorld());
+				InstanceRef->GetCachedDungeonData().ObjectiveCount,
+				GetWorld(),
+				InstanceRef->GetCachedDungeonData().ObjectiveMesh,
+				InstanceRef->GetCachedDungeonData().DisplayAfterCollectingAllObjectives);
 
 			//Enter the dungeon in the first room from the list of nodes and frequencies
 			UProblematicFunctions::EnterDungeon(NewDungeon, GetWorld());

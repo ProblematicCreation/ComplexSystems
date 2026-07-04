@@ -19,7 +19,7 @@ class PROBLEMATICPLUGIN_API ADungeon : public AActor
 public:
 	// Sets default values for this actor's properties
 	ADungeon();
-	ADungeon(UUserWidget* WinScreenWidget);
+	ADungeon(TSubclassOf<UUserWidget> WinScreenWidget);
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Dungeon Map")
 	FVector2D CentrePoint;
@@ -43,7 +43,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Dungeon Map")
 	int32 GetRemainingObjectivesCount() {return ObjectiveRemainingCount;}
 	UFUNCTION(BlueprintCallable, Category = "Dungeon Map")
-	UUserWidget* GetWinDisplay() { return WinDisplay;}
+	TSubclassOf<UUserWidget> GetWinDisplay() { return WinDisplayClass;}
 
 
 	//--==== SETTERS ====--
@@ -51,7 +51,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Dungeon Map")
 	void SetObjectiveCount(int32 Objectives) { ObjectiveRemainingCount = Objectives; }
 	UFUNCTION(BlueprintCallable, Category = "Dungeon Map")
-	void SetWinDisplay(UUserWidget* WinWidget) { WinDisplay = WinWidget; }
+	void SetWinDisplay(	TSubclassOf<UUserWidget> WinWidget) { WinDisplayClass = WinWidget; }
 
 	
 	//--==== Standard Functions ====--
@@ -67,5 +67,8 @@ private:
 	int32 ObjectiveRemainingCount;
 
 	UPROPERTY()
-	UUserWidget* WinDisplay;
+	TSubclassOf<UUserWidget> WinDisplayClass;
+
+	UPROPERTY()
+	UUserWidget* WinDisplayWidget;
 };
