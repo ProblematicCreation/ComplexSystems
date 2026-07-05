@@ -14,6 +14,7 @@ class UObject;
 class UStaticMesh;
 class UUserWidget;
 struct FAreaAndFrequency;
+struct FStoredAreaAndFrequency;
 #ifdef PROBLEMATICPLUGIN_ProblematicFunctions_generated_h
 #error "ProblematicFunctions.generated.h already included, missing '#pragma once' in ProblematicFunctions.h"
 #endif

@@ -19,6 +19,7 @@ ENGINE_API UClass* Z_Construct_UClass_AActor_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UMaterialInterface_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UPrimitiveComponent_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_UStaticMesh_NoRegister();
+ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FHitResult();
 PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_ADungeon_NoRegister();
 PROBLEMATICPLUGIN_API UClass* Z_Construct_UClass_ANodeArea();
@@ -315,6 +316,55 @@ DEFINE_FUNCTION(ANodeArea::execSetInnerAndOuterPerimeter)
 }
 // End Class ANodeArea Function SetInnerAndOuterPerimeter
 
+// Begin Class ANodeArea Function SetParentDungeon
+struct Z_Construct_UFunction_ANodeArea_SetParentDungeon_Statics
+{
+	struct NodeArea_eventSetParentDungeon_Parms
+	{
+		ADungeon* Parent;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Problematic Node" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//--==== Setters ====--\n" },
+#endif
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "--==== Setters ====--" },
+#endif
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_Parent;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_ANodeArea_SetParentDungeon_Statics::NewProp_Parent = { "Parent", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(NodeArea_eventSetParentDungeon_Parms, Parent), Z_Construct_UClass_ADungeon_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ANodeArea_SetParentDungeon_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ANodeArea_SetParentDungeon_Statics::NewProp_Parent,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_ANodeArea_SetParentDungeon_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ANodeArea_SetParentDungeon_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ANodeArea, nullptr, "SetParentDungeon", nullptr, nullptr, Z_Construct_UFunction_ANodeArea_SetParentDungeon_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ANodeArea_SetParentDungeon_Statics::PropPointers), sizeof(Z_Construct_UFunction_ANodeArea_SetParentDungeon_Statics::NodeArea_eventSetParentDungeon_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ANodeArea_SetParentDungeon_Statics::Function_MetaDataParams), Z_Construct_UFunction_ANodeArea_SetParentDungeon_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_ANodeArea_SetParentDungeon_Statics::NodeArea_eventSetParentDungeon_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_ANodeArea_SetParentDungeon()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ANodeArea_SetParentDungeon_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(ANodeArea::execSetParentDungeon)
+{
+	P_GET_OBJECT(ADungeon,Z_Param_Parent);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->SetParentDungeon(Z_Param_Parent);
+	P_NATIVE_END;
+}
+// End Class ANodeArea Function SetParentDungeon
+
 // Begin Class ANodeArea
 void ANodeArea::StaticRegisterNativesANodeArea()
 {
@@ -325,6 +375,7 @@ void ANodeArea::StaticRegisterNativesANodeArea()
 		{ "GetOuterPerimeter", &ANodeArea::execGetOuterPerimeter },
 		{ "OnObjectiveBeginOverlap", &ANodeArea::execOnObjectiveBeginOverlap },
 		{ "SetInnerAndOuterPerimeter", &ANodeArea::execSetInnerAndOuterPerimeter },
+		{ "SetParentDungeon", &ANodeArea::execSetParentDungeon },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
@@ -362,6 +413,14 @@ struct Z_Construct_UClass_ANodeArea_Statics
 		{ "Category", "Problematic Node" },
 		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_TeleporterMeshHeightOffset_MetaData[] = {
+		{ "Category", "Problematic Node" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ObjectiveMeshHeightOffset_MetaData[] = {
+		{ "Category", "Problematic Node" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_OnObjectiveCollected_MetaData[] = {
 		{ "Category", "Problematic Node" },
 		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
@@ -373,15 +432,22 @@ struct Z_Construct_UClass_ANodeArea_Statics
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ParentDungeon_MetaData[] = {
 		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_ObjectiveComponent_MetaData[] = {
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/UnrealC++Classes/NodeArea.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_TeleporterMaterial;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_TeleporterMesh;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_TeleporterScale;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_ObjectiveMesh;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_TeleporterMeshHeightOffset;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_ObjectiveMeshHeightOffset;
 	static const UECodeGen_Private::FMulticastDelegatePropertyParams NewProp_OnObjectiveCollected;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_Portals_Inner;
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_Portals;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_ParentDungeon;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_ObjectiveComponent;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
@@ -390,6 +456,7 @@ struct Z_Construct_UClass_ANodeArea_Statics
 		{ &Z_Construct_UFunction_ANodeArea_GetOuterPerimeter, "GetOuterPerimeter" }, // 389923615
 		{ &Z_Construct_UFunction_ANodeArea_OnObjectiveBeginOverlap, "OnObjectiveBeginOverlap" }, // 1595758917
 		{ &Z_Construct_UFunction_ANodeArea_SetInnerAndOuterPerimeter, "SetInnerAndOuterPerimeter" }, // 1293952083
+		{ &Z_Construct_UFunction_ANodeArea_SetParentDungeon, "SetParentDungeon" }, // 3708344277
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -401,19 +468,25 @@ const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANodeArea_Stat
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANodeArea_Statics::NewProp_TeleporterMesh = { "TeleporterMesh", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANodeArea, TeleporterMesh), Z_Construct_UClass_UStaticMesh_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TeleporterMesh_MetaData), NewProp_TeleporterMesh_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ANodeArea_Statics::NewProp_TeleporterScale = { "TeleporterScale", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANodeArea, TeleporterScale), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TeleporterScale_MetaData), NewProp_TeleporterScale_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANodeArea_Statics::NewProp_ObjectiveMesh = { "ObjectiveMesh", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANodeArea, ObjectiveMesh), Z_Construct_UClass_UStaticMesh_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ObjectiveMesh_MetaData), NewProp_ObjectiveMesh_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ANodeArea_Statics::NewProp_TeleporterMeshHeightOffset = { "TeleporterMeshHeightOffset", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANodeArea, TeleporterMeshHeightOffset), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TeleporterMeshHeightOffset_MetaData), NewProp_TeleporterMeshHeightOffset_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ANodeArea_Statics::NewProp_ObjectiveMeshHeightOffset = { "ObjectiveMeshHeightOffset", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANodeArea, ObjectiveMeshHeightOffset), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ObjectiveMeshHeightOffset_MetaData), NewProp_ObjectiveMeshHeightOffset_MetaData) };
 const UECodeGen_Private::FMulticastDelegatePropertyParams Z_Construct_UClass_ANodeArea_Statics::NewProp_OnObjectiveCollected = { "OnObjectiveCollected", nullptr, (EPropertyFlags)0x0010000010080000, UECodeGen_Private::EPropertyGenFlags::InlineMulticastDelegate, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANodeArea, OnObjectiveCollected), Z_Construct_UDelegateFunction_ProblematicPlugin_OnObjectiveCollected__DelegateSignature, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_OnObjectiveCollected_MetaData), NewProp_OnObjectiveCollected_MetaData) }; // 2487492968
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANodeArea_Statics::NewProp_Portals_Inner = { "Portals", nullptr, (EPropertyFlags)0x0000000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_UNodeAreaTeleporter_NoRegister, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ANodeArea_Statics::NewProp_Portals = { "Portals", nullptr, (EPropertyFlags)0x0040008000000008, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANodeArea, Portals), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Portals_MetaData), NewProp_Portals_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANodeArea_Statics::NewProp_ParentDungeon = { "ParentDungeon", nullptr, (EPropertyFlags)0x0040000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANodeArea, ParentDungeon), Z_Construct_UClass_ADungeon_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ParentDungeon_MetaData), NewProp_ParentDungeon_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ANodeArea_Statics::NewProp_ObjectiveComponent = { "ObjectiveComponent", nullptr, (EPropertyFlags)0x0040000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANodeArea, ObjectiveComponent), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ObjectiveComponent_MetaData), NewProp_ObjectiveComponent_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ANodeArea_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANodeArea_Statics::NewProp_TeleporterMaterial,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANodeArea_Statics::NewProp_TeleporterMesh,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANodeArea_Statics::NewProp_TeleporterScale,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANodeArea_Statics::NewProp_ObjectiveMesh,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANodeArea_Statics::NewProp_TeleporterMeshHeightOffset,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANodeArea_Statics::NewProp_ObjectiveMeshHeightOffset,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANodeArea_Statics::NewProp_OnObjectiveCollected,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANodeArea_Statics::NewProp_Portals_Inner,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANodeArea_Statics::NewProp_Portals,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANodeArea_Statics::NewProp_ParentDungeon,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANodeArea_Statics::NewProp_ObjectiveComponent,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ANodeArea_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_ANodeArea_Statics::DependentSingletons[])() = {
@@ -456,10 +529,10 @@ ANodeArea::~ANodeArea() {}
 struct Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ANodeArea, ANodeArea::StaticClass, TEXT("ANodeArea"), &Z_Registration_Info_UClass_ANodeArea, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANodeArea), 322232887U) },
+		{ Z_Construct_UClass_ANodeArea, ANodeArea::StaticClass, TEXT("ANodeArea"), &Z_Registration_Info_UClass_ANodeArea, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANodeArea), 2421154154U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_516255927(TEXT("/Script/ProblematicPlugin"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_2156091883(TEXT("/Script/ProblematicPlugin"),
 	Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

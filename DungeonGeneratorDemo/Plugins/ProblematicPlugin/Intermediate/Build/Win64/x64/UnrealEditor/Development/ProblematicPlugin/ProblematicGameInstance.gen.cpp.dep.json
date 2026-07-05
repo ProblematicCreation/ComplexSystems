@@ -7,9 +7,7 @@
         "Includes": [
             "c:\\users\\user\\documents\\aie git\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\problematicplugin\\definitions.problematicplugin.h",
             "c:\\users\\user\\documents\\aie git\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\source\\problematicplugin\\public\\unrealc++classes\\problematicgameinstance.h",
-            "c:\\users\\user\\documents\\aie git\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\problematicgameinstance.generated.h",
-            "c:\\users\\user\\documents\\aie git\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\source\\problematicplugin\\public\\unrealc++classes\\problematicfunctions.h",
-            "c:\\users\\user\\documents\\aie git\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\problematicfunctions.generated.h"
+            "c:\\users\\user\\documents\\aie git\\complexsystems\\dungeongeneratordemo\\plugins\\problematicplugin\\intermediate\\build\\win64\\unrealeditor\\inc\\problematicplugin\\uht\\problematicgameinstance.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

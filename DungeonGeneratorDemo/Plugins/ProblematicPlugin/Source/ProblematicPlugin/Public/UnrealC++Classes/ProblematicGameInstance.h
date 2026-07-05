@@ -13,30 +13,37 @@ class ANodeArea;
  * 
  */
 USTRUCT(BlueprintType)
+struct FStoredAreaAndFrequency
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSoftClassPtr<class ANodeArea> Area;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 Frequency;
+};
+
+USTRUCT(BlueprintType)
 struct FCachedData
 {
 	GENERATED_BODY()
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<FAreaAndFrequency> NodesAndFrequency;
+
+	FCachedData();
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FStoredAreaAndFrequency> NodesAndFrequency;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FVector2D DungeonLocation;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float NodeAreaSpawnRadius;
-	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float NodeAreaPerimeterMultiplier;
-	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 NodeAreaAmountToSpawn;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 ObjectiveCount;
-	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UStaticMesh* ObjectiveMesh;
-
+	TSoftObjectPtr<UStaticMesh> ObjectiveMesh;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UUserWidget> DisplayAfterCollectingAllObjectives;
 };
@@ -51,11 +58,11 @@ public:
 
 	
 	UFUNCTION(BlueprintCallable, Category = "Problematic Instance Functions")
-	void CachedDungeonToGenerate(
-		TArray<FAreaAndFrequency> AreasAndFrequency,
+	void CachedDungeonToGenerate( 
+		TArray<FStoredAreaAndFrequency> AreasAndFrequency,
 		FVector2D MapLocation, float MapSpawnCircle,
 		float OuterPerimeterSizeMultiplier, int32 RoomAmountToSpawn,
-		int32 ObjectivesCount, UStaticMesh* ObjectiveMesh = nullptr, TSubclassOf<UUserWidget> DisplayAfterCollectingAllObjectives = nullptr); 
+		int32 ObjectivesCount, TSoftObjectPtr<UStaticMesh> ObjectiveMesh = nullptr, TSubclassOf<UUserWidget> DisplayAfterCollectingAllObjectives = nullptr); 
 	
 	UFUNCTION(BlueprintCallable, Category = "Problematic Instance Functions")
 	FCachedData GetCachedDungeonData() { return CachedData;}

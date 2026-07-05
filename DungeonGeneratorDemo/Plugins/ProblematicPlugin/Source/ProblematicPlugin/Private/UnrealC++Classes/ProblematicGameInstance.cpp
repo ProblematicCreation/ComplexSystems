@@ -4,14 +4,26 @@
 #include "UnrealC++Classes/ProblematicFunctions.h"
 
 
-UProblematicGameInstance::UProblematicGameInstance()
+FCachedData::FCachedData()
 {
-	ResetDungeonGenerationData();
+	NodesAndFrequency.Empty();
+	DungeonLocation = FVector2D::ZeroVector;
+	NodeAreaAmountToSpawn = 0.f;
+	NodeAreaSpawnRadius = 0.f;
+	NodeAreaPerimeterMultiplier = 0.f;
+	ObjectiveCount = 0;
+	ObjectiveMesh = nullptr;
 }
 
-void UProblematicGameInstance::CachedDungeonToGenerate(TArray<FAreaAndFrequency> AreasAndFrequency,
+UProblematicGameInstance::UProblematicGameInstance()
+{
+	//ResetDungeonGenerationData();
+	bShouldGenerateDungeonOnOpen = false; 
+}
+
+void UProblematicGameInstance::CachedDungeonToGenerate(TArray<FStoredAreaAndFrequency> AreasAndFrequency,
 	FVector2D MapLocation, float MapSpawnCircle, float OuterPerimeterSizeMultiplier, int32 RoomAmountToSpawn,
-	int32 ObjectivesCount, UStaticMesh* ObjectiveMesh, TSubclassOf<UUserWidget> DisplayAfterCollectingAllObjectives)
+	int32 ObjectivesCount, TSoftObjectPtr<UStaticMesh> ObjectiveMesh, TSubclassOf<UUserWidget> DisplayAfterCollectingAllObjectives)
 {
 	CachedData.NodesAndFrequency = AreasAndFrequency;
 	CachedData.DungeonLocation = MapLocation;

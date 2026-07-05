@@ -84,7 +84,7 @@ ADungeon* UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> No
 			//--== add to dungeon actor ==--
 			NewMap->AddArea(NewRoom);
 		}
-		
+		//------------------------------------------------------------================== ALGORITHMS ======================---------------------------------------------------
 		//--==== Move each room apart from one another ====--
 		SeparationSteeringAlgorithm(NewMap->GetAllNodeAreas(), SpaceBetweenAreas);
 
@@ -168,12 +168,14 @@ ADungeon* UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> No
 		for (ANodeArea* Node : NewMap->GetAllNodeAreas())
 		{
 			Node->FinaliseTeleporterSetup();
+			Node->SetParentDungeon(NewMap);
 		}
 
 		// If there is an objective amount set
 		if (ObjectiveCount > 0)
 		{
 			NewMap->SetWinDisplay(DisplayAfterCollectingAllObjectives);
+			NewMap->SetObjectiveCount(ObjectiveCount);
 			
 			TArray<ANodeArea*> RoomWithoutObjective = NewMap->GetAllNodeAreas();
 
@@ -245,9 +247,9 @@ ADungeon* UProblematicFunctions::GenerateDungeonMap(TArray<FAreaAndFrequency> No
 	return nullptr;
 }
 
-void UProblematicFunctions::GenerateDungeonAndLoadLevel(FName LevelToLoad, TArray<FAreaAndFrequency> AreasAndFrequency,
+void UProblematicFunctions::GenerateDungeonAndLoadLevel(FName LevelToLoad, TArray<FStoredAreaAndFrequency> AreasAndFrequency,
 	FVector2D MapLocation, float MapSpawnCircle, float OuterPerimeterSizeMultiplier, int32 RoomAmountToSpawn, int32 ObjectiveCount, 
-	UObject* WorldContextObject, UStaticMesh* ObjectiveMesh, TSubclassOf<UUserWidget> DisplayAfterCollectingAllObjectives)
+	UObject* WorldContextObject, TSoftObjectPtr<UStaticMesh> ObjectiveMesh, TSubclassOf<UUserWidget> DisplayAfterCollectingAllObjectives)
 {
 	//--==== check if the current game instance is the problematic game instance ====--
 	if (UProblematicGameInstance* InstanceRef = Cast<UProblematicGameInstance>(WorldContextObject->GetWorld()->GetGameInstance()))

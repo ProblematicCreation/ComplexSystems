@@ -15,6 +15,10 @@ ANodeArea::ANodeArea()
 	
     TeleporterScale = FVector(1.f);
 	ObjectiveMesh = nullptr;
+	ObjectiveComponent = nullptr;
+	
+	TeleporterMeshHeightOffset = 0.f;
+	ObjectiveMeshHeightOffset = 0.f;
 }
 
 FVector2D ANodeArea::GetCenter2DLocation()
@@ -104,6 +108,7 @@ void ANodeArea::FinaliseTeleporterSetup()
 	{
 		bool ShouldUseOppositeWall = false;
 		float IndividualPortalExtentX = Portals[0]->GetPortalMesh()->Bounds.GetBox().GetExtent().X;
+		float IndividualPortalExtentZ = Portals[0]->GetPortalMesh()->Bounds.GetBox().GetExtent().Z;
 		float WidthOfPortalsCombined = (IndividualPortalExtentX * 2.f) * Portals.Num();
 		
 		//--==== determine if the width of all the portals combined is greater than the width of the wall ====--
@@ -116,7 +121,7 @@ void ANodeArea::FinaliseTeleporterSetup()
 		if (PortalLocationsCount & 1)
 		{
 			//--== add portal in the center ==--
-			FVector CenterLocation = FVector(Origin.X, Origin.Y + (Extents.Y / 1.5f), Origin.Z);
+			FVector CenterLocation = FVector(Origin.X, Origin.Y + (Extents.Y / 1.5f), -Extents.Z + IndividualPortalExtentZ + TeleporterMeshHeightOffset);
 			PortalLocations.Add(CenterLocation);
 			WasOdd = true;
 			PortalLocationsCount--;
@@ -273,6 +278,7 @@ void ANodeArea::FinaliseTeleporterSetup()
 			}
 			
 			PreviousPortalOffset = PortalLocation.X;
+			PortalLocation.Z = -Extents.Z + IndividualPortalExtentZ + TeleporterMeshHeightOffset;
 			PortalLocations.Add(PortalLocation);
 			HalfRemainingPortals--;
 		}
@@ -284,7 +290,7 @@ void ANodeArea::FinaliseTeleporterSetup()
 		//--==== if there is only 1 connection ====--
 		if (Portals.Num() == 1)
 		{
-			Portals[i]->FinalisedSetup(FVector(Origin.X, Origin.Y + (Extents.Y / 1.5f), Origin.Z));
+			Portals[i]->FinalisedSetup(FVector(Origin.X, Origin.Y + (Extents.Y / 1.5f), -Extents.Z + Portals[i]->GetPortalMesh()->Bounds.GetBox().GetExtent().Z + TeleporterMeshHeightOffset));
 			break;
 		}
 		
@@ -294,61 +300,75 @@ void ANodeArea::FinaliseTeleporterSetup()
 
 void ANodeArea::AddObjectiveComponent()
 {
-	UStaticMeshComponent* ObjectiveComp = NewObject<UStaticMeshComponent>(this, UStaticMeshComponent::StaticClass());
+	ObjectiveComponent = NewObject<UStaticMeshComponent>(this, UStaticMeshComponent::StaticClass());
 		
-	if (IsValid(ObjectiveComp))
+	if (IsValid(ObjectiveComponent))
 	{
-		ObjectiveComp->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
-		ObjectiveComp->RegisterComponent();
-		this->AddInstanceComponent(ObjectiveComp);
+		ObjectiveComponent->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
+		ObjectiveComponent->RegisterComponent();
+		this->AddInstanceComponent(ObjectiveComponent);
 
 		if (ObjectiveMesh)
 		{
-			ObjectiveComp->SetStaticMesh(ObjectiveMesh);
+			ObjectiveComponent->SetStaticMesh(ObjectiveMesh);
 		}
 		
+		ObjectiveComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+		ObjectiveComponent->SetCollisionResponseToAllChannels(ECR_Overlap);
+		ObjectiveComponent->SetGenerateOverlapEvents(true);
+		
 		//bind to function overlap
-		ObjectiveComp->OnComponentBeginOverlap.AddDynamic(this, &ANodeArea::OnObjectiveBeginOverlap);
+		ObjectiveComponent->OnComponentBeginOverlap.AddDynamic(this, &ANodeArea::OnObjectiveBeginOverlap);
+
+		//set the location
+		FVector Origin;
+		FVector Extents;
+		GetActorBounds(false, Origin, Extents);
+
+		float ObjectiveExtentZ = ObjectiveComponent->Bounds.GetBox().GetExtent().Z;
+		
+		ObjectiveComponent->SetWorldLocation(FVector(Origin.X, Origin.Y + (Extents.Y / 2.f), -Extents.Z + ObjectiveExtentZ + ObjectiveMeshHeightOffset));
+	}
+}
+
+void ANodeArea::AddObjectiveComponentWithMesh(UStaticMesh* Mesh)
+{
+	ObjectiveComponent = NewObject<UStaticMeshComponent>(this, UStaticMeshComponent::StaticClass());
+		
+	if (IsValid(ObjectiveComponent))
+	{
+		ObjectiveComponent->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
+		ObjectiveComponent->RegisterComponent();
+		this->AddInstanceComponent(ObjectiveComponent);
+
+		if (Mesh)
+		{
+			ObjectiveComponent->SetStaticMesh(Mesh);
+		}
+		
+		ObjectiveComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+		ObjectiveComponent->SetCollisionResponseToAllChannels(ECR_Overlap);
+		ObjectiveComponent->SetGenerateOverlapEvents(true);
+		
+		//bind to function overlap
+		ObjectiveComponent->OnComponentBeginOverlap.AddDynamic(this, &ANodeArea::OnObjectiveBeginOverlap);
 
 		//set the location
 		FVector Origin;
 		FVector Extents;
 		GetActorBounds(false, Origin, Extents);
 		
-		ObjectiveComp->SetWorldLocation(FVector(Origin.X, Origin.Y + (Extents.Y / 2.f), Origin.Z));
-	}
-}
-
-void ANodeArea::AddObjectiveComponentWithMesh(UStaticMesh* Mesh)
-{
-	UStaticMeshComponent* ObjectiveComp = NewObject<UStaticMeshComponent>(this, UStaticMeshComponent::StaticClass());
+		float ObjectiveExtentZ = ObjectiveComponent->Bounds.GetBox().GetExtent().Z;
 		
-	if (IsValid(ObjectiveComp))
-	{
-		ObjectiveComp->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
-		ObjectiveComp->RegisterComponent();
-		this->AddInstanceComponent(ObjectiveComp);
-
-		if (Mesh)
-		{
-			ObjectiveComp->SetStaticMesh(Mesh);
-		}
-		
-		//bind overlap event
-		ObjectiveComp->OnComponentBeginOverlap.AddDynamic(this, &ANodeArea::OnObjectiveBeginOverlap);
-
-		//Set the location
-		FVector Origin;
-		FVector Extents;
-		GetActorBounds(false, Origin, Extents);
-		
-		ObjectiveComp->SetWorldLocation(FVector(Origin.X, Origin.Y + (Extents.Y / 2.f), Origin.Z));
+		ObjectiveComponent->SetWorldLocation(FVector(Origin.X, Origin.Y + (Extents.Y / 2.f), -Extents.Z + ObjectiveExtentZ + ObjectiveMeshHeightOffset));
 	}
 }
 
 void ANodeArea::OnObjectiveBeginOverlap(UPrimitiveComponent* Comp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	UE_LOG(LogTemp, Warning, TEXT("--==== Coin Overlapped ====--"));
+
 	if (OtherActor->ActorHasTag("Player"))
 	{
 		if (ParentDungeon)
@@ -358,8 +378,6 @@ void ANodeArea::OnObjectiveBeginOverlap(UPrimitiveComponent* Comp, AActor* Other
 	}
 
 	Comp->DestroyComponent();
-
-	UE_LOG(LogTemp, Warning, TEXT("--==== Coin Overlapped ====--"));
 }
 
 // Called when the game starts or when spawned

@@ -6,6 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "ProblematicGameMode.generated.h"
 
+struct FAreaAndFrequency;
 /**
  * 
  */
@@ -16,4 +17,10 @@ class PROBLEMATICPLUGIN_API AProblematicGameMode : public AGameModeBase
 
 protected:
 	virtual void BeginPlay() override;
+
+	void GenerateDungeonOnBegin();
+
+private:
+	FTimerHandle TimerHandle;
+	
 };

@@ -64,6 +64,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Problematic Node")
 	UStaticMesh* ObjectiveMesh;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Problematic Node")
+	float TeleporterMeshHeightOffset;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Problematic Node")
+	float ObjectiveMeshHeightOffset;
+
 	UPROPERTY(BlueprintAssignable, Category = "Problematic Node")
 	FOnObjectiveCollected OnObjectiveCollected;
 
@@ -81,5 +86,8 @@ private:
 
 	UPROPERTY()
 	class ADungeon* ParentDungeon;
+
+	UPROPERTY()
+	class UStaticMeshComponent* ObjectiveComponent;
 
 };

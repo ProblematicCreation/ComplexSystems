@@ -45,10 +45,10 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "Problematic Functions") 
 	static void GenerateDungeonAndLoadLevel(
-		FName LevelToLoad, TArray<FAreaAndFrequency> AreasAndFrequency, 
+		FName LevelToLoad, TArray<struct FStoredAreaAndFrequency> AreasAndFrequency, 
 		FVector2D MapLocation, float MapSpawnCircle, float OuterPerimeterSizeMultiplier, int32 RoomAmountToSpawn,
 		int32 ObjectiveCount,
-		UObject* WorldContextObject, UStaticMesh* ObjectiveMesh = nullptr, TSubclassOf<UUserWidget> DisplayAfterCollectingAllObjectives = nullptr);
+		UObject* WorldContextObject, TSoftObjectPtr<UStaticMesh> ObjectiveMesh = nullptr, TSubclassOf<UUserWidget> DisplayAfterCollectingAllObjectives = nullptr);
 	
 	UFUNCTION(BlueprintCallable, Category = "Problematic Functions")
 	static void EnterDungeon(ADungeon* DungeonMap, UObject* WorldContextObject);

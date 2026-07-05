@@ -10,6 +10,7 @@
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 class AActor;
+class ADungeon;
 class UPrimitiveComponent;
 struct FHitResult;
 #ifdef PROBLEMATICPLUGIN_NodeArea_generated_h
@@ -23,6 +24,7 @@ PROBLEMATICPLUGIN_API void FOnObjectiveCollected_DelegateWrapper(const FMulticas
 
 #define FID_Users_User_Documents_AIE_git_ComplexSystems_DungeonGeneratorDemo_Plugins_ProblematicPlugin_Source_ProblematicPlugin_Public_UnrealC__Classes_NodeArea_h_18_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execOnObjectiveBeginOverlap); \
+	DECLARE_FUNCTION(execSetParentDungeon); \
 	DECLARE_FUNCTION(execSetInnerAndOuterPerimeter); \
 	DECLARE_FUNCTION(execGetOuterPerimeter); \
 	DECLARE_FUNCTION(execGetInnerPerimeter); \
